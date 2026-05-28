@@ -190,6 +190,21 @@ function AmicusContent({ onRunAudit }: { onRunAudit: () => void }) {
         </button>
       </div>
 
+      {/* Deployment story — the tangible "what do we actually drop on your
+          desk" answer. Sits above the privacy quote so the physicality
+          lands before the abstract guarantee. */}
+      <div className="mt-16 max-w-2xl">
+        <p className="text-xs font-medium uppercase tracking-[0.22em] text-forest-deep">
+          {t.solutions.amicus.deploymentEyebrow}
+        </p>
+        <h3 className="mt-4 font-serif text-2xl sm:text-3xl text-neutral-900 leading-snug tracking-tight">
+          {t.solutions.amicus.deploymentTitle}
+        </h3>
+        <p className="mt-4 text-[15px] leading-relaxed text-neutral-500">
+          {t.solutions.amicus.deploymentBody}
+        </p>
+      </div>
+
       <div className="mt-12 max-w-2xl border-l-2 border-forest-deep pl-6">
         <p className="font-serif text-xl italic text-neutral-900 leading-snug">
           {t.solutions.amicus.noteTitle}

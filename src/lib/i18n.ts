@@ -55,7 +55,6 @@ export type Dict = {
     cta: string;
   };
   hero: {
-    eyebrow: string;
     titleLine1: string;
     titleItalic: string;
     titleLine2Rest: string;
@@ -94,6 +93,9 @@ export type Dict = {
     amicus: {
       title: string;
       body: string;
+      deploymentEyebrow: string;
+      deploymentTitle: string;
+      deploymentBody: string;
       noteTitle: string;
       noteBody: string;
       features: Feature[];
@@ -248,7 +250,6 @@ const en: Dict = {
     cta: "Get in touch",
   },
   hero: {
-    eyebrow: "GDPR-compliant · Built in Germany",
     titleLine1: "Modern websites",
     titleItalic: "&",
     titleLine2Rest: "private AI",
@@ -272,7 +273,7 @@ const en: Dict = {
       websitesShort:
         "Editorial websites that win the first impression — fast, branded, easy to maintain.",
       amicusShort:
-        "An on-premise legal AI that never sends a single client document where it shouldn't go.",
+        "A private, locally-running AI with four tools your firm uses daily — semantic case-law search, an opposing-counsel simulator, anonymisation and a rule-based deadline calculator.",
       learnMore: "Explore the solution",
     },
     deepDive: {
@@ -304,31 +305,35 @@ const en: Dict = {
     },
     amicus: {
       title: "A private AI partner for your practice.",
-      body: "Amicus runs on your hardware, in your office. It accelerates the work only an experienced lawyer can do — without ever sending a client document to a third-party server.",
+      body: "Amicus is a private, locally-running AI for law firms. Four focused tools you reach for daily — semantic search across your own case archive, an opposing-counsel simulator, controlled anonymisation, and a rule-based deadline calculator. Everything runs on your hardware, no client document ever leaves the office.",
+      deploymentEyebrow: "How it arrives",
+      deploymentTitle: "A Mac mini, set up and walked in.",
+      deploymentBody:
+        "Instead of a cloud login and a setup project, we deliver a Mac mini pre-configured with Amicus directly to your office and connect it to your network. Switch it on, watch the AI work on your rulings, your drafts and your deadlines — and see for yourself, on real cases, how it integrates into your day. No hidden server somewhere, no opaque infrastructure.",
       noteTitle:
         "Everything runs locally. No client data leaves the office — ever.",
       noteBody:
         "Fully compliant with BRAO §43a, GDPR and your firm's confidentiality obligations.",
       features: [
         {
-          title: "Case Law Search",
+          title: "Semantic case archive",
           description:
-            "Natural-language search across BGH, BAG and local court rulings — with citations and direct paragraph linking.",
+            "Load your relevant BAG, BGH or FG rulings as PDFs. Amicus searches them by meaning — not by keyword — and returns the five most relevant decisions to a natural-language question, summarised and cited with the case number. A closed corpus, so the answers stay grounded in what you uploaded.",
         },
         {
-          title: "Opponent Simulator",
+          title: "Opposing-counsel simulator",
           description:
-            "Stress-test your arguments against a simulated opposing counsel before you walk into the courtroom.",
+            "Paste an anonymised draft. Amicus takes the role of the opposing side, surfaces weaknesses in your argument, and returns concrete improvements — together with the rulings the other side could realistically use against you. Reasoning stress-tested before it ever reaches the court.",
         },
         {
-          title: "Anonymizer",
+          title: "Controlled anonymisation",
           description:
-            "One-click redaction of names, addresses, file numbers and signatures across PDFs and documents.",
+            "Names, addresses, dates of birth and case numbers are automatically detected and flagged. You confirm every flag yourself — only then does Amicus replace the entry with [CLIENT], [OPPOSING PARTY] or [CASE NO]. Speed without giving up control.",
         },
         {
-          title: "Deadline Calculator",
+          title: "Deadline calculator",
           description:
-            "ZPO- and StPO-aware deadline computation, including holidays per Bundesland — never miss a Frist again.",
+            "Enter an event and a date — Amicus computes the applicable deadlines on the basis of rules, not a language model (e.g. § 4 KSchG, three weeks). Weekends and the public holidays of your state are accounted for. Exact output, no guessed dates.",
         },
       ],
     },
@@ -339,19 +344,19 @@ const en: Dict = {
     titleItalic: "lawyer's",
     titleB: "standard of care.",
     intro:
-      "We chose the legal sector deliberately. It demands the discipline, confidentiality and craftsmanship we care about — and that's exactly what we ship.",
+      "We didn't choose the legal sector by accident. It demands precision, confidentiality and craftsmanship — exactly what we stand for.",
     pillars: [
       {
         title: "Built for German law firms",
-        body: "We understand BRAO, FAO advertising rules and the specific workflows of small-to-mid-sized German Kanzleien. No generic SaaS — software shaped by the profession.",
+        body: "We know the BRAO, the FAO advertising rules and the reality of small-to-mid-sized German Kanzleien. No compromises for other industries, no generic SaaS — software that understands how lawyers actually work.",
       },
       {
-        title: "Privacy-first",
-        body: "Everything we ship is engineered around attorney-client privilege. Amicus runs on-premise, our websites are hosted in EU data centers, and nothing trains on your data.",
+        title: "Privacy first",
+        body: "§ 43a BRAO is not a footnote to us — it is the starting point of every decision. Amicus runs on-premise on your own hardware; your client data never leaves your firm. No cloud training, no data transfer, no compromise.",
       },
       {
         title: "Custom-tailored",
-        body: "Every engagement starts with a workshop, not a checklist. We adapt to your areas of practice, your tone, and the way your firm actually works.",
+        body: "Every engagement begins with a conversation, not a proposal template. We work our way into your practice areas, your language and your workflows — before we write a single line of code.",
       },
     ],
   },
@@ -629,9 +634,16 @@ const en: Dict = {
           ],
         },
         {
-          heading: "4. Contact by e-mail",
+          heading: "4a. Contact by e-mail",
           content: [
             "If you contact us by e-mail, the data you provide (e-mail address, name, message) will be stored for the purpose of processing your enquiry. The legal basis is Art. 6 (1) (b) GDPR (pre-contractual measures) and/or (f) (legitimate interest in answering your enquiry). We do not pass this data on to third parties without your consent.",
+          ],
+        },
+        {
+          heading: "4b. Contact form",
+          content: [
+            "When you use our contact form, the data entered (name, e-mail, message) is processed in order to handle your enquiry. The legal basis is Art. 6 (1) (b) GDPR.",
+            "As Vercel is based in the USA, a transfer of personal data to the USA may take place. Vercel is certified under the EU-U.S. Data Privacy Framework, so an adequate level of data protection exists (Art. 45 GDPR).",
           ],
         },
         {
@@ -665,6 +677,7 @@ const en: Dict = {
               "Object to processing (Art. 21 GDPR)",
               "Lodge a complaint with a supervisory authority (Art. 77 GDPR)",
             ],
+            "Competent supervisory authority:\nDer Landesbeauftragte für Datenschutz und Informationsfreiheit Mecklenburg-Vorpommern\nWerderstraße 74a\n19055 Schwerin\nwww.datenschutz-mv.de",
             "For questions or to exercise your rights, please contact us at: nielsesbjornschade@gmail.com",
           ],
         },
@@ -691,7 +704,6 @@ const de: Dict = {
     cta: "Kontakt aufnehmen",
   },
   hero: {
-    eyebrow: "DSGVO-konform · Made in Germany",
     titleLine1: "Moderne Websites",
     titleItalic: "&",
     titleLine2Rest: "private KI",
@@ -715,7 +727,7 @@ const de: Dict = {
       websitesShort:
         "Redaktionelle Websites, die schon beim ersten Eindruck überzeugen — schnell, markengerecht, leicht zu pflegen.",
       amicusShort:
-        "Eine On-Premise-KI für Kanzleien, die kein einziges Mandanten-Dokument an Server sendet, wo es nicht hingehört.",
+        "Eine private, lokal laufende KI mit vier Werkzeugen für den Kanzlei-Alltag — semantische Urteilssuche, Gegner-Simulator, kontrollierte Anonymisierung und ein regelbasierter Fristenrechner.",
       learnMore: "Lösung im Detail",
     },
     deepDive: {
@@ -747,31 +759,35 @@ const de: Dict = {
     },
     amicus: {
       title: "Ein privater KI-Partner für Ihre Kanzlei.",
-      body: "Amicus läuft auf Ihrer Hardware, in Ihrer Kanzlei. Sie beschleunigt die Arbeit, die nur ein erfahrener Anwalt leisten kann — ohne je ein Mandantendokument an einen Drittserver zu senden.",
+      body: "Amicus ist eine private, lokal laufende KI für Kanzleien. Vier konkrete Werkzeuge, die Sie täglich greifen — semantische Suche im eigenen Urteils-Archiv, ein Gegner-Simulator, kontrollierte Anonymisierung und ein regelbasierter Fristenrechner. Alles läuft auf Ihrer Hardware, kein Mandantendokument verlässt die Kanzlei.",
+      deploymentEyebrow: "So kommt es zu Ihnen",
+      deploymentTitle: "Ein Mac mini, vorkonfiguriert ins Büro getragen.",
+      deploymentBody:
+        "Statt Cloud-Anmeldung und Setup-Projekt liefern wir Ihnen einen Mac mini, vollständig mit Amicus eingerichtet, direkt in Ihre Kanzlei und schließen ihn an Ihr Netzwerk an. Einschalten, der KI bei der Arbeit mit Ihren Urteilen, Schriftsätzen und Fristen zusehen — und an echten Akten erleben, wie sie sich in Ihren Alltag einfügt. Kein versteckter Server irgendwo, keine intransparente Infrastruktur.",
       noteTitle:
         "Alles läuft lokal. Keine Mandantendaten verlassen die Kanzlei — niemals.",
       noteBody:
         "Vollständig vereinbar mit BRAO §43a, DSGVO und Ihren Verschwiegenheitspflichten.",
       features: [
         {
-          title: "Rechtsprechungs-Suche",
+          title: "Semantisches Urteils-Archiv",
           description:
-            "Natürlichsprachliche Suche über BGH, BAG und Landesgerichte — mit Fundstellen und direkter Randnummern-Verlinkung.",
+            "Laden Sie Ihre relevanten BAG-, BGH- oder FG-Urteile als PDF. Amicus durchsucht sie semantisch — nicht per Stichwort — und liefert die fünf passendsten Entscheidungen zu einer Frage in natürlicher Sprache, mit Zusammenfassung und Aktenzeichen. Geschlossener Datenbestand: Die Antworten bleiben gebunden an das, was Sie hochgeladen haben.",
         },
         {
           title: "Gegner-Simulator",
           description:
-            "Testen Sie Ihre Argumentation gegen eine simulierte Gegenseite, bevor Sie den Sitzungssaal betreten.",
+            "Fügen Sie einen anonymisierten Schriftsatz-Entwurf ein. Amicus übernimmt die Rolle der Gegenseite, deckt Schwächen in Ihrer Argumentation auf und liefert konkrete Verbesserungen — mitsamt der Urteile, mit denen die Gegenseite realistisch gegen Sie vorgehen würde. Eine Argumentation auf Belastung getestet, bevor sie das Gericht erreicht.",
         },
         {
-          title: "Anonymisierung",
+          title: "Kontrollierte Anonymisierung",
           description:
-            "Schwärzung von Namen, Adressen, Aktenzeichen und Unterschriften in PDFs und Dokumenten — mit einem Klick.",
+            "Namen, Adressen, Geburtsdaten und Aktenzeichen werden automatisch erkannt und markiert. Sie bestätigen jede Markierung selbst — erst dann ersetzt Amicus den Eintrag durch [MANDANT], [GEGNER] oder [AKTENZEICHEN]. Geschwindigkeit ohne Kontrollverlust.",
         },
         {
-          title: "Fristen-Rechner",
+          title: "Fristenrechner",
           description:
-            "ZPO- und StPO-konforme Fristberechnung inklusive Feiertage pro Bundesland — keine Frist mehr verpassen.",
+            "Ereignis und Datum eingeben — Amicus rechnet die anwendbaren Fristen regelbasiert aus, nicht durch ein Sprachmodell (z. B. § 4 KSchG, drei Wochen). Wochenenden und Feiertage Ihres Bundeslandes werden berücksichtigt. Exaktes Ergebnis, keine geratenen Daten.",
         },
       ],
     },
@@ -782,19 +798,19 @@ const de: Dict = {
     titleItalic: "eines Juristen.",
     titleB: "",
     intro:
-      "Wir haben den juristischen Sektor bewusst gewählt. Er verlangt die Disziplin, die Verschwiegenheit und das Handwerk, an dem uns liegt — und genau das liefern wir.",
+      "Wir haben den juristischen Sektor nicht zufällig gewählt. Er verlangt Präzision, Verschwiegenheit und Handwerk — genau das, wofür wir stehen.",
     pillars: [
       {
         title: "Gebaut für deutsche Kanzleien",
-        body: "Wir kennen BRAO, FAO-Werberichtlinien und die spezifischen Abläufe kleiner und mittelgroßer Kanzleien. Kein generisches SaaS — Software, geformt durch den Berufsstand.",
+        body: "Wir kennen BRAO, FAO-Werberichtlinien und die Realität kleiner und mittelgroßer Kanzleien. Keine Kompromisse für andere Branchen, kein generisches SaaS — Software, die versteht, wie Juristen arbeiten.",
       },
       {
         title: "Datenschutz zuerst",
-        body: "Alles, was wir liefern, ist um das anwaltliche Berufsgeheimnis herum entwickelt. Amicus läuft On-Premise, unsere Websites werden in EU-Rechenzentren gehostet — und nichts trainiert auf Ihren Daten.",
+        body: "§ 43a BRAO ist für uns keine Fußnote, sondern der Ausgangspunkt jeder Entscheidung. Amicus läuft On-Premise auf Ihrer Hardware; Ihre Mandantendaten verlassen Ihre Kanzlei nie. Kein Cloud-Training, kein Datentransfer, kein Kompromiss.",
       },
       {
         title: "Maßgeschneidert",
-        body: "Jede Zusammenarbeit beginnt mit einem Workshop, nicht mit einer Checkliste. Wir passen uns Ihren Rechtsgebieten, Ihrem Ton und Ihrer Arbeitsweise an.",
+        body: "Jede Zusammenarbeit beginnt mit einem Gespräch, nicht mit einer Angebotsvorlage. Wir arbeiten uns in Ihre Rechtsgebiete, Ihre Sprache und Ihre Abläufe ein — bevor wir eine Zeile Code schreiben.",
       },
     ],
   },
@@ -1072,9 +1088,16 @@ const de: Dict = {
           ],
         },
         {
-          heading: "4. Kontaktaufnahme per E-Mail",
+          heading: "4a. Kontaktaufnahme per E-Mail",
           content: [
             "Wenn Sie uns per E-Mail kontaktieren, werden die von Ihnen mitgeteilten Daten (E-Mail-Adresse, Name, Nachricht) zur Bearbeitung Ihrer Anfrage gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. lit. f (berechtigtes Interesse an der Beantwortung Ihrer Anfrage). Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.",
+          ],
+        },
+        {
+          heading: "4b. Kontaktformular",
+          content: [
+            "Bei Nutzung unseres Kontaktformulars werden die eingegebenen Daten (Name, E-Mail, Nachricht) zur Bearbeitung Ihrer Anfrage verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO.",
+            "Da Vercel in den USA ansässig ist, kann eine Übermittlung personenbezogener Daten in die USA stattfinden. Vercel ist unter dem EU-U.S. Data Privacy Framework zertifiziert, sodass ein angemessenes Datenschutzniveau besteht (Art. 45 DSGVO).",
           ],
         },
         {
@@ -1108,6 +1131,7 @@ const de: Dict = {
               "Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)",
               "Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO)",
             ],
+            "Zuständige Aufsichtsbehörde:\nDer Landesbeauftragte für Datenschutz und Informationsfreiheit Mecklenburg-Vorpommern\nWerderstraße 74a\n19055 Schwerin\nwww.datenschutz-mv.de",
             "Für Fragen oder die Ausübung Ihrer Rechte wenden Sie sich bitte an: nielsesbjornschade@gmail.com",
           ],
         },

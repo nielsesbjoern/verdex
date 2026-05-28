@@ -13,16 +13,6 @@ export function Hero() {
     <section className="relative pt-40 pb-24 lg:pt-56 lg:pb-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-4xl">
-          <motion.p
-            key={`eyebrow-${lang}`}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: EDITORIAL_EASE }}
-            className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-500"
-          >
-            {t.hero.eyebrow}
-          </motion.p>
-
           <motion.h1
             key={`title-${lang}`}
             initial={{ opacity: 0, y: 24 }}
@@ -32,7 +22,7 @@ export function Hero() {
               delay: 0.1,
               ease: EDITORIAL_EASE,
             }}
-            className="mt-8 font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-[88px] text-neutral-900 leading-[1.02] tracking-tight"
+            className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-[88px] text-neutral-900 leading-[1.02] tracking-tight"
           >
             {t.hero.titleLine1}
             <br />

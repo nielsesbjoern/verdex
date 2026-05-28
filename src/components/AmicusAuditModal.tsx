@@ -88,7 +88,9 @@ export function AmicusAuditModal({ isOpen, onClose }: Props) {
       return;
     }
     const source = selectedArea.tasks[state.bottleneck];
-    const full = `${source.intro}\n\n• ${source.findings.join("\n• ")}`;
+    // Intro is shown statically above the typewriter — only animate the
+    // findings bullets so we don't visually duplicate the intro line.
+    const full = `• ${source.findings.join("\n• ")}`;
     let i = 0;
     const timer = setInterval(() => {
       i += 2;
@@ -357,6 +359,10 @@ function ResultsView({
   const { t } = useLang();
   if (!state.practiceArea || !state.bottleneck) return null;
   const sim = t.audit.simulation.cases[state.practiceArea].tasks[state.bottleneck];
+  // Must mirror the same string the typewriter effect builds in the parent,
+  // so we can tell when the animation has finished and hide the caret.
+  const fullSimText = `• ${sim.findings.join("\n• ")}`;
+  const isTypingDone = typed.length >= fullSimText.length;
 
   return (
     <div className="pt-10 lg:pt-14">
@@ -393,7 +399,12 @@ function ResultsView({
           <p className="text-sm text-neutral-500">{sim.intro}</p>
           <pre className="mt-4 whitespace-pre-wrap text-sm leading-relaxed font-sans text-[#111111] min-h-[140px]">
             {typed}
-            <span className="inline-block w-2 h-4 bg-[#102512] ml-1 animate-pulse" />
+            {!isTypingDone && (
+              <span
+                aria-hidden
+                className="inline-block w-2 h-4 bg-[#102512] ml-1 animate-pulse"
+              />
+            )}
           </pre>
         </div>
       </div>
