@@ -5,23 +5,35 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --muted: #737373;
+  --accent: #102512;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-feature-settings: "cv11", "ss01", "ss03";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+::selection {
+  background: #102512;
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 1.5px solid #102512;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Editorial: tighten serif numerals & punctuation a hair */
+.font-serif {
+  font-feature-settings: "lnum", "kern";
+  letter-spacing: -0.01em;
 }
