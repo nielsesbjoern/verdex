@@ -4,15 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useLang } from "@/lib/LanguageProvider";
+import { useAmicusAudit } from "@/lib/AmicusAuditContext";
 import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
-import { AmicusAuditModal } from "./AmicusAuditModal";
 
 export function Navbar() {
   const { t } = useLang();
+  const { open: openAudit } = useAmicusAudit();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [isAuditOpen, setIsAuditOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -101,7 +101,7 @@ export function Navbar() {
                           role="menuitem"
                           onClick={() => {
                             setOpen(false);
-                            setIsAuditOpen(true);
+                            openAudit();
                           }}
                           className="block w-full text-left px-5 py-2.5 text-sm text-neutral-700 hover:text-forest-deep hover:bg-neutral-50 transition-colors duration-200 ease-editorial"
                         >
@@ -135,7 +135,6 @@ export function Navbar() {
           </div>
         </nav>
       </div>
-      <AmicusAuditModal isOpen={isAuditOpen} onClose={() => setIsAuditOpen(false)} />
     </header>
   );
 }

@@ -15,6 +15,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useLang } from "@/lib/LanguageProvider";
+import { useAmicusAudit } from "@/lib/AmicusAuditContext";
 
 export type SolutionId = "websites" | "amicus";
 
@@ -30,6 +31,7 @@ const AMICUS_ICONS: LucideIcon[] = [Scale, Swords, EyeOff, CalendarClock];
 
 export function SolutionDetailModal({ solutionId, onClose }: Props) {
   const { t, lang } = useLang();
+  const { open: openAudit } = useAmicusAudit();
   const isOpen = solutionId !== null;
 
   // Lock body scroll + close on Escape while open
@@ -53,6 +55,13 @@ export function SolutionDetailModal({ solutionId, onClose }: Props) {
     requestAnimationFrame(() => {
       window.location.hash = "#contact";
     });
+  }
+
+  function handleRunAudit() {
+    onClose();
+    // Let the deep-dive modal finish closing (body-scroll restore) before
+    // the audit modal takes over — otherwise the scroll-lock effects fight.
+    requestAnimationFrame(() => openAudit());
   }
 
   return (
@@ -101,20 +110,45 @@ export function SolutionDetailModal({ solutionId, onClose }: Props) {
               </motion.div>
 
               {/* CTA footer */}
-              <div className="mt-16 lg:mt-20 flex flex-wrap items-center gap-6 border-t border-neutral-100 pt-10">
-                <button
-                  onClick={handleCtaClick}
-                  className="group inline-flex items-center gap-3 rounded-full bg-forest-deep px-7 py-3.5 text-sm font-medium text-white hover:bg-forest-deep/90 transition-all duration-500 ease-editorial"
-                >
-                  {t.solutions.deepDive.primaryCta}
-                  <ArrowRight
-                    size={16}
-                    className="transition-transform duration-500 ease-editorial group-hover:translate-x-1"
-                  />
-                </button>
+              <div className="mt-16 lg:mt-20 flex flex-wrap items-center gap-x-8 gap-y-5 border-t border-neutral-100 pt-10">
+                {solutionId === "amicus" ? (
+                  <>
+                    <button
+                      onClick={handleRunAudit}
+                      className="group inline-flex items-center gap-3 rounded-full bg-forest-deep px-7 py-3.5 text-sm font-medium text-white hover:bg-forest-deep/90 transition-all duration-500 ease-editorial"
+                    >
+                      {t.solutions.deepDive.runAuditCta}
+                      <ArrowRight
+                        size={16}
+                        className="transition-transform duration-500 ease-editorial group-hover:translate-x-1"
+                      />
+                    </button>
+                    <button
+                      onClick={handleCtaClick}
+                      className="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-forest-deep transition-colors duration-300 ease-editorial"
+                    >
+                      {t.solutions.deepDive.primaryCta}
+                      <span
+                        aria-hidden
+                        className="block h-px w-6 bg-neutral-900 transition-all duration-500 ease-editorial group-hover:w-10 group-hover:bg-forest-deep"
+                      />
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={handleCtaClick}
+                    className="group inline-flex items-center gap-3 rounded-full bg-forest-deep px-7 py-3.5 text-sm font-medium text-white hover:bg-forest-deep/90 transition-all duration-500 ease-editorial"
+                  >
+                    {t.solutions.deepDive.primaryCta}
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform duration-500 ease-editorial group-hover:translate-x-1"
+                    />
+                  </button>
+                )}
                 <button
                   onClick={onClose}
-                  className="text-sm text-neutral-500 hover:text-forest-deep transition-colors duration-300 ease-editorial"
+                  className="ml-auto text-sm text-neutral-500 hover:text-forest-deep transition-colors duration-300 ease-editorial"
                 >
                   {t.solutions.deepDive.backToOverview}
                 </button>

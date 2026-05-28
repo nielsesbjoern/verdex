@@ -83,6 +83,7 @@ export type Dict = {
     deepDive: {
       closeLabel: string;
       primaryCta: string;
+      runAuditCta: string;
       backToOverview: string;
     };
     websites: {
@@ -268,6 +269,7 @@ const en: Dict = {
     deepDive: {
       closeLabel: "Close",
       primaryCta: "Get in touch",
+      runAuditCta: "Run the ROI audit",
       backToOverview: "Back to solutions",
     },
     websites: {
@@ -697,6 +699,7 @@ const de: Dict = {
     deepDive: {
       closeLabel: "Schließen",
       primaryCta: "Kontakt aufnehmen",
+      runAuditCta: "ROI-Audit starten",
       backToOverview: "Zurück zu den Lösungen",
     },
     websites: {

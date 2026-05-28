@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Playfair_Display } from "next/font/google";
 import { LanguageProvider } from "@/lib/LanguageProvider";
+import { AmicusAuditProvider } from "@/lib/AmicusAuditContext";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
@@ -51,9 +52,11 @@ export default function RootLayout({
     >
       <body className="font-sans text-[17px] sm:text-lg leading-relaxed antialiased bg-white text-neutral-900 caret-forest-deep">
         <LanguageProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <AmicusAuditProvider>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </AmicusAuditProvider>
         </LanguageProvider>
       </body>
     </html>
