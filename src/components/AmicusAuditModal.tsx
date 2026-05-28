@@ -110,6 +110,9 @@ export function AmicusAuditModal({ isOpen, onClose }: Props) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35, ease: EASE }}
           className="fixed inset-0 z-[100] bg-white text-[#111111]"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="amicus-audit-title"
         >
           <div className="h-full overflow-y-auto">
             <div className="mx-auto max-w-7xl px-6 lg:px-10 py-10 lg:py-14">
@@ -118,7 +121,10 @@ export function AmicusAuditModal({ isOpen, onClose }: Props) {
                   <p className="text-xs uppercase tracking-[0.22em] text-neutral-500">
                     {t.audit.badge}
                   </p>
-                  <h2 className="mt-4 font-serif text-4xl lg:text-5xl leading-tight">
+                  <h2
+                    id="amicus-audit-title"
+                    className="mt-4 font-serif text-4xl lg:text-5xl leading-tight"
+                  >
                     Amicus AI
                   </h2>
                 </div>
@@ -141,24 +147,27 @@ export function AmicusAuditModal({ isOpen, onClose }: Props) {
                     state={state}
                     setState={setState}
                     langKey={lang}
+                    onAdvance={() => setStep((s) => Math.min(6, s + 1))}
                   />
                   <div className="mt-12 flex items-center justify-between border-t border-neutral-100 pt-8">
                     <button
                       onClick={() => setStep((s) => Math.max(1, s - 1))}
-                      className="text-sm text-neutral-500 hover:text-[#102512] transition-colors"
+                      disabled={step === 1}
+                      className="text-sm text-neutral-500 hover:text-[#102512] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       {t.audit.back}
                     </button>
-                    <button
-                      onClick={() => {
-                        if (step < 5) setStep((s) => s + 1);
-                        else if (canShowResults) setStep(6);
-                      }}
-                      disabled={!isStepValid}
-                      className="rounded-full bg-[#102512] px-6 py-3 text-sm font-medium text-white disabled:opacity-40"
-                    >
-                      {step < 5 ? t.audit.next : t.audit.finish}
-                    </button>
+                    {step === 5 && (
+                      <button
+                        onClick={() => {
+                          if (canShowResults) setStep(6);
+                        }}
+                        disabled={!isStepValid}
+                        className="rounded-full bg-[#102512] px-6 py-3 text-sm font-medium text-white disabled:opacity-40"
+                      >
+                        {t.audit.finish}
+                      </button>
+                    )}
                   </div>
                 </div>
               ) : (
@@ -184,17 +193,32 @@ function StepContent({
   state,
   setState,
   langKey,
+  onAdvance,
 }: {
   step: number;
   state: AuditState;
   setState: React.Dispatch<React.SetStateAction<AuditState>>;
   langKey: string;
+  onAdvance: () => void;
 }) {
   const { t } = useLang();
   const S = t.audit.steps;
-  const card = "rounded-2xl border border-neutral-100 p-6 transition-colors text-left";
+  // Card cards a little taller so they don't look cramped after the
+  // factor/value secondary text was removed.
+  const card =
+    "rounded-2xl border border-neutral-100 px-6 py-8 text-base font-medium transition-colors text-left";
   const active = "border-[#102512] bg-[#102512] text-white";
   const idle = "hover:border-[#102512]/40";
+
+  /**
+   * Save the user's choice for the current step and auto-advance to the next
+   * one. A small delay lets the green selection state render so the click
+   * still feels acknowledged before the screen changes.
+   */
+  function selectAndAdvance(patch: Partial<AuditState>) {
+    setState((v) => ({ ...v, ...patch }));
+    window.setTimeout(onAdvance, 220);
+  }
 
   if (step === 1) {
     return (
@@ -207,7 +231,7 @@ function StepContent({
             return (
               <button
                 key={`${langKey}-${o.id}`}
-                onClick={() => setState((v) => ({ ...v, practiceArea: o.id }))}
+                onClick={() => selectAndAdvance({ practiceArea: o.id })}
                 className={`${card} ${isActive ? active : idle}`}
               >
                 {o.label}
@@ -230,13 +254,10 @@ function StepContent({
             return (
               <button
                 key={`${langKey}-${o.id}`}
-                onClick={() => setState((v) => ({ ...v, caseVolume: o.id }))}
+                onClick={() => selectAndAdvance({ caseVolume: o.id })}
                 className={`${card} ${isActive ? active : idle}`}
               >
-                <div className="font-medium">{o.label}</div>
-                <div className={`mt-2 text-sm ${isActive ? "text-white/80" : "text-neutral-500"}`}>
-                  {o.value}
-                </div>
+                {o.label}
               </button>
             );
           })}
@@ -256,13 +277,10 @@ function StepContent({
             return (
               <button
                 key={`${langKey}-${o.id}`}
-                onClick={() => setState((v) => ({ ...v, bottleneck: o.id }))}
+                onClick={() => selectAndAdvance({ bottleneck: o.id })}
                 className={`${card} ${isActive ? active : idle}`}
               >
-                <div className="font-medium">{o.label}</div>
-                <div className={`mt-2 text-sm ${isActive ? "text-white/80" : "text-neutral-500"}`}>
-                  {o.sub}
-                </div>
+                {o.label}
               </button>
             );
           })}
@@ -282,13 +300,10 @@ function StepContent({
             return (
               <button
                 key={`${langKey}-${o.id}`}
-                onClick={() => setState((v) => ({ ...v, timePerCase: o.id }))}
+                onClick={() => selectAndAdvance({ timePerCase: o.id })}
                 className={`${card} ${isActive ? active : idle}`}
               >
-                <div className="font-medium">{o.label}</div>
-                <div className={`mt-2 text-sm ${isActive ? "text-white/80" : "text-neutral-500"}`}>
-                  {o.value}
-                </div>
+                {o.label}
               </button>
             );
           })}

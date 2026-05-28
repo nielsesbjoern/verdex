@@ -107,6 +107,15 @@ export type Dict = {
     intro: string;
     pillars: Pillar[];
   };
+  about: {
+    eyebrow: string;
+    name: string;
+    titleA: string;
+    titleItalic: string;
+    paragraphs: string[];
+    photoAlt: string;
+    backToHome: string;
+  };
   contact: {
     eyebrow: string;
     titleA: string;
@@ -345,6 +354,19 @@ const en: Dict = {
         body: "Every engagement starts with a workshop, not a checklist. We adapt to your areas of practice, your tone, and the way your firm actually works.",
       },
     ],
+  },
+  about: {
+    eyebrow: "Founder",
+    name: "Niels Schade",
+    titleA: "Law is family.",
+    titleItalic: "Software is craft.",
+    paragraphs: [
+      "I finished my Abitur in 2024 with a 0.9 GPA — and deliberately chose Copenhagen Business School over a German law degree. There I now study Business Administration and Sociology. The combination gives me both: the strategic sharpness for scalable structures and the sociological understanding of how people inside organisations actually work.",
+      "I grew up in a household where law was a dinner-table subject. My parents run a firm together — my father as a certified specialist attorney for employment law, my mother for family law. My uncle covers tax law, and my grandfather was also an attorney. The day-to-day reality of a Kanzlei — its pressure points, its legal sensitivities — I therefore know not from a brochure, but from three generations of direct observation.",
+      "It is precisely that proximity — the legal depth from home and the strategic, economic perspective from Copenhagen — that flows into every solution Verdex builds.",
+    ],
+    photoAlt: "Portrait of Niels Schade, founder of Verdex",
+    backToHome: "Back to home",
   },
   contact: {
     eyebrow: "Get in touch",
@@ -775,6 +797,19 @@ const de: Dict = {
         body: "Jede Zusammenarbeit beginnt mit einem Workshop, nicht mit einer Checkliste. Wir passen uns Ihren Rechtsgebieten, Ihrem Ton und Ihrer Arbeitsweise an.",
       },
     ],
+  },
+  about: {
+    eyebrow: "Gründer",
+    name: "Niels Schade",
+    titleA: "Recht ist Familie.",
+    titleItalic: "Software ist Handwerk.",
+    paragraphs: [
+      "Mein Abitur habe ich 2024 mit einem Schnitt von 0,9 abgelegt — und mich danach bewusst gegen ein Jurastudium und für die Copenhagen Business School entschieden. Dort studiere ich heute Business Administration und Sociology. Die Kombination gibt mir beides: die strategische Schärfe für skalierbare Strukturen und das soziologische Verständnis dafür, wie Menschen in Organisationen wirklich arbeiten.",
+      "Aufgewachsen bin ich in einer Familie, in der Recht Esstisch-Thema ist. Meine Eltern führen gemeinsam eine Kanzlei — mein Vater als Fachanwalt für Arbeitsrecht, meine Mutter als Fachanwältin für Familienrecht. Das Steuerrecht deckt mein Onkel ab, mein Großvater war ebenfalls Anwalt. Den Alltag einer Kanzlei, ihre Schmerzpunkte und ihre rechtlichen Sensibilitäten kenne ich deshalb nicht aus einer Broschüre, sondern aus drei Generationen unmittelbarer Beobachtung.",
+      "Genau diese Nähe — die juristische Tiefe von Hause aus und der wirtschaftlich-strategische Blick aus Kopenhagen — fließt in jede Lösung ein, die Verdex baut.",
+    ],
+    photoAlt: "Porträt von Niels Schade, Gründer von Verdex",
+    backToHome: "Zurück zur Startseite",
   },
   contact: {
     eyebrow: "Lassen Sie uns sprechen",

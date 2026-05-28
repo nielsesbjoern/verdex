@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { useLang } from "@/lib/LanguageProvider";
 import { FadeIn } from "./FadeIn";
 import {
@@ -41,7 +40,7 @@ export function SolutionsTabs() {
           </FadeIn>
 
           {/* Two solution cards — side by side */}
-          <div className="mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          <div className="mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
             <SolutionCard
               eyebrow={t.solutions.cards.eyebrowWebsites}
               title={t.solutions.tabWebsites}
@@ -51,6 +50,7 @@ export function SolutionsTabs() {
               onClick={() => setActiveSolution("websites")}
             />
             <SolutionCard
+              variant="dark"
               eyebrow={t.solutions.cards.eyebrowAmicus}
               title={t.solutions.tabAmicus}
               description={t.solutions.cards.amicusShort}
@@ -76,6 +76,7 @@ type SolutionCardProps = {
   description: string;
   ctaLabel: string;
   delay: number;
+  variant?: "light" | "dark";
   onClick: () => void;
 };
 
@@ -85,8 +86,11 @@ function SolutionCard({
   description,
   ctaLabel,
   delay,
+  variant = "light",
   onClick,
 }: SolutionCardProps) {
+  const isDark = variant === "dark";
+
   return (
     <motion.button
       type="button"
@@ -95,35 +99,58 @@ function SolutionCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.7, delay, ease: EDITORIAL_EASE }}
-      className="group relative text-left rounded-2xl border border-neutral-200 bg-white px-8 py-10 lg:px-10 lg:py-12 transition-all duration-500 ease-editorial hover:border-forest-deep hover:-translate-y-0.5 focus:outline-none focus-visible:border-forest-deep focus-visible:ring-1 focus-visible:ring-forest-deep"
+      className={`group overflow-hidden text-left rounded-3xl px-8 py-12 sm:px-10 sm:py-14 lg:px-14 lg:py-16 transition-all duration-500 ease-editorial hover:-translate-y-1 focus:outline-none ${
+        isDark
+          ? "bg-forest-deep text-white border border-forest-deep hover:shadow-[0_40px_80px_-25px_rgba(16,37,18,0.55)] focus-visible:ring-2 focus-visible:ring-white/40"
+          : "bg-white border-2 border-forest-deep/15 hover:border-forest-deep hover:shadow-[0_30px_70px_-20px_rgba(16,37,18,0.22)] focus-visible:border-forest-deep focus-visible:ring-2 focus-visible:ring-forest-deep/30"
+      }`}
     >
-      <div className="flex items-start justify-between gap-6">
-        <p className="text-xs font-medium uppercase tracking-[0.22em] text-forest-deep/60">
-          {eyebrow}
-        </p>
-        <span
-          aria-hidden
-          className="text-forest-deep transition-transform duration-500 ease-editorial group-hover:-translate-y-1 group-hover:translate-x-1"
-        >
-          <ArrowUpRight size={20} strokeWidth={1.6} />
-        </span>
-      </div>
+      {/* Eyebrow */}
+      <p
+        className={`text-xs font-medium uppercase tracking-[0.22em] ${
+          isDark ? "text-white/70" : "text-forest-deep"
+        }`}
+      >
+        {eyebrow}
+      </p>
 
-      <h3 className="mt-10 font-serif text-3xl sm:text-4xl lg:text-5xl text-neutral-900 leading-[1.05] tracking-tight">
+      {/* Title — reserve enough height for 2 lines so both cards align
+          regardless of whether the localised title wraps. */}
+      <h3
+        className={`mt-16 sm:mt-20 lg:mt-24 font-serif text-4xl sm:text-5xl lg:text-6xl leading-[1.02] tracking-tight min-h-[5rem] sm:min-h-[6.5rem] lg:min-h-[8rem] ${
+          isDark ? "text-white" : "text-neutral-900"
+        }`}
+      >
         {title}
       </h3>
 
-      <p className="mt-6 max-w-md text-[15px] leading-relaxed text-neutral-500">
+      {/* Description */}
+      <p
+        className={`mt-6 max-w-md text-base lg:text-[17px] leading-relaxed ${
+          isDark ? "text-white/70" : "text-neutral-500"
+        }`}
+      >
         {description}
       </p>
 
-      <p className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-neutral-900 group-hover:text-forest-deep transition-colors duration-300 ease-editorial">
+      {/* CTA */}
+      <div
+        className={`mt-12 lg:mt-16 inline-flex items-center gap-3 text-sm font-medium transition-colors duration-300 ease-editorial ${
+          isDark
+            ? "text-white/90 group-hover:text-white"
+            : "text-neutral-900 group-hover:text-forest-deep"
+        }`}
+      >
         {ctaLabel}
         <span
           aria-hidden
-          className="block h-px w-6 bg-neutral-900 transition-all duration-500 ease-editorial group-hover:w-10 group-hover:bg-forest-deep"
+          className={`block h-px w-8 transition-all duration-500 ease-editorial group-hover:w-16 ${
+            isDark
+              ? "bg-white/60 group-hover:bg-white"
+              : "bg-neutral-900 group-hover:bg-forest-deep"
+          }`}
         />
-      </p>
+      </div>
     </motion.button>
   );
 }

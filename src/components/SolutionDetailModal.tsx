@@ -75,6 +75,7 @@ export function SolutionDetailModal({ solutionId, onClose }: Props) {
           className="fixed inset-0 z-[100] bg-white text-neutral-900"
           role="dialog"
           aria-modal="true"
+          aria-labelledby="solution-detail-title"
         >
           <div className="h-full overflow-y-auto">
             <div className="mx-auto max-w-5xl px-6 lg:px-10 py-10 lg:py-14">
@@ -105,47 +106,22 @@ export function SolutionDetailModal({ solutionId, onClose }: Props) {
                 {solutionId === "websites" ? (
                   <WebsitesContent />
                 ) : (
-                  <AmicusContent />
+                  <AmicusContent onRunAudit={handleRunAudit} />
                 )}
               </motion.div>
 
               {/* CTA footer */}
               <div className="mt-16 lg:mt-20 flex flex-wrap items-center gap-x-8 gap-y-5 border-t border-neutral-100 pt-10">
-                {solutionId === "amicus" ? (
-                  <>
-                    <button
-                      onClick={handleRunAudit}
-                      className="group inline-flex items-center gap-3 rounded-full bg-forest-deep px-7 py-3.5 text-sm font-medium text-white hover:bg-forest-deep/90 transition-all duration-500 ease-editorial"
-                    >
-                      {t.solutions.deepDive.runAuditCta}
-                      <ArrowRight
-                        size={16}
-                        className="transition-transform duration-500 ease-editorial group-hover:translate-x-1"
-                      />
-                    </button>
-                    <button
-                      onClick={handleCtaClick}
-                      className="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-forest-deep transition-colors duration-300 ease-editorial"
-                    >
-                      {t.solutions.deepDive.primaryCta}
-                      <span
-                        aria-hidden
-                        className="block h-px w-6 bg-neutral-900 transition-all duration-500 ease-editorial group-hover:w-10 group-hover:bg-forest-deep"
-                      />
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    onClick={handleCtaClick}
-                    className="group inline-flex items-center gap-3 rounded-full bg-forest-deep px-7 py-3.5 text-sm font-medium text-white hover:bg-forest-deep/90 transition-all duration-500 ease-editorial"
-                  >
-                    {t.solutions.deepDive.primaryCta}
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform duration-500 ease-editorial group-hover:translate-x-1"
-                    />
-                  </button>
-                )}
+                <button
+                  onClick={handleCtaClick}
+                  className="group inline-flex items-center gap-3 rounded-full bg-forest-deep px-7 py-3.5 text-sm font-medium text-white hover:bg-forest-deep/90 transition-all duration-500 ease-editorial"
+                >
+                  {t.solutions.deepDive.primaryCta}
+                  <ArrowRight
+                    size={16}
+                    className="transition-transform duration-500 ease-editorial group-hover:translate-x-1"
+                  />
+                </button>
                 <button
                   onClick={onClose}
                   className="ml-auto text-sm text-neutral-500 hover:text-forest-deep transition-colors duration-300 ease-editorial"
@@ -167,7 +143,10 @@ function WebsitesContent() {
   const { t } = useLang();
   return (
     <>
-      <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 leading-[1.05] tracking-tight max-w-3xl">
+      <h2
+        id="solution-detail-title"
+        className="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 leading-[1.05] tracking-tight max-w-3xl"
+      >
         {t.solutions.websites.title}
       </h2>
       <p className="mt-8 max-w-2xl text-lg text-neutral-500 leading-relaxed">
@@ -183,16 +162,33 @@ function WebsitesContent() {
   );
 }
 
-function AmicusContent() {
+function AmicusContent({ onRunAudit }: { onRunAudit: () => void }) {
   const { t } = useLang();
   return (
     <>
-      <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 leading-[1.05] tracking-tight max-w-3xl">
+      <h2
+        id="solution-detail-title"
+        className="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 leading-[1.05] tracking-tight max-w-3xl"
+      >
         {t.solutions.amicus.title}
       </h2>
       <p className="mt-8 max-w-2xl text-lg text-neutral-500 leading-relaxed">
         {t.solutions.amicus.body}
       </p>
+
+      {/* Primary action — placed high so it's visible without scrolling */}
+      <div className="mt-10">
+        <button
+          onClick={onRunAudit}
+          className="group inline-flex items-center gap-3 rounded-full bg-forest-deep px-7 py-3.5 text-sm font-medium text-white hover:bg-forest-deep/90 transition-all duration-500 ease-editorial"
+        >
+          {t.solutions.deepDive.runAuditCta}
+          <ArrowRight
+            size={16}
+            className="transition-transform duration-500 ease-editorial group-hover:translate-x-1"
+          />
+        </button>
+      </div>
 
       <div className="mt-12 max-w-2xl border-l-2 border-forest-deep pl-6">
         <p className="font-serif text-xl italic text-neutral-900 leading-snug">

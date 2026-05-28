@@ -4,13 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useLang } from "@/lib/LanguageProvider";
-import { useAmicusAudit } from "@/lib/AmicusAuditContext";
 import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
 
 export function Navbar() {
   const { t } = useLang();
-  const { open: openAudit } = useAmicusAudit();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -20,9 +18,7 @@ export function Navbar() {
   // like /impressum and /datenschutz — they navigate home and scroll.
   const navLinks = [
     { id: "solutions", label: t.nav.solutions, href: "/#solutions" },
-    { id: "amicus", label: t.nav.amicus, href: "/#solutions" },
-    { id: "about", label: t.nav.about, href: "/#why" },
-    { id: "contact", label: t.nav.contact, href: "/#contact" },
+    { id: "about", label: t.nav.about, href: "/about" },
   ];
 
   useEffect(() => {
@@ -81,6 +77,7 @@ export function Navbar() {
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-haspopup="menu"
+              aria-controls="main-nav-menu"
               onClick={() => setOpen((v) => !v)}
               className="inline-flex items-center justify-center p-2 text-neutral-900 hover:text-forest-deep transition-colors duration-300 ease-editorial"
             >
@@ -89,6 +86,7 @@ export function Navbar() {
 
             {open && (
               <div
+                id="main-nav-menu"
                 ref={menuRef}
                 role="menu"
                 className="absolute right-0 top-full mt-3 w-64 origin-top-right rounded-xl border border-neutral-200 bg-white shadow-lg shadow-neutral-900/[0.06] py-3 animate-fade-up"
@@ -96,27 +94,14 @@ export function Navbar() {
                 <ul className="flex flex-col">
                   {navLinks.map((link, i) => (
                     <li key={`${link.label}-${i}`} role="none">
-                      {link.id === "amicus" ? (
-                        <button
-                          role="menuitem"
-                          onClick={() => {
-                            setOpen(false);
-                            openAudit();
-                          }}
-                          className="block w-full text-left px-5 py-2.5 text-sm text-neutral-700 hover:text-forest-deep hover:bg-neutral-50 transition-colors duration-200 ease-editorial"
-                        >
-                          {link.label}
-                        </button>
-                      ) : (
-                        <a
-                          role="menuitem"
-                          href={link.href}
-                          onClick={() => setOpen(false)}
-                          className="block px-5 py-2.5 text-sm text-neutral-700 hover:text-forest-deep hover:bg-neutral-50 transition-colors duration-200 ease-editorial"
-                        >
-                          {link.label}
-                        </a>
-                      )}
+                      <a
+                        role="menuitem"
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className="block px-5 py-2.5 text-sm text-neutral-700 hover:text-forest-deep hover:bg-neutral-50 transition-colors duration-200 ease-editorial"
+                      >
+                        {link.label}
+                      </a>
                     </li>
                   ))}
                 </ul>

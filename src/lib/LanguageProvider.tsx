@@ -21,30 +21,37 @@ type Ctx = {
 const LanguageContext = createContext<Ctx | null>(null);
 
 function detectInitial(): Lang {
-  // SSR-safe default — actual detection runs in effect.
+  // Must match the server-rendered markup. Reading localStorage or browser
+  // language during the first client render causes hydration mismatches.
   return "en";
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(detectInitial);
 
-  // On mount: restore from localStorage, fall back to browser preference.
+  // Restore the user's language only after hydration.
   useEffect(() => {
     let next: Lang | null = null;
 
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored === "en" || stored === "de") {
-      next = stored;
-    } else if (window.navigator.language?.toLowerCase().startsWith("de")) {
+    try {
+      const stored = window.localStorage.getItem(STORAGE_KEY);
+      if (stored === "en" || stored === "de") {
+        next = stored;
+      }
+    } catch {
+      // localStorage might be disabled — browser preference can still apply.
+    }
+
+    if (!next && window.navigator.language?.toLowerCase().startsWith("de")) {
       next = "de";
     }
 
     if (next && next !== lang) setLangState(next);
-    // Run only once on mount.
+    // Run only once after hydration.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Keep <html lang="..."> in sync for accessibility & SEO.
+  // Keep <html lang="..."> in sync.
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);

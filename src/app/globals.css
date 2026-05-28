@@ -32,6 +32,24 @@ body {
   border-radius: 2px;
 }
 
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -200%;
+  z-index: 200;
+  border-radius: 9999px;
+  background: #102512;
+  color: #fff;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+}
+
 /* Editorial: tighten serif numerals & punctuation a hair */
 .font-serif {
   font-feature-settings: "lnum", "kern";

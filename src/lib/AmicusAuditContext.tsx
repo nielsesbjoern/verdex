@@ -1,7 +1,12 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { AmicusAuditModal } from "@/components/AmicusAuditModal";
+import dynamic from "next/dynamic";
+
+const AmicusAuditModal = dynamic(
+  () => import("@/components/AmicusAuditModal").then((m) => m.AmicusAuditModal),
+  { ssr: false }
+);
 
 type AmicusAuditCtx = {
   isOpen: boolean;

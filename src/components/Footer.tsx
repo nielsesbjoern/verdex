@@ -5,27 +5,22 @@ import { useLang } from "@/lib/LanguageProvider";
 import { LanguageToggle } from "./LanguageToggle";
 import { Logo } from "./Logo";
 
-type FooterLink = { label: string; href: string; internal?: boolean };
+type FooterLink = {
+  label: string;
+  href: string;
+  internal?: boolean;
+  newTab?: boolean;
+};
 
 export function Footer() {
   const { t } = useLang();
 
   const columns: { title: string; links: FooterLink[] }[] = [
     {
-      title: t.footer.columns.product,
-      links: [
-        { label: t.footer.links.websites, href: "/#solutions" },
-        { label: t.footer.links.amicus, href: "/#solutions" },
-        { label: t.footer.links.why, href: "/#why" },
-      ],
-    },
-    {
       title: t.footer.columns.company,
       links: [
-        { label: t.footer.links.about, href: "/#why" },
+        { label: t.footer.links.about, href: "/about", internal: true, newTab: true },
         { label: t.footer.links.contact, href: "/#contact" },
-        // TODO: replace with real careers / blog link
-        { label: t.footer.links.careers, href: "#" },
       ],
     },
     {
@@ -53,33 +48,41 @@ export function Footer() {
         {/* Column grid */}
         <div className="mt-20 grid grid-cols-2 gap-10 lg:grid-cols-4">
           <div className="hidden lg:block" />
+          <div className="hidden lg:block" />
           {columns.map((col) => (
             <div key={col.title}>
               <h4 className="text-xs font-medium uppercase tracking-[0.22em] text-white/50">
                 {col.title}
               </h4>
               <ul className="mt-5 space-y-3">
-                {col.links.map((link) =>
-                  link.internal ? (
+                {col.links.map((link) => {
+                  const className =
+                    "text-sm text-white/80 hover:text-white transition-colors duration-300 ease-editorial";
+                  const newTabProps = link.newTab
+                    ? { target: "_blank", rel: "noopener noreferrer" as const }
+                    : {};
+                  return (
                     <li key={link.label}>
-                      <Link
-                        href={link.href}
-                        className="text-sm text-white/80 hover:text-white transition-colors duration-300 ease-editorial"
-                      >
-                        {link.label}
-                      </Link>
+                      {link.internal ? (
+                        <Link
+                          href={link.href}
+                          className={className}
+                          {...newTabProps}
+                        >
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <a
+                          href={link.href}
+                          className={className}
+                          {...newTabProps}
+                        >
+                          {link.label}
+                        </a>
+                      )}
                     </li>
-                  ) : (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-sm text-white/80 hover:text-white transition-colors duration-300 ease-editorial"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  )
-                )}
+                  );
+                })}
               </ul>
             </div>
           ))}
