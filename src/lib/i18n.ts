@@ -69,12 +69,15 @@ export type Dict = {
     titleB: string;
     intro: string;
     tabWebsites: string;
+    tabAuthority: string;
     tabAmicus: string;
-    /** Card view (two side-by-side fields). */
+    /** Card view (three side-by-side fields). */
     cards: {
       eyebrowWebsites: string;
+      eyebrowAuthority: string;
       eyebrowAmicus: string;
       websitesShort: string;
+      authorityShort: string;
       amicusShort: string;
       learnMore: string;
     };
@@ -86,6 +89,11 @@ export type Dict = {
       backToOverview: string;
     };
     websites: {
+      title: string;
+      body: string;
+      features: Feature[];
+    };
+    authority: {
       title: string;
       body: string;
       features: Feature[];
@@ -255,23 +263,27 @@ const en: Dict = {
     titleLine2Rest: "private AI",
     titleLine3: "for law firms.",
     subtitle:
-      "Verdex builds the digital backbone of forward-thinking law firms — from elegant client-facing websites to a private AI assistant that never sends a single byte off-premise.",
+      "Verdex builds the digital backbone of forward-thinking law firms — elegant client-facing websites, local visibility where clients search, and a private AI assistant that never sends a single byte off-premise.",
     ctaPrimary: "Get in touch",
     ctaSecondary: "Our services",
   },
   solutions: {
     eyebrow: "Solutions",
-    titleA: "Two products.",
+    titleA: "Three products.",
     titleB: "One firm-grade standard.",
     intro:
-      "Whether you need a public-facing site that earns trust before the first call, or an AI assistant that stays inside your office — Verdex delivers both.",
+      "Whether you need a public-facing site that earns trust before the first call, local visibility where clients search under pressure, or an AI assistant that stays inside your office — Verdex delivers all three.",
     tabWebsites: "Website Solutions",
+    tabAuthority: "Verdex Authority",
     tabAmicus: "Amicus AI",
     cards: {
       eyebrowWebsites: "Website",
+      eyebrowAuthority: "Positioning",
       eyebrowAmicus: "Private AI",
       websitesShort:
         "Editorial websites that win the first impression — fast, branded, easy to maintain.",
+      authorityShort:
+        "We anchor your firm in the local search hotspots — so clients acting under acute time pressure find their first digital path straight to you.",
       amicusShort:
         "A private, locally-running AI with four tools your firm uses daily — semantic case-law search, an opposing-counsel simulator, anonymisation and a rule-based deadline calculator.",
       learnMore: "Explore the solution",
@@ -294,12 +306,33 @@ const en: Dict = {
         {
           title: "SEO & Performance",
           description:
-            "Engineered for sub-second loads and top rankings on the queries your future clients actually search.",
+            "Maximised for sub-second loads and search performance — clean technical SEO, an optimised content structure and built-in structured data form the indexable foundation your rankings are built on.",
         },
         {
           title: "Easy to Maintain",
           description:
             "A clean CMS layer so your team can update partners, posts and case studies without needing a developer.",
+        },
+      ],
+    },
+    authority: {
+      title: "Visible exactly where clients search under pressure.",
+      body: "Your website is the digital headquarters — Verdex Authority brings it into the entire digital ecosystem. Google and Apple maps, highly-rated professional directories and active indexing management work in concert, so you are found at the precise moment the search becomes urgent.",
+      features: [
+        {
+          title: "Geo Infrastructure",
+          description:
+            "Complete setup and synchronisation of your Google Business Profile and Apple Business Connect — for precise local navigation straight to your firm.",
+        },
+        {
+          title: "Entity Validation",
+          description:
+            "Listings in the most important, Google-trusted legal and industry directories (NAP synchronisation) to maximise your domain's trust score.",
+        },
+        {
+          title: "Indexing Management",
+          description:
+            "Active steering of the Google bot via the Search Console — new practice areas and partner profiles land in the index immediately instead of waiting for weeks.",
         },
       ],
     },
@@ -399,7 +432,7 @@ const en: Dict = {
   },
   footer: {
     tagline:
-      "Modern websites and a private AI partner for law firms that care about craft and confidentiality.",
+      "Modern websites, local visibility and a private AI partner for law firms that care about craft and confidentiality.",
     columns: {
       product: "Product",
       company: "Company",
@@ -709,23 +742,27 @@ const de: Dict = {
     titleLine2Rest: "private KI",
     titleLine3: "für Kanzleien.",
     subtitle:
-      "Verdex baut das digitale Rückgrat zukunftsorientierter Kanzleien — von eleganten Mandantenauftritten bis zu einem privaten KI-Assistenten, der nicht ein einziges Byte aus der Kanzlei lässt.",
+      "Verdex baut das digitale Rückgrat zukunftsorientierter Kanzleien — elegante Mandantenauftritte, lokale Sichtbarkeit dort, wo gesucht wird, und ein privater KI-Assistent, der nicht ein einziges Byte aus der Kanzlei lässt.",
     ctaPrimary: "Kontakt aufnehmen",
     ctaSecondary: "Unsere Leistungen",
   },
   solutions: {
     eyebrow: "Lösungen",
-    titleA: "Zwei Produkte.",
+    titleA: "Drei Produkte.",
     titleB: "Ein Kanzlei-Standard.",
     intro:
-      "Ob Sie eine repräsentative Website brauchen, die schon vor dem ersten Anruf Vertrauen schafft, oder einen KI-Assistenten, der innerhalb Ihrer Kanzlei bleibt — Verdex liefert beides.",
+      "Ob eine repräsentative Website, die schon vor dem ersten Anruf Vertrauen schafft, lokale Sichtbarkeit dort, wo Mandanten unter Druck suchen, oder ein KI-Assistent, der innerhalb Ihrer Kanzlei bleibt — Verdex liefert alle drei.",
     tabWebsites: "Website-Lösungen",
+    tabAuthority: "Verdex Authority",
     tabAmicus: "Amicus AI",
     cards: {
       eyebrowWebsites: "Website",
+      eyebrowAuthority: "Positionierung",
       eyebrowAmicus: "Private KI",
       websitesShort:
         "Redaktionelle Websites, die schon beim ersten Eindruck überzeugen — schnell, markengerecht, leicht zu pflegen.",
+      authorityShort:
+        "Wir verankern Ihre Kanzlei in den lokalen Suchbrennpunkten — damit Mandanten unter akutem Handlungsdruck den ersten digitalen Weg direkt zu Ihnen finden.",
       amicusShort:
         "Eine private, lokal laufende KI mit vier Werkzeugen für den Kanzlei-Alltag — semantische Urteilssuche, Gegner-Simulator, kontrollierte Anonymisierung und ein regelbasierter Fristenrechner.",
       learnMore: "Lösung im Detail",
@@ -748,12 +785,33 @@ const de: Dict = {
         {
           title: "SEO & Performance",
           description:
-            "Engineered für Ladezeiten unter einer Sekunde und Top-Rankings bei genau den Suchanfragen, die Ihre künftigen Mandanten stellen.",
+            "Maximiert auf Ladezeiten unter einer Sekunde und Suchperformance — sauberes technisches SEO, eine optimierte Content-Struktur und integrierte strukturierte Daten bilden das indexierbare Fundament Ihrer Rankings.",
         },
         {
           title: "Einfach zu pflegen",
           description:
             "Ein schlankes CMS, mit dem Ihr Team Partner, Beiträge und Mandatsthemen aktualisiert — ohne einen Entwickler zu brauchen.",
+        },
+      ],
+    },
+    authority: {
+      title: "Dort sichtbar, wo Mandanten unter Druck suchen.",
+      body: "Ihre Website ist das digitale Hauptquartier — Verdex Authority bringt es in das gesamte digitale Ökosystem. Google- und Apple-Karten, von Google hoch bewertete Fachverzeichnisse und ein aktives Indexierungs-Management greifen ineinander, damit Sie genau dann gefunden werden, wenn die Suche dringend wird.",
+      features: [
+        {
+          title: "Geo-Infrastruktur",
+          description:
+            "Vollständige Einrichtung und Synchronisation von Google Business Profile und Apple Business Connect — für die exakte lokale Navigation direkt zu Ihrer Kanzlei.",
+        },
+        {
+          title: "Entitäten-Validierung",
+          description:
+            "Eintragung in die wichtigsten, von Google hoch bewerteten Fach- und Branchenverzeichnisse (NAP-Synchronisation), um den Trust-Score Ihrer Domain zu maximieren.",
+        },
+        {
+          title: "Indexierungs-Management",
+          description:
+            "Aktive Steuerung des Google-Bots über die Search Console — neue Rechtsgebiete und Partner-Profile landen sofort im Index statt wochenlang zu warten.",
         },
       ],
     },
@@ -853,7 +911,7 @@ const de: Dict = {
   },
   footer: {
     tagline:
-      "Moderne Websites und ein privater KI-Partner für Kanzleien, denen Handwerk und Verschwiegenheit am Herzen liegen.",
+      "Moderne Websites, lokale Sichtbarkeit und ein privater KI-Partner für Kanzleien, denen Handwerk und Verschwiegenheit am Herzen liegen.",
     columns: {
       product: "Produkt",
       company: "Unternehmen",

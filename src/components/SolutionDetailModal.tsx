@@ -7,7 +7,10 @@ import {
   CalendarClock,
   EyeOff,
   Gauge,
+  MapPin,
+  Radar,
   Scale,
+  ShieldCheck,
   Sparkles,
   Swords,
   Wrench,
@@ -17,7 +20,7 @@ import {
 import { useLang } from "@/lib/LanguageProvider";
 import { useAmicusAudit } from "@/lib/AmicusAuditContext";
 
-export type SolutionId = "websites" | "amicus";
+export type SolutionId = "websites" | "authority" | "amicus";
 
 type Props = {
   solutionId: SolutionId | null;
@@ -27,6 +30,7 @@ type Props = {
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const WEBSITE_ICONS: LucideIcon[] = [Sparkles, Gauge, Wrench];
+const AUTHORITY_ICONS: LucideIcon[] = [MapPin, ShieldCheck, Radar];
 const AMICUS_ICONS: LucideIcon[] = [Scale, Swords, EyeOff, CalendarClock];
 
 export function SolutionDetailModal({ solutionId, onClose }: Props) {
@@ -84,6 +88,8 @@ export function SolutionDetailModal({ solutionId, onClose }: Props) {
                 <p className="text-xs uppercase tracking-[0.22em] text-neutral-500">
                   {solutionId === "websites"
                     ? t.solutions.cards.eyebrowWebsites
+                    : solutionId === "authority"
+                    ? t.solutions.cards.eyebrowAuthority
                     : t.solutions.cards.eyebrowAmicus}
                 </p>
                 <button
@@ -105,6 +111,8 @@ export function SolutionDetailModal({ solutionId, onClose }: Props) {
               >
                 {solutionId === "websites" ? (
                   <WebsitesContent />
+                ) : solutionId === "authority" ? (
+                  <AuthorityContent />
                 ) : (
                   <AmicusContent onRunAudit={handleRunAudit} />
                 )}
@@ -156,6 +164,29 @@ function WebsitesContent() {
       <FeatureGrid
         features={t.solutions.websites.features}
         icons={WEBSITE_ICONS}
+        cols={3}
+      />
+    </>
+  );
+}
+
+function AuthorityContent() {
+  const { t } = useLang();
+  return (
+    <>
+      <h2
+        id="solution-detail-title"
+        className="font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 leading-[1.05] tracking-tight max-w-3xl"
+      >
+        {t.solutions.authority.title}
+      </h2>
+      <p className="mt-8 max-w-2xl text-lg text-neutral-500 leading-relaxed">
+        {t.solutions.authority.body}
+      </p>
+
+      <FeatureGrid
+        features={t.solutions.authority.features}
+        icons={AUTHORITY_ICONS}
         cols={3}
       />
     </>

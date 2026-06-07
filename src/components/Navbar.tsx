@@ -55,8 +55,8 @@ export function Navbar() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-editorial ${
         scrolled
-          ? "bg-white/85 backdrop-blur-md border-b border-neutral-200/70"
-          : "bg-transparent border-b border-transparent"
+          ? "bg-forest-deep/95 backdrop-blur-md border-b border-white/10"
+          : "bg-forest-deep border-b border-transparent"
       }`}
     >
       <div className="pl-6 pr-4 sm:pl-8 sm:pr-6 lg:pl-12 lg:pr-8">
@@ -66,11 +66,11 @@ export function Navbar() {
             aria-label="Verdex home"
             className="flex items-center -my-3"
           >
-            <Logo height={47} priority />
+            <Logo variant="white" height={47} priority />
           </Link>
 
           <div className="relative flex items-center gap-4">
-            <LanguageToggle />
+            <LanguageToggle theme="dark" />
             <button
               ref={buttonRef}
               type="button"
@@ -79,7 +79,7 @@ export function Navbar() {
               aria-haspopup="menu"
               aria-controls="main-nav-menu"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex items-center justify-center p-2 text-neutral-900 hover:text-forest-deep transition-colors duration-300 ease-editorial"
+              className="inline-flex items-center justify-center p-2 text-white hover:text-white/70 transition-colors duration-300 ease-editorial"
             >
               {open ? <X size={22} /> : <Menu size={22} />}
             </button>
