@@ -13,10 +13,10 @@ const config: Config = {
         // Brand — the strategic accent. Only for interactive elements,
         // hover/focus, caret, and the prominent footer branding plate.
         forest: {
-          deep: "#102512",
-          // Lighter sage variant for use on dark backgrounds where
+          deep: "#8a1620",
+          // Lighter red variant for use on dark backgrounds where
           // `forest-deep` would lack contrast (dark-mode accents/links).
-          light: "#8fb290",
+          light: "#d75a64",
         },
         // Dark-mode page + surface tones (warm near-black, faintly green).
         ink: {

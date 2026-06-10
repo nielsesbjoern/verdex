@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Lora } from "next/font/google";
 import {
   ArrowRight,
   Clock,
@@ -11,23 +12,26 @@ import {
 } from "lucide-react";
 
 /**
- * The same fictional law firm reimagined as a polished, high-end professional
+ * The same fictional law firm reimagined as a more modern, usable professional
  * site ("After"), with working sub-tabs (Kanzlei, Rechtsgebiete, Team, Kontakt).
  *
- * Uses its OWN identity — warm cream, deep navy and a brass accent, a utility
- * bar, a monogram crest and a credentials band — so it reads as a bespoke,
- * premium client project rather than a copy of the Verdex brand.
+ * Uses its own quieter identity: white surfaces, a red accent and near-black
+ * text in a classic Lora serif, so it reads like a conservative law firm rather
+ * than a Verdex-branded landing page.
  * Demonstration component only; all content is anonymised / invented.
  */
 
-const NAVY = "#16243d";
-const NAVY_DEEP = "#101b30";
-const BRASS = "#a87e4f";
-const CREAM = "#faf8f4";
-const PANEL = "#f3efe7";
-const INK = "#1c2230";
-const MUTED = "#5f6470";
-const HAIRLINE = "#e3ddd0";
+const mockFont = Lora({ subsets: ["latin"], weight: ["400", "500", "600"], display: "swap" });
+
+const RED = "#8a1620";
+const NAVY = "#161616";
+const NAVY_DEEP = "#0f0f0f";
+const BRASS = "#8a1620";
+const CREAM = "#ffffff";
+const PANEL = "#f6f5f3";
+const INK = "#161616";
+const MUTED = "#5b5f63";
+const HAIRLINE = "#e6e3df";
 
 type TabId = "kanzlei" | "rechtsgebiete" | "team" | "kontakt";
 
@@ -43,13 +47,13 @@ export function MockSiteAfter() {
 
   return (
     <div
-      className="min-h-full w-full font-sans"
+      className={`min-h-full w-full ${mockFont.className}`}
       style={{ backgroundColor: CREAM, color: INK }}
     >
       {/* Utility bar */}
       <div
-        className="hidden items-center justify-between px-6 py-2 text-[11px] tracking-wide sm:flex sm:px-10"
-        style={{ backgroundColor: NAVY_DEEP, color: "#aeb6c4" }}
+        className="hidden items-center justify-between px-6 py-2.5 text-[12px] sm:flex sm:px-10"
+        style={{ backgroundColor: NAVY_DEEP, color: "#d4d1ca" }}
       >
         <span className="inline-flex items-center gap-2">
           <MapPin size={12} style={{ color: BRASS }} /> Friedrichstraße 1, 10117
@@ -81,13 +85,13 @@ export function MockSiteAfter() {
             </span>
             <span>
               <span
-                className="block font-serif text-lg leading-none tracking-tight"
+                className="block text-lg leading-none"
                 style={{ color: NAVY }}
               >
                 Brandt &amp; Kollegen
               </span>
               <span
-                className="mt-1 block text-[10px] uppercase tracking-[0.28em]"
+                className="mt-1 block text-[12px]"
                 style={{ color: BRASS }}
               >
                 Rechtsanwälte · Notar
@@ -97,8 +101,8 @@ export function MockSiteAfter() {
           <button
             type="button"
             onClick={() => setTab("kontakt")}
-            className="hidden items-center gap-2 rounded-sm px-5 py-2.5 text-[12px] font-medium tracking-wide text-white sm:inline-flex"
-            style={{ backgroundColor: NAVY }}
+            className="hidden items-center gap-2 px-5 py-2.5 text-[13px] font-medium text-white sm:inline-flex"
+            style={{ backgroundColor: RED }}
           >
             Termin vereinbaren <ArrowRight size={14} />
           </button>
@@ -116,7 +120,7 @@ export function MockSiteAfter() {
                 key={item.id}
                 type="button"
                 onClick={() => setTab(item.id)}
-                className="relative pb-2 text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors duration-200"
+                className="relative pb-2 text-[14px] font-medium transition-colors duration-200"
                 style={{ color: active ? NAVY : MUTED }}
               >
                 {item.label}
@@ -148,42 +152,41 @@ export function MockSiteAfter() {
 function Crest() {
   return (
     <div
-      className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-sm"
-      style={{ backgroundColor: NAVY }}
+      className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden border bg-white"
+      style={{ borderColor: HAIRLINE }}
     >
-      {/* Inner frame */}
       <div
-        className="absolute inset-3"
-        style={{ border: `1px solid ${BRASS}55` }}
+        className="absolute inset-5"
+        style={{ border: `1px solid ${HAIRLINE}` }}
       />
       <div className="relative flex flex-col items-center px-6 text-center">
         <span
           className="flex h-16 w-16 items-center justify-center rounded-full"
-          style={{ border: `1.5px solid ${BRASS}` }}
+          style={{ backgroundColor: CREAM, border: `1px solid ${HAIRLINE}` }}
         >
           <Scale size={28} style={{ color: BRASS }} />
         </span>
         <span
-          className="mt-6 font-serif text-2xl tracking-tight"
-          style={{ color: CREAM }}
+          className="mt-6 text-2xl"
+          style={{ color: NAVY }}
         >
           Brandt &amp; Kollegen
         </span>
         <span
-          className="mt-3 text-[10px] uppercase tracking-[0.32em]"
-          style={{ color: BRASS }}
+          className="mt-3 text-[13px]"
+          style={{ color: MUTED }}
         >
-          Anwaltskanzlei
+          Rechtsanwälte und Notar
         </span>
         <span
-          className="mt-6 h-px w-12"
-          style={{ backgroundColor: `${BRASS}66` }}
+          className="mt-6 h-px w-16"
+          style={{ backgroundColor: HAIRLINE }}
         />
         <span
-          className="mt-4 text-[11px] uppercase tracking-[0.3em]"
-          style={{ color: "#aeb6c4" }}
+          className="mt-4 text-[13px]"
+          style={{ color: MUTED }}
         >
-          Est. 1987 · Berlin
+          Berlin-Mitte, seit 1987
         </span>
       </div>
     </div>
@@ -194,10 +197,10 @@ function Crest() {
 
 function KanzleiTab({ onContact }: { onContact: () => void }) {
   const stats = [
-    ["37", "Jahre Erfahrung"],
+    ["1987", "gegründet"],
     ["4", "Fachbereiche"],
     ["9", "Anwält:innen"],
-    ["98%", "weiterempfohlen"],
+    ["1", "Notariat"],
   ];
 
   return (
@@ -206,35 +209,26 @@ function KanzleiTab({ onContact }: { onContact: () => void }) {
       <section className="px-6 pb-16 pt-12 sm:px-10 sm:pt-16">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-[0.3em]"
-              style={{ color: BRASS }}
-            >
-              Rechtsanwälte · Berlin · seit 1987
-            </p>
             <h1
-              className="mt-6 font-serif text-4xl leading-[1.04] tracking-tight sm:text-5xl lg:text-6xl"
+              className="text-4xl leading-[1.08] sm:text-5xl lg:text-[56px]"
               style={{ color: NAVY }}
             >
-              Klarheit in jeder
-              <br />
-              <span className="italic" style={{ color: BRASS }}>
-                Rechtsfrage.
-              </span>
+              Rechtsanwälte &amp; Notar in Berlin-Mitte.
             </h1>
             <p
-              className="mt-7 max-w-xl text-base leading-relaxed sm:text-lg"
+              className="mt-7 max-w-xl text-base leading-relaxed"
               style={{ color: MUTED }}
             >
-              Persönliche Beratung mit über 35 Jahren Erfahrung — für Menschen
-              und Unternehmen, die eine verlässliche Entscheidung brauchen.
+              Beratung und Vertretung im Arbeitsrecht, Familienrecht, Erbrecht
+              und Verkehrsrecht. Persönlich erreichbar, mit festen
+              Ansprechpartnern und klaren nächsten Schritten.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
               <button
                 type="button"
                 onClick={onContact}
-                className="inline-flex items-center gap-3 rounded-sm px-6 py-3.5 text-sm font-medium text-white"
-                style={{ backgroundColor: NAVY }}
+                className="inline-flex items-center gap-3 px-6 py-3.5 text-sm font-medium text-white"
+                style={{ backgroundColor: RED }}
               >
                 Erstgespräch vereinbaren <ArrowRight size={16} />
               </button>
@@ -255,20 +249,24 @@ function KanzleiTab({ onContact }: { onContact: () => void }) {
 
       {/* Credentials band */}
       <section
-        className="px-6 py-10 sm:px-10"
-        style={{ backgroundColor: PANEL, borderTop: `1px solid ${HAIRLINE}`, borderBottom: `1px solid ${HAIRLINE}` }}
+        className="px-6 py-8 sm:px-10"
+        style={{
+          backgroundColor: PANEL,
+          borderTop: `1px solid ${HAIRLINE}`,
+          borderBottom: `1px solid ${HAIRLINE}`,
+        }}
       >
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {stats.map(([value, label]) => (
             <div key={label}>
               <p
-                className="font-serif text-3xl tracking-tight sm:text-4xl"
+                className="text-3xl tracking-tight sm:text-4xl"
                 style={{ color: NAVY }}
               >
                 {value}
               </p>
               <p
-                className="mt-2 text-[11px] uppercase tracking-[0.18em]"
+                className="mt-2 text-[13px]"
                 style={{ color: MUTED }}
               >
                 {label}
@@ -282,17 +280,11 @@ function KanzleiTab({ onContact }: { onContact: () => void }) {
       <section className="px-6 py-16 sm:px-10 sm:py-20">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-[0.3em]"
-              style={{ color: BRASS }}
-            >
-              Die Kanzlei
-            </p>
             <h2
-              className="mt-5 font-serif text-2xl leading-snug tracking-tight sm:text-3xl"
+              className="text-2xl leading-snug sm:text-3xl"
               style={{ color: NAVY }}
             >
-              Eine Kanzlei, die zuhört — und dann liefert.
+              Beratung, die den Sachverhalt zuerst ordnet.
             </h2>
           </div>
           <div
@@ -300,41 +292,36 @@ function KanzleiTab({ onContact }: { onContact: () => void }) {
             style={{ color: MUTED }}
           >
             <p>
-              Seit 1987 begleiten wir Mandantinnen und Mandanten durch die
-              entscheidenden Momente — vom ersten Gespräch bis zur tragfähigen
-              Lösung. Wir nehmen uns Zeit, erklären verständlich und denken
-              vorausschauend.
+              Seit 1987 betreut die Kanzlei Privatpersonen und Unternehmen in
+              rechtlichen Fragen, bei denen eine belastbare Einschätzung zählt.
+              Im ersten Gespräch klären wir Sachstand, Unterlagen und mögliche
+              Vorgehensweisen.
             </p>
             <p>
-              Vier Fachbereiche, ein Anspruch: sorgfältige, klare und
-              verlässliche Arbeit, auf die Sie sich verlassen können — diskret,
-              persönlich und auf Augenhöhe.
+              Jeder Vorgang erhält eine zuständige Ansprechperson. Fristen,
+              Kosten und nächste Schritte werden früh besprochen, damit
+              Mandantinnen und Mandanten wissen, woran sie sind.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="px-6 py-20 sm:px-10" style={{ backgroundColor: NAVY }}>
-        <p
-          className="text-center text-[11px] uppercase tracking-[0.3em]"
-          style={{ color: BRASS }}
-        >
-          Unser Versprechen
-        </p>
-        <blockquote
-          className="mx-auto mt-7 max-w-3xl text-center font-serif text-2xl leading-snug tracking-tight sm:text-3xl"
-          style={{ color: CREAM }}
-        >
-          „Gute Beratung beginnt mit Zuhören — und endet mit einer Entscheidung,
-          hinter der Sie stehen können.“
-        </blockquote>
-        <p
-          className="mt-8 text-center text-[12px] uppercase tracking-[0.28em]"
-          style={{ color: "#aeb6c4" }}
-        >
-          Dr. Katharina Brandt · Gründerin
-        </p>
+      {/* Practical information */}
+      <section className="px-6 py-14 sm:px-10" style={{ backgroundColor: NAVY }}>
+        <div className="grid grid-cols-1 gap-8 text-white lg:grid-cols-3">
+          {[
+            ["Sprechzeiten", "Mo-Fr 9-18 Uhr, Termine nach Vereinbarung."],
+            ["Ersteinschätzung", "Kurze telefonische Klärung vor Mandatsbeginn."],
+            ["Unterlagen", "Dokumente können vorab digital eingereicht werden."],
+          ].map(([title, body]) => (
+            <div key={title} className="border-t border-white/20 pt-5">
+              <h3 className="text-xl">{title}</h3>
+              <p className="mt-3 text-[14px] leading-relaxed text-white/75">
+                {body}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
     </>
   );
@@ -347,48 +334,47 @@ function RechtsgebieteTab() {
     [
       "I",
       "Arbeitsrecht",
-      "Kündigung, Abfindung, Aufhebungsvertrag und Zeugnis — strategisch und auf Augenhöhe begleitet.",
+      "Kündigung, Abfindung, Aufhebungsvertrag, Zeugnis und laufende arbeitsrechtliche Beratung.",
     ],
     [
       "II",
       "Familienrecht",
-      "Scheidung, Unterhalt, Sorge- und Umgangsrecht — mit Fingerspitzengefühl und klarer Linie.",
+      "Scheidung, Unterhalt sowie Sorge- und Umgangsrecht mit klarer Vorbereitung der nächsten Schritte.",
     ],
     [
       "III",
       "Erbrecht",
-      "Testament, Pflichtteil und Nachlassabwicklung — vorausschauend gestaltet, sauber durchgesetzt.",
+      "Testament, Pflichtteil, Nachlassabwicklung und Vertretung in erbrechtlichen Auseinandersetzungen.",
     ],
     [
       "IV",
       "Verkehrsrecht",
-      "Unfall, Bußgeld und Führerschein — schnelle Einschätzung, konsequente Vertretung.",
+      "Unfallregulierung, Bußgeldverfahren und Fahrerlaubnisfragen nach Verkehrsvorfällen.",
     ],
   ];
 
   return (
     <section className="px-6 py-16 sm:px-10 sm:py-20">
-      <p
-        className="text-[11px] font-semibold uppercase tracking-[0.3em]"
-        style={{ color: BRASS }}
-      >
-        Rechtsgebiete
-      </p>
       <h2
-        className="mt-5 max-w-2xl font-serif text-3xl leading-tight tracking-tight sm:text-4xl"
+        className="max-w-2xl text-3xl leading-tight sm:text-4xl"
         style={{ color: NAVY }}
       >
-        Vier Schwerpunkte, ein Anspruch.
+        Rechtliche Beratung in vier Schwerpunkten.
       </h2>
+      <p className="mt-5 max-w-2xl text-[15px] leading-relaxed" style={{ color: MUTED }}>
+        Die Kanzlei bündelt ihre Arbeit auf Bereiche, in denen häufig schnelle
+        Einschätzungen, belastbare Dokumente und klare Kommunikation erforderlich
+        sind.
+      </p>
       <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {areas.map(([n, title, body]) => (
           <div
             key={n}
-            className="rounded-sm p-7 transition-shadow duration-300"
+            className="border bg-white p-7 transition-shadow duration-300"
             style={{ backgroundColor: "#fff", border: `1px solid ${HAIRLINE}` }}
           >
             <div className="flex items-baseline justify-between">
-              <p className="font-serif text-sm italic" style={{ color: BRASS }}>
+              <p className="text-sm" style={{ color: BRASS }}>
                 {n}
               </p>
               <span
@@ -397,7 +383,7 @@ function RechtsgebieteTab() {
               />
             </div>
             <h3
-              className="mt-4 font-serif text-2xl tracking-tight"
+              className="mt-4 text-2xl"
               style={{ color: NAVY }}
             >
               {title}
@@ -435,22 +421,16 @@ function TeamTab() {
 
   return (
     <section className="px-6 py-16 sm:px-10 sm:py-20">
-      <p
-        className="text-[11px] font-semibold uppercase tracking-[0.3em]"
-        style={{ color: BRASS }}
-      >
-        Team
-      </p>
       <h2
-        className="mt-5 max-w-2xl font-serif text-3xl leading-tight tracking-tight sm:text-4xl"
+        className="max-w-2xl text-3xl leading-tight sm:text-4xl"
         style={{ color: NAVY }}
       >
-        Menschen, die für Sie einstehen.
+        Zuständige Ansprechpartner statt anonymer Fallbearbeitung.
       </h2>
 
       {/* Tier 1 — Partners */}
       <p
-        className="mt-12 text-[11px] font-semibold uppercase tracking-[0.22em]"
+        className="mt-12 text-[13px] font-medium"
         style={{ color: MUTED }}
       >
         Partnerinnen &amp; Partner
@@ -459,11 +439,11 @@ function TeamTab() {
         {partners.map(([initials, name, role]) => (
           <div
             key={name}
-            className="flex items-center gap-5 rounded-sm p-6"
+            className="flex items-center gap-5 border bg-white p-6"
             style={{ backgroundColor: "#fff", border: `1px solid ${HAIRLINE}` }}
           >
             <div
-              className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full font-serif text-lg"
+              className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-lg"
               style={{
                 backgroundColor: NAVY,
                 color: CREAM,
@@ -474,7 +454,7 @@ function TeamTab() {
             </div>
             <div>
               <h3
-                className="font-serif text-xl tracking-tight"
+                className="text-xl"
                 style={{ color: NAVY }}
               >
                 {name}
@@ -492,7 +472,7 @@ function TeamTab() {
 
       {/* Tier 2 — Associates & Notary (compact, secondary) */}
       <p
-        className="mt-14 text-[11px] font-semibold uppercase tracking-[0.22em]"
+        className="mt-14 text-[13px] font-medium"
         style={{ color: MUTED }}
       >
         Angestellte Anwält:innen &amp; Notariat
@@ -503,7 +483,7 @@ function TeamTab() {
           return (
             <div key={name} className="text-center">
               <div
-                className="mx-auto flex h-12 w-12 items-center justify-center rounded-full font-serif text-sm"
+                className="mx-auto flex h-12 w-12 items-center justify-center rounded-full text-sm"
                 style={{
                   backgroundColor: isNotar ? NAVY : PANEL,
                   color: isNotar ? CREAM : NAVY,
@@ -513,7 +493,7 @@ function TeamTab() {
                 {initials}
               </div>
               <h4
-                className="mt-3 font-serif text-base leading-tight tracking-tight"
+                className="mt-3 text-base leading-tight"
                 style={{ color: NAVY }}
               >
                 {name}
@@ -537,18 +517,16 @@ function TeamTab() {
 function KontaktTab() {
   return (
     <section className="px-6 py-16 sm:px-10 sm:py-20">
-      <p
-        className="text-[11px] font-semibold uppercase tracking-[0.3em]"
-        style={{ color: BRASS }}
-      >
-        Kontakt
-      </p>
       <h2
-        className="mt-5 max-w-2xl font-serif text-3xl leading-tight tracking-tight sm:text-4xl"
+        className="max-w-2xl text-3xl leading-tight sm:text-4xl"
         style={{ color: NAVY }}
       >
-        Sprechen wir über Ihr Anliegen.
+        Kontakt aufnehmen.
       </h2>
+      <p className="mt-5 max-w-2xl text-[15px] leading-relaxed" style={{ color: MUTED }}>
+        Für neue Mandate genügt zunächst eine kurze Nachricht mit Betreff,
+        Fristen und den wichtigsten Unterlagen.
+      </p>
 
       <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
         {/* Details */}
@@ -573,39 +551,39 @@ function KontaktTab() {
 
         {/* Mock form (visual only) */}
         <div
-          className="space-y-4 rounded-sm p-7"
+          className="space-y-4 border bg-white p-7"
           style={{ backgroundColor: "#fff", border: `1px solid ${HAIRLINE}` }}
         >
           {["Name", "E-Mail"].map((label) => (
             <div key={label}>
               <label
-                className="block text-[11px] font-semibold uppercase tracking-[0.18em]"
+                className="block text-[13px] font-medium"
                 style={{ color: MUTED }}
               >
                 {label}
               </label>
               <div
-                className="mt-2 h-10 w-full rounded-sm"
+                className="mt-2 h-10 w-full border bg-white"
                 style={{ backgroundColor: CREAM, border: `1px solid ${HAIRLINE}` }}
               />
             </div>
           ))}
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-[0.18em]"
+              className="block text-[13px] font-medium"
               style={{ color: MUTED }}
             >
               Nachricht
             </label>
             <div
-              className="mt-2 h-24 w-full rounded-sm"
+              className="mt-2 h-24 w-full border bg-white"
               style={{ backgroundColor: CREAM, border: `1px solid ${HAIRLINE}` }}
             />
           </div>
           <button
             type="button"
-            className="inline-flex items-center gap-3 rounded-sm px-6 py-3 text-sm font-medium text-white"
-            style={{ backgroundColor: NAVY }}
+            className="inline-flex items-center gap-3 px-6 py-3 text-sm font-medium text-white"
+            style={{ backgroundColor: RED }}
           >
             Nachricht senden <ArrowRight size={16} />
           </button>
@@ -632,7 +610,7 @@ function SiteFooter({ onTab }: { onTab: (t: TabId) => void }) {
             >
               <Scale size={16} style={{ color: BRASS }} />
             </span>
-            <span className="font-serif text-lg" style={{ color: CREAM }}>
+            <span className="text-lg" style={{ color: CREAM }}>
               Brandt &amp; Kollegen
             </span>
           </div>
