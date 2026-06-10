@@ -35,7 +35,7 @@ export function ServicesOverview() {
         </FadeIn>
 
         <div className="mt-16 lg:mt-20">
-          <SolutionCards />
+          <SolutionCards headingLevel="h2" />
         </div>
       </div>
     </article>

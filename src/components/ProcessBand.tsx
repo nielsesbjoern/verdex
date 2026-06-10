@@ -19,12 +19,12 @@ export function ProcessBand() {
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
             {t.process.eyebrow}
           </p>
-          <h2 className="mt-6 font-serif text-3xl leading-[1.08] tracking-tight text-neutral-900 sm:text-4xl dark:text-neutral-100">
+          <h1 className="mt-6 font-serif text-3xl leading-[1.08] tracking-tight text-neutral-900 sm:text-4xl dark:text-neutral-100">
             {t.process.title}{" "}
             <span className="font-normal italic text-neutral-700 dark:text-neutral-300">
               {t.process.titleItalic}
             </span>
-          </h2>
+          </h1>
         </FadeIn>
 
         <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -37,9 +37,9 @@ export function ProcessBand() {
               <p className="font-serif text-sm italic text-forest-deep dark:text-forest-light">
                 {String(i + 1).padStart(2, "0")}
               </p>
-              <h3 className="mt-4 font-serif text-xl tracking-tight text-neutral-900 dark:text-neutral-100">
+              <h2 className="mt-4 font-serif text-xl tracking-tight text-neutral-900 dark:text-neutral-100">
                 {step.title}
-              </h3>
+              </h2>
               <p className="mt-3 text-[14px] leading-relaxed text-neutral-500 dark:text-neutral-400">
                 {step.body}
               </p>

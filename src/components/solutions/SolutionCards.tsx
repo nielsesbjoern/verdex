@@ -15,7 +15,11 @@ import {
  * The three solution cards rendered as links to their detail pages.
  * Shared by the home preview and the `/leistungen` overview.
  */
-export function SolutionCards() {
+export function SolutionCards({
+  headingLevel = "h3",
+}: {
+  headingLevel?: "h2" | "h3";
+}) {
   const { t } = useLang();
 
   const copy: Record<
@@ -56,6 +60,7 @@ export function SolutionCards() {
             title={copy[s.id].title}
             description={copy[s.id].description}
             ctaLabel={t.solutions.cards.learnMore}
+            headingLevel={headingLevel}
           />
         </FadeIn>
       ))}
@@ -114,6 +119,7 @@ function SolutionCard({
   description,
   ctaLabel,
   variant,
+  headingLevel,
 }: {
   href: string;
   eyebrow: string;
@@ -121,9 +127,11 @@ function SolutionCard({
   description: string;
   ctaLabel: string;
   variant: SolutionVariant;
+  headingLevel: "h2" | "h3";
 }) {
   const styles = CARD_STYLES[variant];
   const ref = useRef<HTMLAnchorElement>(null);
+  const HeadingTag = headingLevel;
 
   function handleMove(e: React.MouseEvent<HTMLAnchorElement>) {
     const el = ref.current;
@@ -155,11 +163,11 @@ function SolutionCard({
           {eyebrow}
         </span>
 
-        <h3
+        <HeadingTag
           className={`mt-14 min-h-[4.5rem] font-serif text-3xl leading-[1.04] tracking-tight sm:mt-16 sm:min-h-[5.5rem] sm:text-4xl lg:mt-20 lg:min-h-[6.5rem] lg:text-5xl ${styles.title}`}
         >
           {title}
-        </h3>
+        </HeadingTag>
 
         <span
           className={`mt-6 block max-w-md text-base leading-relaxed lg:text-[17px] ${styles.description}`}

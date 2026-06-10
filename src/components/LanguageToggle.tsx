@@ -22,7 +22,7 @@ export function LanguageToggle({
   const groupId = useId();
 
   const isDark = theme === "dark";
-  const inactive = isDark ? "text-white/40" : "text-neutral-400";
+  const inactive = isDark ? "text-white/60" : "text-neutral-500";
   const active = isDark ? "text-white" : "text-neutral-900";
   const hover = isDark ? "hover:text-white" : "hover:text-neutral-900";
 
@@ -42,7 +42,7 @@ export function LanguageToggle({
               {i > 0 && (
                 <span
                   aria-hidden
-                  className={`mx-1 ${isDark ? "text-white/20" : "text-neutral-300"}`}
+                  className={`mx-1 ${isDark ? "text-white/60" : "text-neutral-500"}`}
                 >
                   /
                 </span>

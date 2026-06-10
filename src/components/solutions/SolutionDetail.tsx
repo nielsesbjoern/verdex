@@ -164,9 +164,9 @@ function AmicusContent({ onRunAudit }: { onRunAudit: () => void }) {
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-forest-deep dark:text-forest-light">
           {t.solutions.amicus.deploymentEyebrow}
         </p>
-        <h3 className="mt-4 font-serif text-2xl leading-snug tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl">
+        <h2 className="mt-4 font-serif text-2xl leading-snug tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl">
           {t.solutions.amicus.deploymentTitle}
-        </h3>
+        </h2>
         <p className="mt-4 text-[15px] leading-relaxed text-neutral-500 dark:text-neutral-400">
           {t.solutions.amicus.deploymentBody}
         </p>
@@ -222,9 +222,9 @@ function FeatureGrid({
               strokeWidth={1.5}
               className="text-forest-deep dark:text-forest-light"
             />
-            <h4 className="mt-6 font-serif text-2xl leading-tight tracking-tight text-neutral-900 dark:text-neutral-100">
+            <h2 className="mt-6 font-serif text-2xl leading-tight tracking-tight text-neutral-900 dark:text-neutral-100">
               {f.title}
-            </h4>
+            </h2>
             <p className="mt-3 text-[15px] leading-relaxed text-neutral-500 dark:text-neutral-400">
               {f.description}
             </p>

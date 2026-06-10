@@ -139,7 +139,7 @@ function SegmentedToggle({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="text-[11px] font-medium uppercase tracking-[0.22em] text-neutral-400 dark:text-neutral-500">
+      <span className="text-[11px] font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-500">
         {viewLabel}
       </span>
       <div className="relative inline-flex rounded-full border border-neutral-200 bg-neutral-100 p-1 dark:border-white/10 dark:bg-white/[0.05]">
@@ -223,7 +223,7 @@ function PreviewWindow({
           <span className="h-3 w-3 rounded-full bg-[#28c840]" />
         </div>
         <div className="flex flex-1 justify-center">
-          <span className="truncate rounded-md bg-white px-3 py-1 text-[11px] text-neutral-400 dark:bg-white/5 dark:text-neutral-500">
+          <span className="truncate rounded-md bg-white px-3 py-1 text-[11px] text-neutral-500 dark:bg-white/5 dark:text-neutral-500">
             www.brandt-kollegen.de
           </span>
         </div>
@@ -291,9 +291,9 @@ function SeoImpact() {
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
           {seo.eyebrow}
         </p>
-        <h3 className="mt-6 font-serif text-3xl leading-[1.08] tracking-tight text-neutral-900 sm:text-4xl dark:text-neutral-100">
+        <h2 className="mt-6 font-serif text-3xl leading-[1.08] tracking-tight text-neutral-900 sm:text-4xl dark:text-neutral-100">
           {seo.title}
-        </h3>
+        </h2>
         <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-neutral-500 dark:text-neutral-400">
           {seo.caption}
         </p>
@@ -323,7 +323,7 @@ function SeoImpact() {
                 {h.label}
               </p>
               <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="font-serif text-lg text-neutral-400 line-through decoration-neutral-300 dark:text-neutral-500 dark:decoration-white/20">
+                <span className="font-serif text-lg text-neutral-500 line-through decoration-neutral-300 dark:text-neutral-500 dark:decoration-white/20">
                   {h.before}
                 </span>
                 <span aria-hidden className="text-neutral-300 dark:text-neutral-600">
@@ -338,7 +338,7 @@ function SeoImpact() {
         ))}
       </div>
 
-      <p className="mt-8 text-[12px] italic leading-relaxed text-neutral-400 dark:text-neutral-500">
+      <p className="mt-8 text-[12px] italic leading-relaxed text-neutral-500 dark:text-neutral-500">
         {seo.note}
       </p>
     </div>
@@ -364,7 +364,7 @@ function ScoreBar({
         <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
           {label}
         </span>
-        <span className="font-serif text-sm text-neutral-400 dark:text-neutral-500">
+        <span className="font-serif text-sm text-neutral-500 dark:text-neutral-500">
           <span className="line-through decoration-neutral-300 dark:decoration-white/20">
             {before}
           </span>
@@ -393,7 +393,7 @@ function ScoreBar({
         />
       </div>
 
-      <div className="mt-2 flex justify-between text-[10px] uppercase tracking-[0.18em] text-neutral-400">
+      <div className="mt-2 flex justify-between text-[10px] uppercase tracking-[0.18em] text-neutral-500">
         <span>{beforeLabel}</span>
         <span>{afterLabel}</span>
       </div>
@@ -416,13 +416,13 @@ function ImpactNarrative() {
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-forest-deep dark:text-forest-light">
             {impact.eyebrow}
           </p>
-          <h3 className="mt-6 font-serif text-3xl leading-[1.08] tracking-tight text-neutral-900 sm:text-4xl lg:text-[44px] dark:text-neutral-100">
+          <h2 className="mt-6 font-serif text-3xl leading-[1.08] tracking-tight text-neutral-900 sm:text-4xl lg:text-[44px] dark:text-neutral-100">
             {impact.title}
             <br />
             <span className="font-normal italic text-neutral-700 dark:text-neutral-300">
               {impact.titleItalic}
             </span>
-          </h3>
+          </h2>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
             {impact.body}
           </p>
@@ -442,9 +442,9 @@ function ImpactNarrative() {
                   strokeWidth={1.5}
                   className="text-forest-deep dark:text-forest-light"
                 />
-                <h4 className="mt-6 font-serif text-2xl leading-tight tracking-tight text-neutral-900 dark:text-neutral-100">
+                <h3 className="mt-6 font-serif text-2xl leading-tight tracking-tight text-neutral-900 dark:text-neutral-100">
                   {point.title}
-                </h4>
+                </h3>
                 <p className="mt-4 text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-400">
                   {point.body}
                 </p>
@@ -519,7 +519,7 @@ function Fullscreen({
               </button>
             ))}
           </div>
-          <span className="hidden text-[12px] text-white/50 sm:inline">
+          <span className="hidden text-[12px] text-white/70 sm:inline">
             {sc.fullscreenHint}
           </span>
         </div>

@@ -31,9 +31,9 @@ export function Faq() {
         <p className="text-center text-xs font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
           {t.faq.eyebrow}
         </p>
-        <h3 className="mt-5 text-center font-serif text-3xl tracking-tight text-neutral-900 sm:text-4xl dark:text-neutral-100">
+        <h1 className="mt-5 text-center font-serif text-3xl tracking-tight text-neutral-900 sm:text-4xl dark:text-neutral-100">
           {t.faq.title}
-        </h3>
+        </h1>
       </FadeIn>
 
       <FadeIn delay={0.1} className="mt-12">
