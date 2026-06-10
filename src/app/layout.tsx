@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Playfair_Display } from "next/font/google";
-import { LanguageProvider } from "@/lib/LanguageProvider";
 import { AmicusAuditProvider } from "@/lib/AmicusAuditContext";
+import { AMICUS_VISIBLE } from "@/lib/features";
+import { LanguageProvider } from "@/lib/LanguageProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
@@ -29,13 +30,38 @@ const playfair = Playfair_Display({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://verdex.de";
 
+const siteTitle = AMICUS_VISIBLE
+  ? "Verdex — AI & Websites for Law Firms"
+  : "Verdex — Websites & Digital Positioning for Law Firms";
+
+const siteDescription = AMICUS_VISIBLE
+  ? "Verdex builds modern websites and private, GDPR-compliant AI tools for German law firms. Local, secure, and tailored to legal practice."
+  : "Verdex builds modern websites and digital positioning for German law firms — fast, GDPR-compliant, and tailored to legal practice.";
+
+const siteKeywords = AMICUS_VISIBLE
+  ? [
+      "legal tech",
+      "AI for law firms",
+      "Kanzlei KI",
+      "law firm website",
+      "private legal AI",
+      "GDPR legal AI",
+    ]
+  : [
+      "legal tech",
+      "law firm website",
+      "local SEO law firms",
+      "Kanzlei Website",
+      "digital positioning law firms",
+      "GDPR law firm website",
+    ];
+
 export const metadata: Metadata = {
   title: {
-    default: "Verdex — AI & Websites for Law Firms",
+    default: siteTitle,
     template: "%s | Verdex",
   },
-  description:
-    "Verdex builds modern websites and private, GDPR-compliant AI tools for German law firms. Local, secure, and tailored to legal practice.",
+  description: siteDescription,
   metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
@@ -45,18 +71,10 @@ export const metadata: Metadata = {
     follow: true,
   },
   applicationName: "Verdex",
-  keywords: [
-    "legal tech",
-    "AI for law firms",
-    "Kanzlei KI",
-    "law firm website",
-    "private legal AI",
-    "GDPR legal AI",
-  ],
+  keywords: siteKeywords,
   openGraph: {
-    title: "Verdex — AI & Websites for Law Firms",
-    description:
-      "Modern websites and a private, on-premise AI assistant built for law firms.",
+    title: siteTitle,
+    description: siteDescription,
     type: "website",
     url: siteUrl,
     siteName: "Verdex",
@@ -71,9 +89,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Verdex — AI & Websites for Law Firms",
-    description:
-      "Modern websites and a private, on-premise AI assistant built for law firms.",
+    title: siteTitle,
+    description: siteDescription,
     images: ["/icon.png"],
   },
 };
@@ -109,8 +126,7 @@ export default function RootLayout({
               name: "Verdex",
               url: siteUrl,
               logo: `${siteUrl}/icon.png`,
-              description:
-                "Verdex builds modern websites and private, GDPR-compliant AI tools for law firms.",
+              description: siteDescription,
               sameAs: [],
             }),
           }}

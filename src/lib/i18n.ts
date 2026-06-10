@@ -5,6 +5,8 @@
  * implement it exactly, so TypeScript catches any missing/extra keys.
  */
 
+import { AMICUS_VISIBLE } from "./features";
+
 export type Lang = "en" | "de";
 
 export const SUPPORTED_LANGS: { code: Lang; label: string }[] = [
@@ -260,19 +262,19 @@ const en: Dict = {
   hero: {
     titleLine1: "Modern websites",
     titleItalic: "&",
-    titleLine2Rest: "private AI",
+    titleLine2Rest: "local visibility",
     titleLine3: "for law firms.",
     subtitle:
-      "Verdex builds the digital backbone of forward-thinking law firms — elegant client-facing websites, local visibility where clients search, and a private AI assistant that never sends a single byte off-premise.",
+      "Verdex builds the digital backbone of forward-thinking law firms — elegant client-facing websites and local visibility exactly where clients search under pressure.",
     ctaPrimary: "Get in touch",
     ctaSecondary: "Our services",
   },
   solutions: {
     eyebrow: "Solutions",
-    titleA: "Three products.",
+    titleA: "Two products.",
     titleB: "One firm-grade standard.",
     intro:
-      "Whether you need a public-facing site that earns trust before the first call, local visibility where clients search under pressure, or an AI assistant that stays inside your office — Verdex delivers all three.",
+      "Whether you need a public-facing site that earns trust before the first call, or local visibility where clients search under pressure — Verdex delivers both.",
     tabWebsites: "Website Solutions",
     tabAuthority: "Verdex Authority",
     tabAmicus: "Amicus AI",
@@ -385,7 +387,7 @@ const en: Dict = {
       },
       {
         title: "Privacy first",
-        body: "§ 43a BRAO is not a footnote to us — it is the starting point of every decision. Amicus runs on-premise on your own hardware; your client data never leaves your firm. No cloud training, no data transfer, no compromise.",
+        body: "§ 43a BRAO is not a footnote to us — it is the starting point of every decision. Your client data stays with you; no careless integrations, no opaque third parties, no compromise.",
       },
       {
         title: "Custom-tailored",
@@ -396,12 +398,12 @@ const en: Dict = {
   about: {
     eyebrow: "Founder",
     name: "Niels Schade",
-    titleA: "Law is family.",
-    titleItalic: "Software is craft.",
+    titleA: "Law is home.",
+    titleItalic: "Building is care.",
     paragraphs: [
-      "I finished my Abitur in 2024 with a 0.9 GPA — and deliberately chose Copenhagen Business School over a German law degree. There I now study Business Administration and Sociology. The combination gives me both: the strategic sharpness for scalable structures and the sociological understanding of how people inside organisations actually work.",
-      "I grew up in a household where law was a dinner-table subject. My parents run a firm together — my father as a certified specialist attorney for employment law, my mother for family law. My uncle covers tax law, and my grandfather was also an attorney. The day-to-day reality of a Kanzlei — its pressure points, its legal sensitivities — I therefore know not from a brochure, but from three generations of direct observation.",
-      "It is precisely that proximity — the legal depth from home and the strategic, economic perspective from Copenhagen — that flows into every solution Verdex builds.",
+      "After finishing school in 2024, I moved to Copenhagen to study Business Administration and Sociology at Copenhagen Business School. I've always been drawn to both sides of things: how you build something that actually works, and how people really tick in their day-to-day.",
+      "Law was never just a job in my family — it was simply part of life. My parents run a firm together: my father in employment law, my mother in family law. My uncle does tax law, and my grandfather was a lawyer too. So I don't know what life in a Kanzlei is like from a textbook — I know it from home, from real conversations about the good days and the hard ones.",
+      "That's what I bring to Verdex: a genuine feel for how law firms actually work, and a real urge to build things that make their day a little easier. And I always start by listening.",
     ],
     photoAlt: "Portrait of Niels Schade, founder of Verdex",
     backToHome: "Back to home",
@@ -432,7 +434,7 @@ const en: Dict = {
   },
   footer: {
     tagline:
-      "Modern websites, local visibility and a private AI partner for law firms that care about craft and confidentiality.",
+      "Modern websites and local visibility for law firms that care about craft and confidentiality.",
     columns: {
       product: "Product",
       company: "Company",
@@ -739,19 +741,19 @@ const de: Dict = {
   hero: {
     titleLine1: "Moderne Websites",
     titleItalic: "&",
-    titleLine2Rest: "private KI",
+    titleLine2Rest: "lokale Sichtbarkeit",
     titleLine3: "für Kanzleien.",
     subtitle:
-      "Verdex baut das digitale Rückgrat zukunftsorientierter Kanzleien — elegante Mandantenauftritte, lokale Sichtbarkeit dort, wo gesucht wird, und ein privater KI-Assistent, der nicht ein einziges Byte aus der Kanzlei lässt.",
+      "Verdex baut das digitale Rückgrat zukunftsorientierter Kanzleien — elegante Mandantenauftritte und lokale Sichtbarkeit genau dort, wo Mandanten unter Druck suchen.",
     ctaPrimary: "Kontakt aufnehmen",
     ctaSecondary: "Unsere Leistungen",
   },
   solutions: {
     eyebrow: "Lösungen",
-    titleA: "Drei Produkte.",
+    titleA: "Zwei Produkte.",
     titleB: "Ein Kanzlei-Standard.",
     intro:
-      "Ob eine repräsentative Website, die schon vor dem ersten Anruf Vertrauen schafft, lokale Sichtbarkeit dort, wo Mandanten unter Druck suchen, oder ein KI-Assistent, der innerhalb Ihrer Kanzlei bleibt — Verdex liefert alle drei.",
+      "Ob eine repräsentative Website, die schon vor dem ersten Anruf Vertrauen schafft, oder lokale Sichtbarkeit dort, wo Mandanten unter Druck suchen — Verdex liefert beides.",
     tabWebsites: "Website-Lösungen",
     tabAuthority: "Verdex Authority",
     tabAmicus: "Amicus AI",
@@ -864,7 +866,7 @@ const de: Dict = {
       },
       {
         title: "Datenschutz zuerst",
-        body: "§ 43a BRAO ist für uns keine Fußnote, sondern der Ausgangspunkt jeder Entscheidung. Amicus läuft On-Premise auf Ihrer Hardware; Ihre Mandantendaten verlassen Ihre Kanzlei nie. Kein Cloud-Training, kein Datentransfer, kein Kompromiss.",
+        body: "§ 43a BRAO ist für uns keine Fußnote, sondern der Ausgangspunkt jeder Entscheidung. Ihre Mandantendaten bleiben bei Ihnen — ohne leichtfertige Integrationen, ohne intransparente Drittanbieter, ohne Kompromisse.",
       },
       {
         title: "Maßgeschneidert",
@@ -875,12 +877,12 @@ const de: Dict = {
   about: {
     eyebrow: "Gründer",
     name: "Niels Schade",
-    titleA: "Recht ist Familie.",
-    titleItalic: "Software ist Handwerk.",
+    titleA: "Recht ist Zuhause.",
+    titleItalic: "Bauen ist Sorgfalt.",
     paragraphs: [
-      "Mein Abitur habe ich 2024 mit einem Schnitt von 0,9 abgelegt — und mich danach bewusst gegen ein Jurastudium und für die Copenhagen Business School entschieden. Dort studiere ich heute Business Administration und Sociology. Die Kombination gibt mir beides: die strategische Schärfe für skalierbare Strukturen und das soziologische Verständnis dafür, wie Menschen in Organisationen wirklich arbeiten.",
-      "Aufgewachsen bin ich in einer Familie, in der Recht Esstisch-Thema ist. Meine Eltern führen gemeinsam eine Kanzlei — mein Vater als Fachanwalt für Arbeitsrecht, meine Mutter als Fachanwältin für Familienrecht. Das Steuerrecht deckt mein Onkel ab, mein Großvater war ebenfalls Anwalt. Den Alltag einer Kanzlei, ihre Schmerzpunkte und ihre rechtlichen Sensibilitäten kenne ich deshalb nicht aus einer Broschüre, sondern aus drei Generationen unmittelbarer Beobachtung.",
-      "Genau diese Nähe — die juristische Tiefe von Hause aus und der wirtschaftlich-strategische Blick aus Kopenhagen — fließt in jede Lösung ein, die Verdex baut.",
+      "Nach dem Abitur 2024 bin ich für mein Studium nach Kopenhagen gezogen — Business Administration und Sociology an der Copenhagen Business School. Mich hat schon immer beides interessiert: wie man Dinge sinnvoll aufbaut und wie Menschen in ihrem Arbeitsalltag wirklich ticken.",
+      "Recht war bei uns zu Hause nie nur ein Beruf — es gehörte einfach dazu. Meine Eltern führen gemeinsam eine Kanzlei, mein Vater im Arbeitsrecht, meine Mutter im Familienrecht. Mein Onkel macht Steuerrecht, mein Großvater war auch Anwalt. Wie der Alltag in einer Kanzlei aussieht, kenne ich also nicht aus Büchern, sondern von zu Hause — aus echten Gesprächen über die guten und die anstrengenden Tage.",
+      "Genau das bringe ich bei Verdex ein: das Verständnis dafür, wie Kanzleien wirklich arbeiten, und Lust darauf, etwas zu bauen, das ihnen den Alltag leichter macht. Am liebsten fange ich mit Zuhören an.",
     ],
     photoAlt: "Porträt von Niels Schade, Gründer von Verdex",
     backToHome: "Zurück zur Startseite",
@@ -911,7 +913,7 @@ const de: Dict = {
   },
   footer: {
     tagline:
-      "Moderne Websites, lokale Sichtbarkeit und ein privater KI-Partner für Kanzleien, denen Handwerk und Verschwiegenheit am Herzen liegen.",
+      "Moderne Websites und lokale Sichtbarkeit für Kanzleien, denen Handwerk und Verschwiegenheit am Herzen liegen.",
     columns: {
       product: "Produkt",
       company: "Unternehmen",
@@ -1207,4 +1209,126 @@ const de: Dict = {
   },
 };
 
-export const translations: Record<Lang, Dict> = { en, de };
+/** Marketing copy shown when Amicus is re-enabled via `AMICUS_VISIBLE`. */
+const amicusPublicCopy: Record<Lang, Pick<Dict, "hero" | "solutions" | "footer" | "why">> = {
+  en: {
+    hero: {
+      titleLine1: "Modern websites",
+      titleItalic: "&",
+      titleLine2Rest: "private AI",
+      titleLine3: "for law firms.",
+      subtitle:
+        "Verdex builds the digital backbone of forward-thinking law firms — elegant client-facing websites, local visibility where clients search, and a private AI assistant that never sends a single byte off-premise.",
+      ctaPrimary: "Get in touch",
+      ctaSecondary: "Our services",
+    },
+    solutions: {
+      eyebrow: en.solutions.eyebrow,
+      titleA: "Three products.",
+      titleB: en.solutions.titleB,
+      intro:
+        "Whether you need a public-facing site that earns trust before the first call, local visibility where clients search under pressure, or an AI assistant that stays inside your office — Verdex delivers all three.",
+      tabWebsites: en.solutions.tabWebsites,
+      tabAuthority: en.solutions.tabAuthority,
+      tabAmicus: en.solutions.tabAmicus,
+      cards: en.solutions.cards,
+      deepDive: en.solutions.deepDive,
+      websites: en.solutions.websites,
+      authority: en.solutions.authority,
+      amicus: en.solutions.amicus,
+    },
+    footer: {
+      tagline:
+        "Modern websites, local visibility and a private AI partner for law firms that care about craft and confidentiality.",
+      columns: en.footer.columns,
+      links: en.footer.links,
+      copyright: en.footer.copyright,
+      madeWith: en.footer.madeWith,
+      b2bDisclaimer: en.footer.b2bDisclaimer,
+    },
+    why: {
+      eyebrow: en.why.eyebrow,
+      titleA: en.why.titleA,
+      titleItalic: en.why.titleItalic,
+      titleB: en.why.titleB,
+      intro: en.why.intro,
+      pillars: [
+        en.why.pillars[0],
+        {
+          title: "Privacy first",
+          body: "§ 43a BRAO is not a footnote to us — it is the starting point of every decision. Amicus runs on-premise on your own hardware; your client data never leaves your firm. No cloud training, no data transfer, no compromise.",
+        },
+        en.why.pillars[2],
+      ],
+    },
+  },
+  de: {
+    hero: {
+      titleLine1: "Moderne Websites",
+      titleItalic: "&",
+      titleLine2Rest: "private KI",
+      titleLine3: "für Kanzleien.",
+      subtitle:
+        "Verdex baut das digitale Rückgrat zukunftsorientierter Kanzleien — elegante Mandantenauftritte, lokale Sichtbarkeit dort, wo gesucht wird, und ein privater KI-Assistent, der nicht ein einziges Byte aus der Kanzlei lässt.",
+      ctaPrimary: "Kontakt aufnehmen",
+      ctaSecondary: "Unsere Leistungen",
+    },
+    solutions: {
+      eyebrow: de.solutions.eyebrow,
+      titleA: "Drei Produkte.",
+      titleB: de.solutions.titleB,
+      intro:
+        "Ob eine repräsentative Website, die schon vor dem ersten Anruf Vertrauen schafft, lokale Sichtbarkeit dort, wo Mandanten unter Druck suchen, oder ein KI-Assistent, der innerhalb Ihrer Kanzlei bleibt — Verdex liefert alle drei.",
+      tabWebsites: de.solutions.tabWebsites,
+      tabAuthority: de.solutions.tabAuthority,
+      tabAmicus: de.solutions.tabAmicus,
+      cards: de.solutions.cards,
+      deepDive: de.solutions.deepDive,
+      websites: de.solutions.websites,
+      authority: de.solutions.authority,
+      amicus: de.solutions.amicus,
+    },
+    footer: {
+      tagline:
+        "Moderne Websites, lokale Sichtbarkeit und ein privater KI-Partner für Kanzleien, denen Handwerk und Verschwiegenheit am Herzen liegen.",
+      columns: de.footer.columns,
+      links: de.footer.links,
+      copyright: de.footer.copyright,
+      madeWith: de.footer.madeWith,
+      b2bDisclaimer: de.footer.b2bDisclaimer,
+    },
+    why: {
+      eyebrow: de.why.eyebrow,
+      titleA: de.why.titleA,
+      titleItalic: de.why.titleItalic,
+      titleB: de.why.titleB,
+      intro: de.why.intro,
+      pillars: [
+        de.why.pillars[0],
+        {
+          title: "Datenschutz zuerst",
+          body: "§ 43a BRAO ist für uns keine Fußnote, sondern der Ausgangspunkt jeder Entscheidung. Amicus läuft On-Premise auf Ihrer Hardware; Ihre Mandantendaten verlassen Ihre Kanzlei nie. Kein Cloud-Training, kein Datentransfer, kein Kompromiss.",
+        },
+        de.why.pillars[2],
+      ],
+    },
+  },
+};
+
+function withAmicusPublicCopy(dict: Dict, lang: Lang): Dict {
+  if (!AMICUS_VISIBLE) return dict;
+
+  const overrides = amicusPublicCopy[lang];
+  return {
+    ...dict,
+    hero: overrides.hero,
+    solutions: overrides.solutions,
+    footer: overrides.footer,
+    why: overrides.why,
+  };
+}
+
+export const translations: Record<Lang, Dict> = {
+  en: withAmicusPublicCopy(en, "en"),
+  de: withAmicusPublicCopy(de, "de"),
+};

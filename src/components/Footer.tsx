@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { AMICUS_VISIBLE } from "@/lib/features";
 import { useLang } from "@/lib/LanguageProvider";
 import { LanguageToggle } from "./LanguageToggle";
 import { Logo } from "./Logo";
@@ -21,7 +22,9 @@ export function Footer() {
       links: [
         { label: t.solutions.tabWebsites, href: "/#solutions" },
         { label: t.solutions.tabAuthority, href: "/#solutions" },
-        { label: t.solutions.tabAmicus, href: "/#solutions" },
+        ...(AMICUS_VISIBLE
+          ? [{ label: t.solutions.tabAmicus, href: "/#solutions" }]
+          : []),
       ],
     },
     {

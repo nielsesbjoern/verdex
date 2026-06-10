@@ -12,7 +12,7 @@ export function Hero() {
   return (
     <section className="relative pt-40 pb-24 lg:pt-56 lg:pb-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="mx-auto max-w-4xl">
+        <div className="max-w-4xl">
           <motion.h1
             key={`title-${lang}`}
             initial={{ opacity: 0, y: 24 }}

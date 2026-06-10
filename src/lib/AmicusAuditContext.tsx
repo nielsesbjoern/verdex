@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react";
 import dynamic from "next/dynamic";
+import { AMICUS_VISIBLE } from "./features";
 
 const AmicusAuditModal = dynamic(
   () => import("@/components/AmicusAuditModal").then((m) => m.AmicusAuditModal),
@@ -16,6 +17,12 @@ type AmicusAuditCtx = {
 
 const AmicusAuditContext = createContext<AmicusAuditCtx | null>(null);
 
+const disabledCtx: AmicusAuditCtx = {
+  isOpen: false,
+  open: () => {},
+  close: () => {},
+};
+
 /**
  * Provides a single, globally-controlled Amicus audit modal.
  *
@@ -28,6 +35,14 @@ export function AmicusAuditProvider({ children }: { children: ReactNode }) {
 
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
+
+  if (!AMICUS_VISIBLE) {
+    return (
+      <AmicusAuditContext.Provider value={disabledCtx}>
+        {children}
+      </AmicusAuditContext.Provider>
+    );
+  }
 
   return (
     <AmicusAuditContext.Provider value={{ isOpen, open, close }}>

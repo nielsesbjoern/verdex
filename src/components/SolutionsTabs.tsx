@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { AMICUS_VISIBLE } from "@/lib/features";
 import { useLang } from "@/lib/LanguageProvider";
 import { FadeIn } from "./FadeIn";
 import {
@@ -14,6 +15,37 @@ const EDITORIAL_EASE = [0.16, 1, 0.3, 1] as const;
 export function SolutionsTabs() {
   const { t, lang } = useLang();
   const [activeSolution, setActiveSolution] = useState<SolutionId | null>(null);
+
+  const solutionCards = [
+    {
+      id: "websites" as const,
+      variant: "light" as const,
+      eyebrow: t.solutions.cards.eyebrowWebsites,
+      title: t.solutions.tabWebsites,
+      description: t.solutions.cards.websitesShort,
+      delay: 0.1,
+    },
+    {
+      id: "authority" as const,
+      variant: "gray" as const,
+      eyebrow: t.solutions.cards.eyebrowAuthority,
+      title: t.solutions.tabAuthority,
+      description: t.solutions.cards.authorityShort,
+      delay: 0.2,
+    },
+    ...(AMICUS_VISIBLE
+      ? [
+          {
+            id: "amicus" as const,
+            variant: "dark" as const,
+            eyebrow: t.solutions.cards.eyebrowAmicus,
+            title: t.solutions.tabAmicus,
+            description: t.solutions.cards.amicusShort,
+            delay: 0.3,
+          },
+        ]
+      : []),
+  ];
 
   return (
     <>
@@ -39,34 +71,25 @@ export function SolutionsTabs() {
             </p>
           </FadeIn>
 
-          {/* Three solution cards — side by side */}
-          <div className="mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
-            <SolutionCard
-              eyebrow={t.solutions.cards.eyebrowWebsites}
-              title={t.solutions.tabWebsites}
-              description={t.solutions.cards.websitesShort}
-              ctaLabel={t.solutions.cards.learnMore}
-              delay={0.1}
-              onClick={() => setActiveSolution("websites")}
-            />
-            <SolutionCard
-              variant="gray"
-              eyebrow={t.solutions.cards.eyebrowAuthority}
-              title={t.solutions.tabAuthority}
-              description={t.solutions.cards.authorityShort}
-              ctaLabel={t.solutions.cards.learnMore}
-              delay={0.2}
-              onClick={() => setActiveSolution("authority")}
-            />
-            <SolutionCard
-              variant="dark"
-              eyebrow={t.solutions.cards.eyebrowAmicus}
-              title={t.solutions.tabAmicus}
-              description={t.solutions.cards.amicusShort}
-              ctaLabel={t.solutions.cards.learnMore}
-              delay={0.3}
-              onClick={() => setActiveSolution("amicus")}
-            />
+          <div
+            className={`mt-16 lg:mt-20 grid grid-cols-1 gap-6 lg:gap-10 ${
+              solutionCards.length === 3
+                ? "md:grid-cols-2 lg:grid-cols-3"
+                : "md:grid-cols-2"
+            }`}
+          >
+            {solutionCards.map((card) => (
+              <SolutionCard
+                key={card.id}
+                variant={card.variant}
+                eyebrow={card.eyebrow}
+                title={card.title}
+                description={card.description}
+                ctaLabel={t.solutions.cards.learnMore}
+                delay={card.delay}
+                onClick={() => setActiveSolution(card.id)}
+              />
+            ))}
           </div>
         </div>
       </section>

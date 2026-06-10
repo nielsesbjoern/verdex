@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useLang } from "@/lib/LanguageProvider";
 import { FadeIn } from "./FadeIn";
+import nielsPortrait from "../../public/niels-optimized.jpg";
 
 /**
  * Standalone founder / about page. Designed to live at `/about`, not as an
@@ -45,9 +46,11 @@ export function About() {
           >
             <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl bg-neutral-100">
               <Image
-                src="/niels-optimized.jpg"
+                src={nielsPortrait}
                 alt={t.about.photoAlt}
                 fill
+                priority
+                placeholder="blur"
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 quality={68}
                 className="object-cover"
