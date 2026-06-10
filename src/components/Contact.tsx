@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { useLang } from "@/lib/LanguageProvider";
 import { FadeIn } from "./FadeIn";
 import { Magnetic } from "./Magnetic";
@@ -93,43 +93,34 @@ function ContactForm() {
     e.preventDefault();
     if (!consent) return;
 
-    const subjectParts = [name.trim(), firm.trim()].filter(Boolean).join(" · ");
-    const subject = `${t.contact.form.subjectPrefix} ${subjectParts}`;
-
-    const bodyLines = [
-      `${t.contact.form.name}: ${name}`,
-      `${t.contact.form.email}: ${email}`,
-      `${t.contact.form.firm}: ${firm}`,
-    ];
-    if (phone.trim()) {
-      bodyLines.push(`${t.contact.form.phone}: ${phone}`);
-    }
-    bodyLines.push("", `${t.contact.form.message}:`, message);
-
-    const href =
-      `mailto:${t.contact.email}` +
-      `?subject=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-
-    // Open user's email client with a draft. No server round-trip needed.
-    window.location.href = href;
+    // The form backend is temporarily unavailable — instead of silently
+    // failing, surface a clear notice pointing to the direct e-mail address.
     setSubmitted(true);
   }
 
   if (submitted) {
     return (
       <div className="border-t border-neutral-200 pt-16 text-center dark:border-white/10">
-        <Check
+        <Mail
           className="mx-auto text-forest-deep dark:text-forest-light"
           size={40}
           strokeWidth={1.5}
         />
         <h3 className="mt-6 font-serif text-3xl sm:text-4xl text-neutral-900 leading-tight tracking-tight dark:text-neutral-100">
-          {t.contact.form.successTitle}
+          {t.contact.form.unavailableTitle}
         </h3>
         <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-neutral-500 dark:text-neutral-400">
-          {t.contact.form.successBody}
+          {t.contact.form.unavailableBody}
         </p>
+        <p className="mt-8 text-xs font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
+          {t.contact.form.unavailableEmailPrompt}
+        </p>
+        <a
+          href={`mailto:${t.contact.email}`}
+          className="mt-3 inline-block font-serif text-xl text-forest-deep underline underline-offset-4 transition-colors duration-300 ease-editorial hover:text-forest-deep/80 sm:text-2xl dark:text-forest-light dark:hover:text-forest-light/80"
+        >
+          {t.contact.email}
+        </a>
       </div>
     );
   }

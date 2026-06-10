@@ -87,6 +87,9 @@ export function GermanyReach() {
                 </g>
               ))}
             </svg>
+            <p className="mx-auto mt-4 max-w-[320px] text-center text-[11px] leading-relaxed text-neutral-400 lg:max-w-[380px] dark:text-neutral-500">
+              {t.reach.mapNote}
+            </p>
           </FadeIn>
 
           {/* Copy + facts */}

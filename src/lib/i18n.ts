@@ -178,6 +178,8 @@ export type Dict = {
     titleItalic: string;
     body: string;
     facts: { value: string; label: string }[];
+    /** Small caption under the map clarifying the markers are illustrative. */
+    mapNote: string;
   };
   /** Slim 4-step "how an engagement runs" band. */
   process: {
@@ -249,8 +251,11 @@ export type Dict = {
       consentAfter: string;
       submit: string;
       subjectPrefix: string;
-      successTitle: string;
-      successBody: string;
+      /** Shown after submit while the form backend is unavailable. */
+      unavailableTitle: string;
+      unavailableBody: string;
+      /** Lead-in line right before the direct e-mail address. */
+      unavailableEmailPrompt: string;
     };
   };
   footer: {
@@ -580,6 +585,8 @@ const en: Dict = {
       { value: "GDPR", label: "compliant, hosted in Germany" },
       { value: "< 24 h", label: "response to every enquiry" },
     ],
+    mapNote:
+      "The cities shown are for illustration only and do not represent actual client locations.",
   },
   process: {
     eyebrow: "How it works",
@@ -660,7 +667,7 @@ const en: Dict = {
         features: [
           "Everything in the Law-firm website",
           "Local SEO system tailored to your region",
-          "Google & Apple maps, live reviews integration",
+          "Google & Apple maps profile setup",
           "GDPR routing widget — no cookie banner",
         ],
       },
@@ -725,9 +732,10 @@ const en: Dict = {
         " and consent to my data being processed for the purpose of responding to this enquiry.",
       submit: "Send message",
       subjectPrefix: "Enquiry from",
-      successTitle: "Thank you — message ready to send.",
-      successBody:
-        "Your default mail client should have opened with the message prefilled. If it didn't, please send your enquiry directly to nielsesbjornschade@gmail.com.",
+      unavailableTitle: "The form is currently unavailable.",
+      unavailableBody:
+        "Due to a technical issue, enquiries can't be processed through this form at the moment. Please reach me directly by e-mail — I'll get back to you as quickly as possible.",
+      unavailableEmailPrompt: "Write to me directly:",
     },
   },
   footer: {
@@ -1254,6 +1262,8 @@ const de: Dict = {
       { value: "DSGVO", label: "konform, Hosting in Deutschland" },
       { value: "< 24 h", label: "Antwort auf jede Anfrage" },
     ],
+    mapNote:
+      "Die dargestellten Städte dienen nur zur Illustration und sind keine tatsächlichen Kundenstandorte.",
   },
   process: {
     eyebrow: "So läuft's ab",
@@ -1334,7 +1344,7 @@ const de: Dict = {
         features: [
           "Alles aus der Kanzlei-Website",
           "Lokales SEO-System, auf Ihre Region zugeschnitten",
-          "Google- & Apple-Karten, Live-Bewertungen",
+          "Google- & Apple-Karten-Profile eingerichtet",
           "DSGVO-Anfahrts-Widget — ohne Cookie-Banner",
         ],
       },
@@ -1399,9 +1409,10 @@ const de: Dict = {
         " zur Kenntnis genommen und willige in die Verarbeitung meiner Daten zur Beantwortung dieser Anfrage ein.",
       submit: "Nachricht senden",
       subjectPrefix: "Anfrage von",
-      successTitle: "Vielen Dank — Ihre Nachricht ist bereit.",
-      successBody:
-        "Ihr Standard-Mailprogramm sollte sich mit der vorausgefüllten Nachricht geöffnet haben. Falls nicht, senden Sie Ihre Anfrage bitte direkt an nielsesbjornschade@gmail.com.",
+      unavailableTitle: "Das Formular ist derzeit nicht verfügbar.",
+      unavailableBody:
+        "Aufgrund eines technischen Problems können Anfragen über dieses Formular momentan nicht verarbeitet werden. Bitte erreichen Sie mich direkt per E-Mail — ich melde mich schnellstmöglich bei Ihnen zurück.",
+      unavailableEmailPrompt: "Schreiben Sie mir direkt:",
     },
   },
   footer: {
