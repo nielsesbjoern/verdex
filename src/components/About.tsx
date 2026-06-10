@@ -51,7 +51,7 @@ export function About() {
                 fill
                 priority
                 placeholder="blur"
-                sizes="(max-width: 1024px) 100vw, 40vw"
+                sizes="(max-width: 1024px) 92vw, 520px"
                 quality={68}
                 className="object-cover"
               />
