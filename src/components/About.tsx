@@ -21,7 +21,7 @@ export function About() {
         <FadeIn key={`about-back-${lang}`}>
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-forest-deep transition-colors duration-300 ease-editorial"
+            className="group inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-forest-deep transition-colors duration-300 ease-editorial dark:text-neutral-400 dark:hover:text-forest-light"
           >
             <ArrowLeft
               size={14}
@@ -32,7 +32,7 @@ export function About() {
         </FadeIn>
 
         <FadeIn key={`about-eyebrow-${lang}`} delay={0.05}>
-          <p className="mt-12 lg:mt-16 text-xs font-medium uppercase tracking-[0.22em] text-neutral-500">
+          <p className="mt-12 lg:mt-16 text-xs font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
             {t.about.eyebrow}
           </p>
         </FadeIn>
@@ -44,7 +44,7 @@ export function About() {
             delay={0.1}
             className="lg:col-span-5"
           >
-            <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl bg-neutral-100">
+            <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl bg-neutral-100 dark:bg-ink-surface">
               <Image
                 src={nielsPortrait}
                 alt={t.about.photoAlt}
@@ -64,21 +64,21 @@ export function About() {
             delay={0.15}
             className="lg:col-span-7"
           >
-            <p className="text-xs font-medium uppercase tracking-[0.22em] text-forest-deep">
+            <p className="text-xs font-medium uppercase tracking-[0.22em] text-forest-deep dark:text-forest-light">
               {t.about.name}
             </p>
 
-            <h1 className="mt-6 font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 leading-[1.05] tracking-tight">
+            <h1 className="mt-6 font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 leading-[1.05] tracking-tight dark:text-neutral-100">
               {t.about.titleA}
               <br />
-              <span className="italic font-normal text-neutral-700">
+              <span className="italic font-normal text-neutral-700 dark:text-neutral-300">
                 {t.about.titleItalic}
               </span>
             </h1>
 
             <div className="mt-10 lg:mt-12 space-y-6 max-w-2xl">
               {t.about.paragraphs.map((p, i) => (
-                <p key={i} className="text-lg leading-relaxed text-neutral-600">
+                <p key={i} className="text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
                   {p}
                 </p>
               ))}

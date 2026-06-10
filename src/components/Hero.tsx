@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useLang } from "@/lib/LanguageProvider";
+import { Magnetic } from "./Magnetic";
 
 const EDITORIAL_EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -22,11 +23,11 @@ export function Hero() {
               delay: 0.1,
               ease: EDITORIAL_EASE,
             }}
-            className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-[88px] text-neutral-900 leading-[1.02] tracking-tight"
+            className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-[88px] text-neutral-900 leading-[1.02] tracking-tight dark:text-neutral-100"
           >
             {t.hero.titleLine1}
             <br />
-            <span className="italic font-normal text-neutral-700">
+            <span className="italic font-normal text-neutral-700 dark:text-neutral-300">
               {t.hero.titleItalic}
             </span>{" "}
             {t.hero.titleLine2Rest}
@@ -43,7 +44,7 @@ export function Hero() {
               delay: 0.25,
               ease: EDITORIAL_EASE,
             }}
-            className="mt-10 max-w-2xl text-lg sm:text-xl text-neutral-500 leading-relaxed"
+            className="mt-10 max-w-2xl text-lg sm:text-xl text-neutral-500 leading-relaxed dark:text-neutral-400"
           >
             {t.hero.subtitle}
           </motion.p>
@@ -58,24 +59,26 @@ export function Hero() {
             }}
             className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-6"
           >
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-forest-deep px-7 py-3.5 text-sm font-medium text-white hover:bg-forest-deep/90 transition-all duration-500 ease-editorial"
-            >
-              {t.hero.ctaPrimary}
-              <ArrowRight
-                size={16}
-                className="transition-transform duration-500 ease-editorial group-hover:translate-x-1"
-              />
-            </a>
+            <Magnetic>
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-3 rounded-full bg-forest-deep px-7 py-3.5 text-sm font-medium text-white hover:bg-forest-deep/90 transition-all duration-500 ease-editorial dark:bg-forest-light dark:text-ink dark:hover:bg-forest-light/90"
+              >
+                {t.hero.ctaPrimary}
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-500 ease-editorial group-hover:translate-x-1"
+                />
+              </a>
+            </Magnetic>
             <a
               href="#solutions"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-forest-deep transition-colors duration-300 ease-editorial"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-forest-deep transition-colors duration-300 ease-editorial dark:text-neutral-100 dark:hover:text-forest-light"
             >
               {t.hero.ctaSecondary}
               <span
                 aria-hidden
-                className="block h-px w-6 bg-neutral-900 transition-all duration-500 ease-editorial group-hover:w-10 group-hover:bg-forest-deep"
+                className="block h-px w-6 bg-neutral-900 transition-all duration-500 ease-editorial group-hover:w-10 group-hover:bg-forest-deep dark:bg-neutral-100 dark:group-hover:bg-forest-light"
               />
             </a>
           </motion.div>

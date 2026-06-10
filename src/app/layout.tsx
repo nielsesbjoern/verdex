@@ -4,8 +4,10 @@ import { Playfair_Display } from "next/font/google";
 import { AmicusAuditProvider } from "@/lib/AmicusAuditContext";
 import { AMICUS_VISIBLE } from "@/lib/features";
 import { LanguageProvider } from "@/lib/LanguageProvider";
+import { ThemeProvider, themeNoFlashScript } from "@/lib/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -78,6 +80,7 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "Verdex",
+    locale: "de_DE",
     images: [
       {
         url: "/icon.png",
@@ -106,17 +109,23 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-sans text-[17px] sm:text-lg leading-relaxed antialiased bg-white text-neutral-900 caret-forest-deep">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeNoFlashScript }} />
+      </head>
+      <body className="font-sans text-[17px] sm:text-lg leading-relaxed antialiased bg-white text-neutral-900 caret-forest-deep transition-colors duration-500 ease-editorial dark:bg-ink dark:text-neutral-100">
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        <LanguageProvider>
-          <AmicusAuditProvider>
-            <Navbar />
-            <main id="main-content">{children}</main>
-            <Footer />
-          </AmicusAuditProvider>
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <AmicusAuditProvider>
+              <ScrollProgress />
+              <Navbar />
+              <main id="main-content">{children}</main>
+              <Footer />
+            </AmicusAuditProvider>
+          </LanguageProvider>
+        </ThemeProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

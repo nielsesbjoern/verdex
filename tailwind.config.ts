@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,6 +14,15 @@ const config: Config = {
         // hover/focus, caret, and the prominent footer branding plate.
         forest: {
           deep: "#102512",
+          // Lighter sage variant for use on dark backgrounds where
+          // `forest-deep` would lack contrast (dark-mode accents/links).
+          light: "#8fb290",
+        },
+        // Dark-mode page + surface tones (warm near-black, faintly green).
+        ink: {
+          DEFAULT: "#0b0c0b",
+          surface: "#141614",
+          raised: "#1b1d1b",
         },
       },
       fontFamily: {

@@ -40,10 +40,10 @@ export function LegalDocument({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EDITORIAL_EASE }}
         >
-          <p className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-500">
+          <p className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
             {eyebrow}
           </p>
-          <h1 className="mt-6 font-serif text-5xl sm:text-6xl lg:text-7xl text-neutral-900 leading-[1.05] tracking-tight">
+          <h1 className="mt-6 font-serif text-5xl sm:text-6xl lg:text-7xl text-neutral-900 leading-[1.05] tracking-tight dark:text-neutral-100">
             {title}
           </h1>
         </motion.div>
@@ -57,7 +57,7 @@ export function LegalDocument({
               delay: 0.1,
               ease: EDITORIAL_EASE,
             }}
-            className="mt-10 text-lg text-neutral-500 leading-relaxed"
+            className="mt-10 text-lg text-neutral-500 leading-relaxed dark:text-neutral-400"
           >
             {intro}
           </motion.p>
@@ -75,19 +75,19 @@ export function LegalDocument({
                 delay: idx === 0 ? 0 : 0.05,
                 ease: EDITORIAL_EASE,
               }}
-              className="border-t border-neutral-200 pt-8"
+              className="border-t border-neutral-200 pt-8 dark:border-white/10"
             >
-              <h2 className="font-serif text-2xl sm:text-3xl text-neutral-900 leading-tight tracking-tight">
+              <h2 className="font-serif text-2xl sm:text-3xl text-neutral-900 leading-tight tracking-tight dark:text-neutral-100">
                 {section.heading}
               </h2>
-              <div className="mt-6 space-y-5 text-[15px] sm:text-base leading-relaxed text-neutral-700">
+              <div className="mt-6 space-y-5 text-[15px] sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-400">
                 {section.content.map((item, i) =>
                   typeof item === "string" ? (
                     <Paragraph key={i} text={item} />
                   ) : (
                     <ul
                       key={i}
-                      className="list-disc list-outside pl-5 space-y-2 marker:text-neutral-400"
+                      className="list-disc list-outside pl-5 space-y-2 marker:text-neutral-400 dark:marker:text-neutral-600"
                     >
                       {item.map((bullet, bi) => (
                         <li key={bi}>{bullet}</li>
@@ -100,10 +100,10 @@ export function LegalDocument({
           ))}
         </div>
 
-        <div className="mt-20 pt-8 border-t border-neutral-200">
+        <div className="mt-20 pt-8 border-t border-neutral-200 dark:border-white/10">
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-forest-deep transition-colors duration-300 ease-editorial"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-forest-deep transition-colors duration-300 ease-editorial dark:text-neutral-100 dark:hover:text-forest-light"
           >
             <ArrowLeft
               size={16}

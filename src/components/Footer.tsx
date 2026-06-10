@@ -20,17 +20,38 @@ export function Footer() {
     {
       title: t.footer.columns.product,
       links: [
-        { label: t.solutions.tabWebsites, href: "/#solutions" },
-        { label: t.solutions.tabAuthority, href: "/#solutions" },
+        {
+          label: t.solutions.tabWebsites,
+          href: "/leistungen/websites",
+          internal: true,
+        },
+        {
+          label: t.solutions.tabAuthority,
+          href: "/leistungen/sichtbarkeit",
+          internal: true,
+        },
         ...(AMICUS_VISIBLE
-          ? [{ label: t.solutions.tabAmicus, href: "/#solutions" }]
+          ? [
+              {
+                label: t.solutions.tabAmicus,
+                href: "/leistungen/amicus",
+                internal: true,
+              },
+            ]
           : []),
+        {
+          label: t.footer.links.references,
+          href: "/referenzen",
+          internal: true,
+        },
       ],
     },
     {
       title: t.footer.columns.company,
       links: [
         { label: t.footer.links.about, href: "/about", internal: true },
+        { label: t.footer.links.process, href: "/ablauf", internal: true },
+        { label: t.footer.links.faq, href: "/faq", internal: true },
         { label: t.footer.links.contact, href: "/#contact" },
       ],
     },

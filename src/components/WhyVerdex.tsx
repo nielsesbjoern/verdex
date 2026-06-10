@@ -9,21 +9,21 @@ export function WhyVerdex() {
   return (
     <section
       id="why"
-      className="relative py-24 lg:py-32 border-t border-neutral-100"
+      className="relative py-24 lg:py-32 border-t border-neutral-100 dark:border-white/10"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <FadeIn key={`why-intro-${lang}`} className="max-w-3xl">
-          <p className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-500">
+          <p className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
             {t.why.eyebrow}
           </p>
-          <h2 className="mt-6 font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 leading-[1.05] tracking-tight">
+          <h2 className="mt-6 font-serif text-4xl sm:text-5xl lg:text-6xl text-neutral-900 leading-[1.05] tracking-tight dark:text-neutral-100">
             {t.why.titleA}{" "}
-            <span className="italic font-normal text-neutral-700">
+            <span className="italic font-normal text-neutral-700 dark:text-neutral-300">
               {t.why.titleItalic}
             </span>
             {t.why.titleB ? <> {t.why.titleB}</> : null}
           </h2>
-          <p className="mt-8 max-w-2xl text-lg text-neutral-500 leading-relaxed">
+          <p className="mt-8 max-w-2xl text-lg text-neutral-500 leading-relaxed dark:text-neutral-400">
             {t.why.intro}
           </p>
         </FadeIn>
@@ -33,15 +33,15 @@ export function WhyVerdex() {
             <FadeIn
               key={`${p.title}-${lang}`}
               delay={i * 0.1}
-              className="group border-t border-neutral-200 pt-8"
+              className="group border-t border-neutral-200 pt-8 dark:border-white/10"
             >
-              <p className="font-serif text-sm text-neutral-500 italic">
+              <p className="font-serif text-sm text-neutral-500 italic dark:text-neutral-400">
                 {String(i + 1).padStart(2, "0")}
               </p>
-              <h3 className="mt-6 font-serif text-2xl sm:text-[28px] text-neutral-900 leading-tight tracking-tight transition-colors duration-500 ease-editorial group-hover:text-forest-deep">
+              <h3 className="mt-6 font-serif text-2xl sm:text-[28px] text-neutral-900 leading-tight tracking-tight transition-colors duration-500 ease-editorial group-hover:text-forest-deep dark:text-neutral-100 dark:group-hover:text-forest-light">
                 {p.title}
               </h3>
-              <p className="mt-4 text-[15px] leading-relaxed text-neutral-500">
+              <p className="mt-4 text-[15px] leading-relaxed text-neutral-500 dark:text-neutral-400">
                 {p.body}
               </p>
             </FadeIn>

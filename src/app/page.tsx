@@ -1,6 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { SolutionsTabs } from "@/components/SolutionsTabs";
-import { WhyVerdex } from "@/components/WhyVerdex";
+import { ReferencesTeaser } from "@/components/ReferencesTeaser";
+import { GermanyReach } from "@/components/GermanyReach";
 import { Contact } from "@/components/Contact";
 
 export default function Home() {
@@ -8,7 +9,8 @@ export default function Home() {
     <>
       <Hero />
       <SolutionsTabs />
-      <WhyVerdex />
+      <ReferencesTeaser />
+      <GermanyReach />
       <Contact />
     </>
   );

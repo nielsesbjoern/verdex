@@ -32,6 +32,15 @@ body {
   border-radius: 2px;
 }
 
+.dark ::selection {
+  background: #8fb290;
+  color: #0b0c0b;
+}
+
+.dark :focus-visible {
+  outline-color: #8fb290;
+}
+
 .skip-link {
   position: absolute;
   left: 1rem;

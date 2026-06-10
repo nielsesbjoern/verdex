@@ -16,6 +16,10 @@ export const SUPPORTED_LANGS: { code: Lang; label: string }[] = [
 
 type Feature = { title: string; description: string };
 type Pillar = { title: string; body: string };
+/** A 0–100 audit score that animates from `before` to `after`. */
+type ScoreMetric = { label: string; before: number; after: number };
+/** A free-form before/after pair shown as two chips. */
+type HighlightMetric = { label: string; before: string; after: string };
 
 /** Stable IDs used across translations and audit logic. */
 export type PracticeAreaId = "arbeit" | "familie" | "erb" | "wirtschaft";
@@ -55,6 +59,13 @@ export type Dict = {
     about: string;
     contact: string;
     cta: string;
+    references: string;
+    process: string;
+    faq: string;
+    /** Sub-label under the "Solutions" group: link to the overview page. */
+    allSolutions: string;
+    /** Generic "back to start page" link used on sub-pages. */
+    backHome: string;
   };
   hero: {
     titleLine1: string;
@@ -119,6 +130,68 @@ export type Dict = {
     intro: string;
     pillars: Pillar[];
   };
+  showcase: {
+    eyebrow: string;
+    titleA: string;
+    titleItalic: string;
+    intro: string;
+    /** Short teaser of the payoff, shown before the expand toggle. */
+    teaserLead: string;
+    teaserBody: string;
+    /** Legal anonymisation / illustrative-example notice. */
+    disclaimer: string;
+    viewLabel: string;
+    labelBefore: string;
+    labelAfter: string;
+    openFull: string;
+    expandHint: string;
+    reveal: string;
+    hide: string;
+    close: string;
+    fullscreenHint: string;
+    seo: {
+      eyebrow: string;
+      title: string;
+      caption: string;
+      beforeLabel: string;
+      afterLabel: string;
+      /** Lighthouse-style 0–100 scores (higher is better). */
+      scores: ScoreMetric[];
+      /** Headline before/after pairs (load time, mobile, etc.). */
+      highlights: HighlightMetric[];
+      note: string;
+    };
+    /** Qualitative "what the scores mean in real life" — no hard numbers. */
+    impact: {
+      eyebrow: string;
+      title: string;
+      titleItalic: string;
+      body: string;
+      points: { title: string; body: string }[];
+      closing: string;
+    };
+  };
+  /** Compact "remote, nationwide" band with a stylised Germany map. */
+  reach: {
+    eyebrow: string;
+    title: string;
+    titleItalic: string;
+    body: string;
+    facts: { value: string; label: string }[];
+  };
+  /** Slim 4-step "how an engagement runs" band. */
+  process: {
+    eyebrow: string;
+    title: string;
+    titleItalic: string;
+    steps: { title: string; body: string }[];
+  };
+  /** FAQ accordion shown in the contact section (also emitted as FAQPage JSON-LD). */
+  faq: {
+    eyebrow: string;
+    title: string;
+    items: { q: string; a: string }[];
+  };
   about: {
     eyebrow: string;
     name: string;
@@ -134,6 +207,10 @@ export type Dict = {
     titleB: string;
     body: string;
     email: string;
+    /** "Prefer to write directly?" line shown under the intro, before the form. */
+    directPrompt: string;
+    /** Link to the dedicated FAQ page, shown under the form. */
+    faqLink: string;
     form: {
       name: string;
       email: string;
@@ -166,6 +243,9 @@ export type Dict = {
       careers: string;
       imprint: string;
       privacy: string;
+      references: string;
+      process: string;
+      faq: string;
     };
     copyright: string;
     madeWith: string;
@@ -258,6 +338,11 @@ const en: Dict = {
     about: "About",
     contact: "Contact",
     cta: "Get in touch",
+    references: "References",
+    process: "Process",
+    faq: "FAQ",
+    allSolutions: "All solutions",
+    backHome: "Back to home",
   },
   hero: {
     titleLine1: "Modern websites",
@@ -395,15 +480,139 @@ const en: Dict = {
       },
     ],
   },
+  showcase: {
+    eyebrow: "Before · After",
+    titleA: "From a dated presence",
+    titleItalic: "to a client magnet.",
+    intro:
+      "Switch between the two versions — the same firm, once as it used to look and once reimagined. Both versions open in full.",
+    teaserLead:
+      "A website is no longer a business card — it's a tool that actively wins new clients.",
+    teaserBody:
+      "Higher on Google, trust from the very first moment, and enquiries around the clock — driven by mechanisms no visitor ever sees. See what that means in practice below.",
+    disclaimer:
+      "Illustrative example. The firm, names, contact details and all metrics shown are anonymised or fictional and serve demonstration purposes only — they do not represent an actual completed client project.",
+    viewLabel: "View",
+    labelBefore: "Before",
+    labelAfter: "After",
+    openFull: "Open in full",
+    expandHint: "Click to open in full",
+    reveal: "View the before & after example",
+    hide: "Collapse example",
+    close: "Close",
+    fullscreenHint: "Scroll to explore the full page · Esc to close",
+    seo: {
+      eyebrow: "Measured impact",
+      title: "What the redesign moved.",
+      caption:
+        "Indicative audit values for the illustrative example above — measured with a standard Lighthouse audit (mobile).",
+      beforeLabel: "Before",
+      afterLabel: "After",
+      scores: [
+        { label: "Performance", before: 38, after: 99 },
+        { label: "SEO", before: 55, after: 100 },
+        { label: "Accessibility", before: 61, after: 100 },
+        { label: "Best Practices", before: 67, after: 100 },
+      ],
+      highlights: [
+        { label: "Load time (LCP)", before: "6.4 s", after: "0.8 s" },
+        { label: "Mobile-friendly", before: "Failed", after: "Passed" },
+        { label: "Indexed pages", before: "3", after: "24" },
+      ],
+      note: "Illustrative values for demonstration — not a guarantee of specific results.",
+    },
+    impact: {
+      eyebrow: "What this means in real life",
+      title: "A website is no longer a business card —",
+      titleItalic: "it's a tool that wins clients for you.",
+      body: "Behind every one of those scores sit mechanisms no visitor ever sees — and they work for you around the clock. A fast, technically clean site is ranked higher by Google. Higher means being seen the moment someone searches under pressure. Being seen means being chosen.",
+      points: [
+        {
+          title: "Higher up on Google",
+          body: "Clean code, structure and load speed decide who lands on the first page. Whoever stands at the top gets the first call — long before the competition is even read.",
+        },
+        {
+          title: "Trust before the first word",
+          body: "A modern, fast presence signals care and competence before a prospective client has read a single sentence. The first impression is made in milliseconds.",
+        },
+        {
+          title: "New clients while you work",
+          body: "The mechanisms run quietly in the background — passively, day and night. Visitors turn into enquiries without you lifting a finger.",
+        },
+      ],
+      closing:
+        "In short: not a business card that waits — a tool that actively brings new clients in.",
+    },
+  },
+  reach: {
+    eyebrow: "Nationwide",
+    title: "Remote by design,",
+    titleItalic: "at home all across Germany.",
+    body: "Verdex works fully remote — from the first conversation to launch and beyond. Whether your firm sits in Flensburg or Munich: distance plays no role, care does.",
+    facts: [
+      { value: "100 %", label: "remote — no travel, no detours" },
+      { value: "GDPR", label: "compliant, hosted in Germany" },
+      { value: "< 24 h", label: "response to every enquiry" },
+    ],
+  },
+  process: {
+    eyebrow: "How it works",
+    title: "Four steps",
+    titleItalic: "to launch.",
+    steps: [
+      {
+        title: "Conversation",
+        body: "A no-obligation first call about your firm, your goals — and whether we are a fit.",
+      },
+      {
+        title: "Concept",
+        body: "Structure, content and design direction — agreed before a single line of code is written.",
+      },
+      {
+        title: "Build",
+        body: "Design and development from one hand, with fixed checkpoints instead of surprises.",
+      },
+      {
+        title: "Launch & care",
+        body: "Go-live, visibility setup and a contact person who stays reachable afterwards.",
+      },
+    ],
+  },
+  faq: {
+    eyebrow: "Frequently asked",
+    title: "What firms ask us first.",
+    items: [
+      {
+        q: "What does a website by Verdex cost?",
+        a: "Every project is priced individually — depending on scope, content and visibility goals. After the first conversation you receive a transparent fixed-price offer with no hidden items.",
+      },
+      {
+        q: "How long does a project take?",
+        a: "From the first conversation to launch usually takes a few weeks — depending on how quickly content and approvals move on the firm's side. We fix the exact timeline together during the concept phase.",
+      },
+      {
+        q: "Who owns the website after launch?",
+        a: "You do. Domain, content and code belong entirely to your firm — no renting, no lock-in. On request, we take over ongoing care and maintenance.",
+      },
+      {
+        q: "Do we need any technical knowledge?",
+        a: "No. We handle technology, hosting and setup completely and explain everything in plain language — not developer jargon. Afterwards, your team can update content itself via a lean CMS.",
+      },
+      {
+        q: "Is all of this GDPR-compliant?",
+        a: "Yes. For us, privacy is the starting point, not an afterthought: hosting in Germany, no unnecessary third parties, clean consent flows — compatible with a law firm's confidentiality obligations.",
+      },
+    ],
+  },
   about: {
     eyebrow: "Founder",
     name: "Niels Schade",
     titleA: "Law is home.",
     titleItalic: "Building is care.",
     paragraphs: [
-      "After finishing school in 2024, I moved to Copenhagen to study Business Administration and Sociology at Copenhagen Business School. I've always been drawn to both sides of things: how you build something that actually works, and how people really tick in their day-to-day.",
-      "Law was never just a job in my family — it was simply part of life. My parents run a firm together: my father in employment law, my mother in family law. My uncle does tax law, and my grandfather was a lawyer too. So I don't know what life in a Kanzlei is like from a textbook — I know it from home, from real conversations about the good days and the hard ones.",
-      "That's what I bring to Verdex: a genuine feel for how law firms actually work, and a real urge to build things that make their day a little easier. And I always start by listening.",
+      "After my Abitur in 2024, I moved to Copenhagen to study Business Administration and Sociology at Copenhagen Business School. I have always been fascinated by the intersection of both worlds: how to build organisations that are strategically strong, and how people interact dynamically in their day-to-day work.",
+      "Law, to me, is not merely a profession — it is part of my identity. Shaped by my parents, who together run a firm for employment and family law, and by my grandfather and uncle in legal and tax practice, I have known the realities of legal work since childhood. The daily life of a firm — with all its successes and everyday challenges — I know not from textbooks, but from real, authentic conversations.",
+      "That is exactly the perspective I bring to Verdex: a deep understanding of how law firms actually work, and the ambition to build digital solutions that make daily practice noticeably easier. For me, every innovation begins with one simple but decisive thing: listening closely.",
     ],
     photoAlt: "Portrait of Niels Schade, founder of Verdex",
     backToHome: "Back to home",
@@ -414,6 +623,8 @@ const en: Dict = {
     titleB: "to your firm.",
     body: "A strategic conversation on equal footing. We evaluate your specific needs to determine whether a partnership will deliver maximum value to your firm. Tailored approaches instead of generic pitch decks. Entirely without obligation.",
     email: "nielsesbjornschade@gmail.com",
+    directPrompt: "Prefer to write directly? An informal e-mail is all it takes:",
+    faqLink: "Open questions? Read the FAQ",
     form: {
       name: "Name",
       email: "E-mail",
@@ -449,6 +660,9 @@ const en: Dict = {
       careers: "Careers",
       imprint: "Imprint",
       privacy: "Privacy",
+      references: "References",
+      process: "Process",
+      faq: "FAQ",
     },
     copyright: "All rights reserved.",
     madeWith: "Made with care for the legal profession.",
@@ -737,6 +951,11 @@ const de: Dict = {
     about: "Über uns",
     contact: "Kontakt",
     cta: "Kontakt aufnehmen",
+    references: "Referenzen",
+    process: "Ablauf",
+    faq: "FAQ",
+    allSolutions: "Alle Lösungen",
+    backHome: "Zur Startseite",
   },
   hero: {
     titleLine1: "Moderne Websites",
@@ -874,15 +1093,139 @@ const de: Dict = {
       },
     ],
   },
+  showcase: {
+    eyebrow: "Vorher · Nachher",
+    titleA: "Vom alten Auftritt",
+    titleItalic: "zum Mandantenmagneten.",
+    intro:
+      "Wechseln Sie zwischen den beiden Versionen — dieselbe Kanzlei, einmal wie früher und einmal neu gedacht. Beide Versionen lassen sich voll öffnen.",
+    teaserLead:
+      "Eine Website ist keine Visitenkarte mehr — sie ist ein Werkzeug, das aktiv neue Mandanten gewinnt.",
+    teaserBody:
+      "Weiter oben bei Google, Vertrauen ab der ersten Sekunde und Anfragen rund um die Uhr — durch Mechanismen, die kein Besucher je sieht. Was das konkret bedeutet, sehen Sie unten.",
+    disclaimer:
+      "Fiktives Anschauungsbeispiel. Kanzlei, Namen, Kontaktdaten und alle gezeigten Werte sind anonymisiert bzw. frei erfunden und dienen ausschließlich der Veranschaulichung — sie stellen kein tatsächlich umgesetztes Mandantenprojekt dar.",
+    viewLabel: "Ansicht",
+    labelBefore: "Vorher",
+    labelAfter: "Nachher",
+    openFull: "In voll öffnen",
+    expandHint: "Zum Vollbild anklicken",
+    reveal: "Vorher-Nachher-Beispiel ansehen",
+    hide: "Beispiel einklappen",
+    close: "Schließen",
+    fullscreenHint: "Scrollen für die ganze Seite · Esc zum Schließen",
+    seo: {
+      eyebrow: "Messbare Wirkung",
+      title: "Was der Relaunch bewegt hat.",
+      caption:
+        "Indikative Audit-Werte zum obigen Anschauungsbeispiel — gemessen mit einem Standard-Lighthouse-Audit (mobil).",
+      beforeLabel: "Vorher",
+      afterLabel: "Nachher",
+      scores: [
+        { label: "Performance", before: 38, after: 99 },
+        { label: "SEO", before: 55, after: 100 },
+        { label: "Barrierefreiheit", before: 61, after: 100 },
+        { label: "Best Practices", before: 67, after: 100 },
+      ],
+      highlights: [
+        { label: "Ladezeit (LCP)", before: "6,4 s", after: "0,8 s" },
+        { label: "Mobil nutzbar", before: "Nicht bestanden", after: "Bestanden" },
+        { label: "Indexierte Seiten", before: "3", after: "24" },
+      ],
+      note: "Beispielhafte Werte zur Veranschaulichung — keine Zusicherung konkreter Ergebnisse.",
+    },
+    impact: {
+      eyebrow: "Was das im echten Leben bedeutet",
+      title: "Eine Website ist keine Visitenkarte mehr —",
+      titleItalic: "sie ist ein Werkzeug, das Mandanten gewinnt.",
+      body: "Hinter jedem dieser Werte stehen Mechanismen, die kein Besucher je sieht — und die rund um die Uhr für Sie arbeiten. Eine schnelle, technisch saubere Seite wird von Google weiter oben einsortiert. Weiter oben heißt: gesehen werden, sobald jemand unter Druck sucht. Gesehen werden heißt: gewählt werden.",
+      points: [
+        {
+          title: "Weiter oben bei Google",
+          body: "Sauberer Code, Struktur und Ladezeit entscheiden, wer auf der ersten Seite landet. Wer oben steht, wird zuerst angerufen — lange bevor die Konkurrenz überhaupt gelesen wird.",
+        },
+        {
+          title: "Vertrauen vor dem ersten Wort",
+          body: "Ein moderner, schneller Auftritt signalisiert Sorgfalt und Kompetenz, bevor ein Mandant einen einzigen Satz gelesen hat. Der erste Eindruck entsteht in Millisekunden.",
+        },
+        {
+          title: "Mandanten gewinnen, während Sie arbeiten",
+          body: "Die Mechanismen laufen leise im Hintergrund — passiv, Tag und Nacht. Aus Besuchern werden Anfragen, ohne dass Sie etwas dafür tun müssen.",
+        },
+      ],
+      closing:
+        "Kurz gesagt: keine Visitenkarte, die wartet — ein Werkzeug, das aktiv neue Mandanten bringt.",
+    },
+  },
+  reach: {
+    eyebrow: "Deutschlandweit",
+    title: "Remote gedacht,",
+    titleItalic: "deutschlandweit zu Hause.",
+    body: "Verdex arbeitet vollständig remote — vom Erstgespräch bis zum Launch und darüber hinaus. Ob Ihre Kanzlei in Flensburg sitzt oder in München: Entfernung spielt keine Rolle, Sorgfalt schon.",
+    facts: [
+      { value: "100 %", label: "remote — kein Anfahrtsweg, keine Umwege" },
+      { value: "DSGVO", label: "konform, Hosting in Deutschland" },
+      { value: "< 24 h", label: "Antwort auf jede Anfrage" },
+    ],
+  },
+  process: {
+    eyebrow: "So läuft's ab",
+    title: "Vier Schritte",
+    titleItalic: "bis zum Launch.",
+    steps: [
+      {
+        title: "Gespräch",
+        body: "Ein unverbindliches Erstgespräch über Ihre Kanzlei, Ihre Ziele — und ob wir zusammenpassen.",
+      },
+      {
+        title: "Konzept",
+        body: "Struktur, Inhalte und Design-Richtung — abgestimmt, bevor eine einzige Zeile Code entsteht.",
+      },
+      {
+        title: "Umsetzung",
+        body: "Design und Entwicklung aus einer Hand, mit festen Zwischenständen statt Überraschungen.",
+      },
+      {
+        title: "Launch & Betreuung",
+        body: "Go-live, Einrichtung der Sichtbarkeit und ein Ansprechpartner, der erreichbar bleibt.",
+      },
+    ],
+  },
+  faq: {
+    eyebrow: "Häufige Fragen",
+    title: "Was Kanzleien uns zuerst fragen.",
+    items: [
+      {
+        q: "Was kostet eine Website bei Verdex?",
+        a: "Jedes Projekt wird individuell kalkuliert — abhängig von Umfang, Inhalten und Sichtbarkeits-Zielen. Nach dem Erstgespräch erhalten Sie ein transparentes Festpreis-Angebot ohne versteckte Posten.",
+      },
+      {
+        q: "Wie lange dauert ein Projekt?",
+        a: "Vom Erstgespräch bis zum Launch vergehen in der Regel wenige Wochen — abhängig davon, wie schnell Inhalte und Freigaben auf Kanzleiseite erfolgen. Den genauen Zeitplan legen wir gemeinsam im Konzept fest.",
+      },
+      {
+        q: "Wem gehört die Website nach dem Launch?",
+        a: "Ihnen. Domain, Inhalte und Code liegen vollständig bei Ihrer Kanzlei — keine Miete, kein Lock-in. Auf Wunsch übernehmen wir die laufende Betreuung und Pflege.",
+      },
+      {
+        q: "Brauchen wir technisches Vorwissen?",
+        a: "Nein. Wir übernehmen Technik, Hosting und Einrichtung vollständig und erklären alles in klarer Sprache — nicht im Entwickler-Jargon. Inhalte pflegt Ihr Team später selbst über ein schlankes CMS.",
+      },
+      {
+        q: "Ist das alles DSGVO-konform?",
+        a: "Ja. Datenschutz ist bei uns Ausgangspunkt, nicht Nachtrag: Hosting in Deutschland, keine unnötigen Drittanbieter, saubere Einwilligungen — vereinbar mit den Verschwiegenheitspflichten einer Kanzlei.",
+      },
+    ],
+  },
   about: {
     eyebrow: "Gründer",
     name: "Niels Schade",
     titleA: "Recht ist Zuhause.",
     titleItalic: "Bauen ist Sorgfalt.",
     paragraphs: [
-      "Nach dem Abitur 2024 bin ich für mein Studium nach Kopenhagen gezogen — Business Administration und Sociology an der Copenhagen Business School. Mich hat schon immer beides interessiert: wie man Dinge sinnvoll aufbaut und wie Menschen in ihrem Arbeitsalltag wirklich ticken.",
-      "Recht war bei uns zu Hause nie nur ein Beruf — es gehörte einfach dazu. Meine Eltern führen gemeinsam eine Kanzlei, mein Vater im Arbeitsrecht, meine Mutter im Familienrecht. Mein Onkel macht Steuerrecht, mein Großvater war auch Anwalt. Wie der Alltag in einer Kanzlei aussieht, kenne ich also nicht aus Büchern, sondern von zu Hause — aus echten Gesprächen über die guten und die anstrengenden Tage.",
-      "Genau das bringe ich bei Verdex ein: das Verständnis dafür, wie Kanzleien wirklich arbeiten, und Lust darauf, etwas zu bauen, das ihnen den Alltag leichter macht. Am liebsten fange ich mit Zuhören an.",
+      "Nach meinem Abitur im Jahr 2024 zog ich für mein Studium nach Kopenhagen, um an der Copenhagen Business School Business Administration and Sociology zu studieren. Mich fasziniert seit jeher die Schnittstelle aus beiden Welten: Wie man Organisationen strategisch stark aufbaut und wie Menschen in ihrem Arbeitsalltag dynamisch interagieren.",
+      "Das Thema Recht begreife ich dabei nicht nur als Berufsfeld – es ist Teil meiner Identität. Geprägt durch meine Eltern, die gemeinsam eine Kanzlei für Arbeits- und Familienrecht führen, sowie meinen Großvater und Onkel im Anwalts- und Steuerrecht, kenne ich die juristische Praxis von klein auf. Den Kanzleialltag mit all seinen Erfolgen und täglichen Herausforderungen kenne ich nicht aus Lehrbüchern, sondern aus lebensnahen, authentischen Diskussionen.",
+      "Genau diese Perspektive bringe ich bei Verdex ein: Ein tiefes Verständnis für die realen Arbeitsweisen von Kanzleien und die Ambition, digitale Lösungen zu entwickeln, die den Alltag spürbar erleichtern. Für mich beginnt jede Innovation mit einer einfachen, aber entscheidenden Sache: dem präzisen Zuhören.",
     ],
     photoAlt: "Porträt von Niels Schade, Gründer von Verdex",
     backToHome: "Zurück zur Startseite",
@@ -893,6 +1236,8 @@ const de: Dict = {
     titleB: "in Ihre Kanzlei.",
     body: "Strategischer Austausch auf Augenhöhe. Wir evaluieren Ihren konkreten Bedarf, um festzustellen, ob eine Zusammenarbeit den maximalen Mehrwert für Ihre Kanzlei stiftet. Maßgeschneiderte Ansätze statt generischer Pitch-Decks. Vollkommen unverbindlich.",
     email: "nielsesbjornschade@gmail.com",
+    directPrompt: "Lieber direkt schreiben? Eine formlose E-Mail genügt:",
+    faqLink: "Offene Fragen? Zu den häufigen Fragen",
     form: {
       name: "Name",
       email: "E-Mail",
@@ -928,6 +1273,9 @@ const de: Dict = {
       careers: "Karriere",
       imprint: "Impressum",
       privacy: "Datenschutz",
+      references: "Referenzen",
+      process: "Ablauf",
+      faq: "FAQ",
     },
     copyright: "Alle Rechte vorbehalten.",
     madeWith: "Mit Sorgfalt für die juristische Berufswelt gebaut.",
