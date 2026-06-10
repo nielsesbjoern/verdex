@@ -21,6 +21,10 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
   display: "swap",
+  // Only used in the /referenzen showcase, not above the fold on the
+  // home page — skip preloading so it doesn't compete for bandwidth
+  // during the initial paint / LCP.
+  preload: false,
 });
 
 const playfair = Playfair_Display({

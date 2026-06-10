@@ -5,6 +5,11 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  // Tree-shake heavy icon/animation libs so only used code ships,
+  // reducing unused JavaScript in the client bundle.
+  experimental: {
+    optimizePackageImports: ["framer-motion", "lucide-react"],
+  },
   async headers() {
     return [
       {
