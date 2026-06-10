@@ -192,6 +192,32 @@ export type Dict = {
     title: string;
     items: { q: string; a: string }[];
   };
+  /** "Investment" section: entry-level package anchors shown on /leistungen. */
+  pricing: {
+    eyebrow: string;
+    titleA: string;
+    titleItalic: string;
+    intro: string;
+    /** Prefix before each entry-level price, e.g. "ab" / "from". */
+    fromLabel: string;
+    /** Caption under each price, e.g. "einmalig, zzgl. USt." */
+    oneTimeNote: string;
+    /** Badge on the highlighted (sweet-spot) plan. */
+    recommendedLabel: string;
+    plans: {
+      name: string;
+      price: string;
+      tagline: string;
+      features: string[];
+      /** Visually highlights the sweet-spot plan. */
+      recommended?: boolean;
+    }[];
+    recurring: { label: string; price: string; note: string };
+    footnote: string;
+    cta: string;
+    /** Slim teaser strip shown on the home page, linking to this section. */
+    teaser: { lead: string; link: string };
+  };
   about: {
     eyebrow: string;
     name: string;
@@ -584,7 +610,7 @@ const en: Dict = {
     items: [
       {
         q: "What does a website by Verdex cost?",
-        a: "Every project is priced individually — depending on scope, content and visibility goals. After the first conversation you receive a transparent fixed-price offer with no hidden items.",
+        a: "A bespoke law-firm website starts at €6,900; packages with local visibility and a client funnel start at €11,000. Every project is then priced individually — depending on scope, content and visibility goals — and after the first conversation you receive a transparent fixed-price offer with no hidden items.",
       },
       {
         q: "How long does a project take?",
@@ -603,6 +629,67 @@ const en: Dict = {
         a: "Yes. For us, privacy is the starting point, not an afterthought: hosting in Germany, no unnecessary third parties, clean consent flows — compatible with a law firm's confidentiality obligations.",
       },
     ],
+  },
+  pricing: {
+    eyebrow: "Investment",
+    titleA: "Transparent packages,",
+    titleItalic: "fairly calculated.",
+    intro:
+      "Every project is priced individually — the packages below simply show where the entry point begins. After the first conversation you receive a binding fixed-price offer with no hidden items.",
+    fromLabel: "from",
+    oneTimeNote: "one-time, plus VAT",
+    recommendedLabel: "Recommended",
+    plans: [
+      {
+        name: "Law-firm website",
+        price: "€6,900",
+        tagline:
+          "The representative presence that earns trust before the first call.",
+        features: [
+          "Bespoke design & engineering — no template",
+          "Attorney profiles & practice-area pages",
+          "Technical SEO foundation & sub-second performance",
+          "GDPR-compliant, contact system, analytics",
+        ],
+      },
+      {
+        name: "Visible",
+        price: "€11,000",
+        tagline:
+          "Website plus local visibility exactly where clients search under pressure.",
+        features: [
+          "Everything in the Law-firm website",
+          "Local SEO system tailored to your region",
+          "Google & Apple maps, live reviews integration",
+          "GDPR routing widget — no cookie banner",
+        ],
+      },
+      {
+        name: "Mandates",
+        price: "€17,000",
+        recommended: true,
+        tagline:
+          "The full system: visibility, a client funnel and lasting subject authority.",
+        features: [
+          "Everything in Visible",
+          "Strategy check — a qualified client funnel, not just calls",
+          "Legal-glossary system for subject authority",
+          "Tailored to your specific practice areas",
+        ],
+      },
+    ],
+    recurring: {
+      label: "Ongoing care",
+      price: "from €220 / month",
+      note: "Hosting, maintenance and visibility care — optional, but recommended.",
+    },
+    footnote:
+      "All figures are entry-level prices, net plus VAT. The final fixed price depends on the scope, locations and content of your firm.",
+    cta: "Request a no-obligation offer",
+    teaser: {
+      lead: "Transparent packages from €6,900.",
+      link: "View investment & packages",
+    },
   },
   about: {
     eyebrow: "Founder",
@@ -1197,7 +1284,7 @@ const de: Dict = {
     items: [
       {
         q: "Was kostet eine Website bei Verdex?",
-        a: "Jedes Projekt wird individuell kalkuliert — abhängig von Umfang, Inhalten und Sichtbarkeits-Zielen. Nach dem Erstgespräch erhalten Sie ein transparentes Festpreis-Angebot ohne versteckte Posten.",
+        a: "Eine individuelle Kanzlei-Website beginnt bei 6.900 €; Pakete mit lokaler Sichtbarkeit und Mandanten-Funnel starten bei 11.000 €. Jedes Projekt wird anschließend individuell kalkuliert — abhängig von Umfang, Inhalten und Sichtbarkeits-Zielen — und nach dem Erstgespräch erhalten Sie ein transparentes Festpreis-Angebot ohne versteckte Posten.",
       },
       {
         q: "Wie lange dauert ein Projekt?",
@@ -1216,6 +1303,67 @@ const de: Dict = {
         a: "Ja. Datenschutz ist bei uns Ausgangspunkt, nicht Nachtrag: Hosting in Deutschland, keine unnötigen Drittanbieter, saubere Einwilligungen — vereinbar mit den Verschwiegenheitspflichten einer Kanzlei.",
       },
     ],
+  },
+  pricing: {
+    eyebrow: "Investition",
+    titleA: "Transparente Pakete,",
+    titleItalic: "fair kalkuliert.",
+    intro:
+      "Jedes Projekt wird individuell kalkuliert — die folgenden Pakete zeigen lediglich, wo der Einstieg beginnt. Nach dem Erstgespräch erhalten Sie ein verbindliches Festpreis-Angebot ohne versteckte Posten.",
+    fromLabel: "ab",
+    oneTimeNote: "einmalig, zzgl. USt.",
+    recommendedLabel: "Empfohlen",
+    plans: [
+      {
+        name: "Kanzlei-Website",
+        price: "6.900 €",
+        tagline:
+          "Der repräsentative Auftritt, der schon vor dem ersten Anruf Vertrauen schafft.",
+        features: [
+          "Individuelles Design & Entwicklung — kein Template",
+          "Anwaltsprofile & Rechtsgebiets-Seiten",
+          "Technisches SEO-Fundament & Ladezeiten unter einer Sekunde",
+          "DSGVO-konform, Kontaktsystem, Analytics",
+        ],
+      },
+      {
+        name: "Sichtbar",
+        price: "11.000 €",
+        tagline:
+          "Website plus lokale Sichtbarkeit genau dort, wo Mandanten unter Druck suchen.",
+        features: [
+          "Alles aus der Kanzlei-Website",
+          "Lokales SEO-System, auf Ihre Region zugeschnitten",
+          "Google- & Apple-Karten, Live-Bewertungen",
+          "DSGVO-Anfahrts-Widget — ohne Cookie-Banner",
+        ],
+      },
+      {
+        name: "Mandate",
+        price: "17.000 €",
+        recommended: true,
+        tagline:
+          "Das volle System: Sichtbarkeit, Mandanten-Funnel und dauerhafte Fachautorität.",
+        features: [
+          "Alles aus Sichtbar",
+          "Strategie-Check — qualifizierter Mandanten-Funnel statt Anrufe",
+          "Rechtslexikon-System für Fachautorität",
+          "Zugeschnitten auf Ihre konkreten Rechtsgebiete",
+        ],
+      },
+    ],
+    recurring: {
+      label: "Laufende Betreuung",
+      price: "ab 220 € / Monat",
+      note: "Hosting, Pflege und Sichtbarkeits-Betreuung — optional, aber empfohlen.",
+    },
+    footnote:
+      "Alle Angaben sind Einstiegspreise, netto zzgl. USt. Der finale Festpreis richtet sich nach Umfang, Standorten und Inhalten Ihrer Kanzlei.",
+    cta: "Unverbindliches Angebot anfordern",
+    teaser: {
+      lead: "Transparente Pakete ab 6.900 €.",
+      link: "Investition & Pakete ansehen",
+    },
   },
   about: {
     eyebrow: "Gründer",

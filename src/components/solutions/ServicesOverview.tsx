@@ -3,6 +3,7 @@
 import { useLang } from "@/lib/LanguageProvider";
 import { FadeIn } from "@/components/FadeIn";
 import { BackLink } from "@/components/BackLink";
+import { Pricing } from "@/components/Pricing";
 import { SolutionCards } from "./SolutionCards";
 
 /** `/leistungen` overview page: intro + the solution cards as links. */
@@ -36,6 +37,10 @@ export function ServicesOverview() {
 
         <div className="mt-16 lg:mt-20">
           <SolutionCards headingLevel="h2" />
+        </div>
+
+        <div className="mt-24 lg:mt-28">
+          <Pricing />
         </div>
       </div>
     </article>
