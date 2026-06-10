@@ -8,6 +8,7 @@ import { ThemeProvider, themeNoFlashScript } from "@/lib/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -130,6 +131,7 @@ export default function RootLayout({
             </AmicusAuditProvider>
           </LanguageProvider>
         </ThemeProvider>
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
