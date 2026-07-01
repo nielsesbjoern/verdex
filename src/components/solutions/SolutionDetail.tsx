@@ -7,10 +7,7 @@ import {
   CalendarClock,
   EyeOff,
   Gauge,
-  MapPin,
-  Radar,
   Scale,
-  ShieldCheck,
   Sparkles,
   Swords,
   Wrench,
@@ -20,12 +17,12 @@ import { useLang } from "@/lib/LanguageProvider";
 import { useAmicusAudit } from "@/lib/AmicusAuditContext";
 import { FadeIn } from "@/components/FadeIn";
 import { BackLink } from "@/components/BackLink";
+import { AuthorityContent } from "@/components/solutions/AuthorityContent";
 import type { SolutionId } from "./solutionsMeta";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const WEBSITE_ICONS: LucideIcon[] = [Sparkles, Gauge, Wrench];
-const AUTHORITY_ICONS: LucideIcon[] = [MapPin, ShieldCheck, Radar];
 const AMICUS_ICONS: LucideIcon[] = [Scale, Swords, EyeOff, CalendarClock];
 
 /** Full standalone detail page for one solution (was a modal before). */
@@ -115,23 +112,6 @@ function WebsitesContent() {
       <FeatureGrid
         features={t.solutions.websites.features}
         icons={WEBSITE_ICONS}
-        cols={3}
-      />
-    </>
-  );
-}
-
-function AuthorityContent() {
-  const { t } = useLang();
-  return (
-    <>
-      <DetailHeading title={t.solutions.authority.title} />
-      <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-500 dark:text-neutral-400">
-        {t.solutions.authority.body}
-      </p>
-      <FeatureGrid
-        features={t.solutions.authority.features}
-        icons={AUTHORITY_ICONS}
         cols={3}
       />
     </>

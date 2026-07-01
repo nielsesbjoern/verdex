@@ -9,6 +9,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Analytics } from "@vercel/analytics/react";
+import { siteUrl, absoluteUrl } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -35,15 +36,13 @@ const playfair = Playfair_Display({
   weight: ["400", "600", "700"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://verdex.de";
-
 const siteTitle = AMICUS_VISIBLE
-  ? "Verdex — AI & Websites for Law Firms"
-  : "Verdex — Websites & Digital Positioning for Law Firms";
+  ? "Verdex — KI & Websites für Kanzleien"
+  : "Verdex — Websites & digitale Positionierung für Kanzleien";
 
 const siteDescription = AMICUS_VISIBLE
-  ? "Verdex builds modern websites and private, GDPR-compliant AI tools for German law firms. Local, secure, and tailored to legal practice."
-  : "Verdex builds modern websites and digital positioning for German law firms — fast, GDPR-compliant, and tailored to legal practice.";
+  ? "Verdex baut moderne Websites und private, DSGVO-konforme KI-Tools für deutsche Kanzleien — lokal, sicher und auf die Anwaltspraxis zugeschnitten."
+  : "Verdex baut moderne Websites und digitale Positionierung für deutsche Kanzleien — schnell, DSGVO-konform und auf die Anwaltspraxis zugeschnitten.";
 
 const siteKeywords = AMICUS_VISIBLE
   ? [
@@ -86,20 +85,11 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Verdex",
     locale: "de_DE",
-    images: [
-      {
-        url: "/icon.png",
-        width: 512,
-        height: 512,
-        alt: "Verdex logo icon",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
-    images: ["/icon.png"],
   },
 };
 
@@ -110,7 +100,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="de"
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
@@ -140,7 +130,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Verdex",
               url: siteUrl,
-              logo: `${siteUrl}/icon.png`,
+              logo: absoluteUrl("/icon.png"),
               description: siteDescription,
               sameAs: [],
             }),

@@ -27,6 +27,24 @@ export type CaseVolumeId = "s" | "m" | "l" | "xl";
 export type BottleneckId = "intake" | "research" | "update";
 export type TimePerCaseId = "s" | "m" | "l" | "xl";
 
+export type BriefLegalAreaId =
+  | "arbeit"
+  | "familie"
+  | "erb"
+  | "wirtschaft"
+  | "miet"
+  | "straf"
+  | "verkehr"
+  | "gesellschaft"
+  | "steuer"
+  | "medizin"
+  | "other";
+export type BriefWebsiteStatusId = "none" | "outdated" | "relaunch" | "seo";
+export type BriefGoalId = "leads" | "image" | "local" | "security";
+export type BriefTimelineId = "now" | "soon" | "info";
+
+type BriefOption<T extends string> = { id: T; label: string };
+
 type AreaOption = { id: PracticeAreaId; label: string };
 type CaseVolumeOption = { id: CaseVolumeId; label: string; value: number };
 type BottleneckOption = {
@@ -64,6 +82,8 @@ export type Dict = {
     faq: string;
     /** Sub-label under the "Solutions" group: link to the overview page. */
     allSolutions: string;
+    /** Link to the nationwide / remote page. */
+    nationwide: string;
     /** Generic "back to start page" link used on sub-pages. */
     backHome: string;
   };
@@ -109,7 +129,14 @@ export type Dict = {
     authority: {
       title: string;
       body: string;
-      features: Feature[];
+      shieldEyebrow: string;
+      shieldTitle: string;
+      shieldBody: string;
+      shieldFeatures: Feature[];
+      layersEyebrow: string;
+      layers: Feature[];
+      noteTitle: string;
+      noteBody: string;
     };
     amicus: {
       title: string;
@@ -180,6 +207,80 @@ export type Dict = {
     facts: { value: string; label: string }[];
     /** Small caption under the map clarifying the markers are illustrative. */
     mapNote: string;
+    /** Slim home-page teaser linking to the full page. */
+    teaser: {
+      lead: string;
+      link: string;
+    };
+  };
+  /** City landing pages and regions hub. */
+  cities: {
+    backToRegions: string;
+    eyebrow: string;
+    heroTitle: string;
+    mapAria: string;
+    regionsEyebrow: string;
+    regionsTitle: string;
+    regionsBody: string;
+    regionsMapAria: string;
+    searchLabel: string;
+    searchPlaceholder: string;
+    searchNoResults: string;
+    searchNoResultsHint: string;
+    searchResults: string;
+    bundeslaenderTitle: string;
+    bundeslandEmpty: string;
+    bundeslandComingSoon: string;
+    bundeslandCount: string;
+    viewCity: string;
+    landmarksLabel: string;
+    faqTitle: string;
+    cta: string;
+    courtsTitle: string;
+    economyTitle: string;
+    servicesTitle: string;
+    localExampleTitle: string;
+    localExampleDisclaimer: string;
+    whyVerdexTitle: string;
+    nearbyTitle: string;
+    moreRegionsTitle: string;
+    moreRegionsBody: string;
+    sections: {
+      courts: string;
+      economy: string;
+      services: string;
+      localExample: string;
+      faq: string;
+      whyVerdex: string;
+      nearby: string;
+    };
+    serp: {
+      eyebrow: string;
+      title: string;
+      body: string;
+      beforeLabel: string;
+      afterLabel: string;
+      beforeSnippet: string;
+      afterSnippet: string;
+      query: string;
+      disclaimer: string;
+    };
+    bundeslandPage: {
+      backToDeutschlandweit: string;
+      eyebrow: string;
+      heroTitle: string;
+      mapAria: string;
+      citiesTitle: string;
+      citiesBody: string;
+      viewHub: string;
+      legalAreasLabel: string;
+      cta: string;
+      courtsTitle: string;
+      economyTitle: string;
+      servicesTitle: string;
+      whyVerdexTitle: string;
+      faqTitle: string;
+    };
   };
   /** Slim 4-step "how an engagement runs" band. */
   process: {
@@ -214,6 +315,16 @@ export type Dict = {
       /** Visually highlights the sweet-spot plan. */
       recommended?: boolean;
     }[];
+    /** Standalone security product — bookable with or without a website project. */
+    authorityPlan: {
+      eyebrow: string;
+      name: string;
+      price: string;
+      priceNote: string;
+      tagline: string;
+      features: string[];
+      detailLink: string;
+    };
     recurring: { label: string; price: string; note: string };
     footnote: string;
     cta: string;
@@ -257,6 +368,58 @@ export type Dict = {
       /** Lead-in line right before the direct e-mail address. */
       unavailableEmailPrompt: string;
     };
+    briefing: {
+      stepLabel: string;
+      stepOf: string;
+      back: string;
+      next: string;
+      send: string;
+      durationHint: string;
+      summaryTitle: string;
+      subjectPrefix: string;
+      otherPlaceholder: string;
+      mailLabels: {
+        firm: string;
+        area: string;
+        websiteStatus: string;
+        goal: string;
+        timeline: string;
+        name: string;
+        email: string;
+        note: string;
+      };
+      mail: {
+        header: string;
+        intro: string;
+        sectionBriefing: string;
+        sectionContact: string;
+        footer: string;
+      };
+      steps: {
+        firm: { title: string; sub: string; placeholder: string };
+        area: {
+          title: string;
+          sub: string;
+          options: BriefOption<BriefLegalAreaId>[];
+        };
+        websiteStatus: {
+          title: string;
+          sub: string;
+          options: BriefOption<BriefWebsiteStatusId>[];
+        };
+        goal: {
+          title: string;
+          sub: string;
+          options: BriefOption<BriefGoalId>[];
+        };
+        timeline: {
+          title: string;
+          sub: string;
+          options: BriefOption<BriefTimelineId>[];
+        };
+        contact: { title: string; sub: string; notePlaceholder: string };
+      };
+    };
   };
   footer: {
     tagline: string;
@@ -277,6 +440,7 @@ export type Dict = {
       references: string;
       process: string;
       faq: string;
+      nationwide: string;
     };
     copyright: string;
     madeWith: string;
@@ -369,10 +533,11 @@ const en: Dict = {
     about: "About",
     contact: "Contact",
     cta: "Get in touch",
-    references: "References",
+    references: "Example",
     process: "Process",
     faq: "FAQ",
     allSolutions: "All solutions",
+    nationwide: "Nationwide",
     backHome: "Back to home",
   },
   hero: {
@@ -390,18 +555,18 @@ const en: Dict = {
     titleA: "Two products.",
     titleB: "One firm-grade standard.",
     intro:
-      "Whether you need a public-facing site that earns trust before the first call, or local visibility where clients search under pressure — Verdex delivers both.",
+      "Whether you need a public-facing site that earns trust before the first call, or firm-grade security infrastructure for your website — Verdex delivers both.",
     tabWebsites: "Website Solutions",
     tabAuthority: "Verdex Authority",
     tabAmicus: "Amicus AI",
     cards: {
       eyebrowWebsites: "Website",
-      eyebrowAuthority: "Positioning",
+      eyebrowAuthority: "Security",
       eyebrowAmicus: "Private AI",
       websitesShort:
         "Editorial websites that win the first impression — fast, branded, easy to maintain.",
       authorityShort:
-        "We anchor your firm in the local search hotspots — so clients acting under acute time pressure find their first digital path straight to you.",
+        "We set up a multi-layer security ring once — Cloudflare shielding, WAF, bot defence and a locked back door in code. Afterwards, everything belongs to you. No retainer.",
       amicusShort:
         "A private, locally-running AI with four tools your firm uses daily — semantic case-law search, an opposing-counsel simulator, anonymisation and a rule-based deadline calculator.",
       learnMore: "Explore the solution",
@@ -434,25 +599,55 @@ const en: Dict = {
       ],
     },
     authority: {
-      title: "Visible exactly where clients search under pressure.",
-      body: "Your website is the digital headquarters — Verdex Authority brings it into the entire digital ecosystem. Google and Apple maps, highly-rated professional directories and active indexing management work in concert, so you are found at the precise moment the search becomes urgent.",
-      features: [
+      title: "Set up once. Permanently protected.",
+      body: "Verdex Authority is security infrastructure for your law firm's website — configured once, then self-sustaining. We migrate your domain to Cloudflare, hide your real server IP, set up WAF rules and bot defence, rate-limit your contact forms and lock the hosting back door in code. We hand everything over in your accounts. No ongoing contract with Verdex.",
+      shieldEyebrow: "The protection ring",
+      shieldTitle: "Firm-grade infrastructure, configured once.",
+      shieldBody:
+        "Three security pillars we set up at launch — then Cloudflare and your code keep working automatically.",
+      shieldFeatures: [
         {
-          title: "Geo Infrastructure",
+          title: "Shielded entry",
           description:
-            "Complete setup and synchronisation of your Google Business Profile and Apple Business Connect — for precise local navigation straight to your firm.",
+            "Domain migration to Cloudflare with proxy enabled and TLS Full (strict) — your real server IP stays invisible to the outside world.",
         },
         {
-          title: "Entity Validation",
+          title: "Intelligent bot defence",
           description:
-            "Listings in the most important, Google-trusted legal and industry directories (NAP synchronisation) to maximise your domain's trust score.",
+            "WAF rules, Bot Fight Mode and API rate limiting — configured once, then Cloudflare filters harmful traffic and form spam automatically.",
         },
         {
-          title: "Indexing Management",
+          title: "Locked back door",
           description:
-            "Active steering of the Google bot via the Search Console — new practice areas and partner profiles land in the index immediately instead of waiting for weeks.",
+            "An origin shared secret in your Next.js middleware — direct access to the hosting URL is rejected with 403 unless the valid header is present.",
         },
       ],
+      layersEyebrow: "Four layers",
+      layers: [
+        {
+          title: "Layer 1 — Entry",
+          description:
+            "DNS proxy and end-to-end encryption. Set up once, active permanently.",
+        },
+        {
+          title: "Layer 2 — Gatekeepers",
+          description:
+            "WAF, bot defence and rate limits on API routes. Rules in place, Cloudflare filters on its own.",
+        },
+        {
+          title: "Layer 3 — Relief",
+          description:
+            "Edge caching for HTML pages — fast delivery worldwide, less load on your server.",
+        },
+        {
+          title: "Layer 4 — Last line",
+          description:
+            "Middleware and origin secret in your code — part of your repository, owned by your firm.",
+        },
+      ],
+      noteTitle: "We build the system. You own it. No retainer.",
+      noteBody:
+        "After setup, domain and Cloudflare sit in your accounts. Protection keeps running on its own. Works with any Verdex website or an existing site you already run.",
     },
     amicus: {
       title: "A private AI partner for your practice.",
@@ -587,6 +782,87 @@ const en: Dict = {
     ],
     mapNote:
       "The cities shown are for illustration only and do not represent actual client locations.",
+    teaser: {
+      lead: "Fully remote — from Flensburg to Munich, with care that doesn't depend on distance.",
+      link: "How we work nationwide",
+    },
+  },
+  cities: {
+    backToRegions: "All cities",
+    eyebrow: "Law firm website · {bundesland}",
+    heroTitle: "Law firm websites for {city}",
+    mapAria: "Map of Germany with {city} highlighted",
+    regionsEyebrow: "Regions",
+    regionsTitle: "Law firm websites across Germany",
+    regionsBody:
+      "Verdex builds modern law firm websites for mid-sized cities — where clients search under pressure and competition is still winnable.",
+    regionsMapAria: "Interactive map of Germany with Verdex target cities",
+    searchLabel: "Search cities",
+    searchPlaceholder: "Search city, region or legal focus…",
+    searchNoResults: "No cities found.",
+    searchNoResultsHint:
+      "Try a different spelling or browse the federal states below once the search is cleared.",
+    searchResults: "{count} cities found",
+    bundeslaenderTitle: "By federal state",
+    bundeslandEmpty: "Coming soon",
+    bundeslandComingSoon:
+      "City pages for this federal state are in preparation.",
+    bundeslandCount: "{count} cities live",
+    viewCity: "Law firm website {city}",
+    landmarksLabel: "Landmarks",
+    faqTitle: "What law firms in {city} ask first",
+    cta: "Get in touch — {city}",
+    courtsTitle: "Courts for mandates from {city}",
+    economyTitle: "Economy & clients in {city}",
+    servicesTitle: "What Verdex delivers in {city}",
+    localExampleTitle: "Example: how clients search in {city}",
+    localExampleDisclaimer:
+      "Fictional search scenario for illustration only — not a case handled by Verdex.",
+    whyVerdexTitle: "Why Verdex for {city}",
+    nearbyTitle: "More regions near {city}",
+    moreRegionsTitle: "More regions coming soon",
+    moreRegionsBody:
+      "We are expanding city pages across Germany. Browse all live cities on our nationwide page or get in touch for your city.",
+    sections: {
+      courts: "Courts",
+      economy: "Local economy",
+      services: "Services",
+      localExample: "Search scenario",
+      faq: "FAQ",
+      whyVerdex: "Why Verdex",
+      nearby: "Nearby regions",
+    },
+    serp: {
+      eyebrow: "Local visibility",
+      title: "How clients find you in {city}",
+      body: "When someone searches under pressure in {city}, the first result wins the call — not the best lawyer on paper.",
+      beforeLabel: "Without positioning",
+      afterLabel: "With local positioning",
+      beforeSnippet:
+        "General law firm homepage with no local focus. Clients in {city} scroll past.",
+      afterSnippet:
+        "{legalArea} in {city} — clear expertise, Google Maps, fast load times. Found when it matters.",
+      query: "{legalArea} {city}",
+      disclaimer:
+        "Illustrative preview only — not a real search result or client project.",
+    },
+    bundeslandPage: {
+      backToDeutschlandweit: "All cities",
+      eyebrow: "Federal state · Stadtstaat",
+      heroTitle: "Law firm websites in {bundesland}",
+      mapAria: "Map of Germany with {bundesland} highlighted",
+      citiesTitle: "City pages in {bundesland}",
+      citiesBody:
+        "Each city has its own landing page with local courts, economy and search scenarios.",
+      viewHub: "Overview {bundesland}",
+      legalAreasLabel: "Typical legal areas",
+      cta: "Get in touch — {bundesland}",
+      courtsTitle: "Courts in {bundesland}",
+      economyTitle: "Economy & mandates in {bundesland}",
+      servicesTitle: "What Verdex delivers in {bundesland}",
+      whyVerdexTitle: "Why Verdex for {bundesland}",
+      faqTitle: "What law firms in {bundesland} ask first",
+    },
   },
   process: {
     eyebrow: "How it works",
@@ -606,8 +882,8 @@ const en: Dict = {
         body: "Design and development from one hand, with fixed checkpoints instead of surprises.",
       },
       {
-        title: "Launch & care",
-        body: "Go-live, visibility setup and a contact person who stays reachable afterwards.",
+        title: "Launch & handover",
+        body: "Go-live and complete handover of everything booked — website, local visibility and/or security infrastructure.",
       },
     ],
   },
@@ -625,11 +901,15 @@ const en: Dict = {
       },
       {
         q: "Who owns the website after launch?",
-        a: "You do. Domain, content and code belong entirely to your firm — no renting, no lock-in. On request, we take over ongoing care and maintenance.",
+        a: "You do. Domain, content and code belong entirely to your firm — no renting, no lock-in. We set up what you book once and hand everything over. There is no maintenance contract with Verdex.",
       },
       {
         q: "Do we need any technical knowledge?",
         a: "No. We handle technology, hosting and setup completely and explain everything in plain language — not developer jargon. Afterwards, your team can update content itself via a lean CMS.",
+      },
+      {
+        q: "Is our website protected against attacks?",
+        a: "Yes — with Verdex Authority (€2,000–3,000). Your domain runs through a professional edge infrastructure with encryption, bot filtering and access control built into the code. Direct access to the hosting URL is rejected. We set it up once and hand it over — no retainer.",
       },
       {
         q: "Is all of this GDPR-compliant?",
@@ -685,10 +965,25 @@ const en: Dict = {
         ],
       },
     ],
+    authorityPlan: {
+      eyebrow: "Standalone · security",
+      name: "Verdex Authority",
+      price: "€2,000–3,000",
+      priceNote: "one-time, plus VAT — depending on scope",
+      tagline:
+        "Firm-grade protection for your website — bookable on its own or alongside any website package.",
+      features: [
+        "Cloudflare proxy & TLS Full (strict)",
+        "WAF, Bot Fight Mode & API rate limiting",
+        "Origin lock in middleware — hosting back door sealed",
+        "Edge caching & full handover in your accounts",
+      ],
+      detailLink: "Explore Verdex Authority",
+    },
     recurring: {
-      label: "Ongoing care",
-      price: "from €220 / month",
-      note: "Hosting, maintenance and visibility care — optional, but recommended.",
+      label: "Full handover",
+      price: "no retainer",
+      note: "No maintenance contract with Verdex. Everything we set up sits in your accounts and keeps running on its own.",
     },
     footnote:
       "All figures are entry-level prices, net plus VAT. The final fixed price depends on the scope, locations and content of your firm.",
@@ -737,6 +1032,92 @@ const en: Dict = {
         "Due to a technical issue, enquiries can't be processed through this form at the moment. Please reach me directly by e-mail — I'll get back to you as quickly as possible.",
       unavailableEmailPrompt: "Write to me directly:",
     },
+    briefing: {
+      stepLabel: "Step",
+      stepOf: "of",
+      back: "Back",
+      next: "Continue",
+      send: "Send briefing",
+      durationHint: "Takes about 2 minutes — your answers are compiled into a structured e-mail.",
+      summaryTitle: "Your briefing",
+      subjectPrefix: "Verdex · Briefing ·",
+      otherPlaceholder: "Please specify your practice area",
+      mailLabels: {
+        firm: "Firm",
+        area: "Practice area",
+        websiteStatus: "Current website",
+        goal: "Primary goal",
+        timeline: "Timeline",
+        name: "Name",
+        email: "E-mail",
+        note: "Additional notes",
+      },
+      mail: {
+        header: "VERDEX · FIRM BRIEFING",
+        intro: "Hello,\n\nplease find my briefing for an initial conversation below:",
+        sectionBriefing: "BRIEFING",
+        sectionContact: "CONTACT",
+        footer: "Sent via verdex.de",
+      },
+      steps: {
+        firm: {
+          title: "What is the name of your firm?",
+          sub: "So I know who I'm speaking with.",
+          placeholder: "e.g. Müller & Partner",
+        },
+        area: {
+          title: "Which practice areas do you cover?",
+          sub: "Multiple selection — choose all that apply.",
+          options: [
+            { id: "arbeit", label: "Employment law" },
+            { id: "familie", label: "Family law" },
+            { id: "erb", label: "Inheritance law" },
+            { id: "wirtschaft", label: "Commercial law" },
+            { id: "miet", label: "Tenancy & property law" },
+            { id: "straf", label: "Criminal law" },
+            { id: "verkehr", label: "Traffic law" },
+            { id: "gesellschaft", label: "Corporate law" },
+            { id: "steuer", label: "Tax law" },
+            { id: "medizin", label: "Medical law" },
+            { id: "other", label: "Other" },
+          ],
+        },
+        websiteStatus: {
+          title: "How does your website look today?",
+          sub: "An honest snapshot helps me assess the starting point.",
+          options: [
+            { id: "none", label: "No website yet" },
+            { id: "outdated", label: "Outdated or slow" },
+            { id: "relaunch", label: "Relaunch planned" },
+            { id: "seo", label: "Fine, but weak in search" },
+          ],
+        },
+        goal: {
+          title: "What is your primary goal?",
+          sub: "What should change for your firm?",
+          options: [
+            { id: "leads", label: "More client enquiries" },
+            { id: "image", label: "More professional presence" },
+            { id: "local", label: "Better local visibility" },
+            { id: "security", label: "Security & GDPR compliance" },
+          ],
+        },
+        timeline: {
+          title: "When would you like to start?",
+          sub: "No commitment — just so I know your timeframe.",
+          options: [
+            { id: "now", label: "As soon as possible" },
+            { id: "soon", label: "Within 1–3 months" },
+            { id: "info", label: "Just gathering information" },
+          ],
+        },
+        contact: {
+          title: "Almost done — how can I reach you?",
+          sub: "Review your briefing and add your contact details.",
+          notePlaceholder: "Anything else I should know? (optional)",
+        },
+      },
+    },
   },
   footer: {
     tagline:
@@ -755,9 +1136,10 @@ const en: Dict = {
       careers: "Careers",
       imprint: "Imprint",
       privacy: "Privacy",
-      references: "References",
+      references: "Example",
       process: "Process",
       faq: "FAQ",
+      nationwide: "Nationwide",
     },
     copyright: "All rights reserved.",
     madeWith: "Made with care for the legal profession.",
@@ -1046,10 +1428,11 @@ const de: Dict = {
     about: "Über uns",
     contact: "Kontakt",
     cta: "Kontakt aufnehmen",
-    references: "Referenzen",
+    references: "Beispiel",
     process: "Ablauf",
     faq: "FAQ",
     allSolutions: "Alle Lösungen",
+    nationwide: "Deutschlandweit",
     backHome: "Zur Startseite",
   },
   hero: {
@@ -1067,18 +1450,18 @@ const de: Dict = {
     titleA: "Zwei Produkte.",
     titleB: "Ein Kanzlei-Standard.",
     intro:
-      "Ob eine repräsentative Website, die schon vor dem ersten Anruf Vertrauen schafft, oder lokale Sichtbarkeit dort, wo Mandanten unter Druck suchen — Verdex liefert beides.",
+      "Ob eine repräsentative Website, die schon vor dem ersten Anruf Vertrauen schafft, oder Schutz-Infrastruktur auf Kanzlei-Niveau für Ihren Auftritt — Verdex liefert beides.",
     tabWebsites: "Website-Lösungen",
     tabAuthority: "Verdex Authority",
     tabAmicus: "Amicus AI",
     cards: {
       eyebrowWebsites: "Website",
-      eyebrowAuthority: "Positionierung",
+      eyebrowAuthority: "Sicherheit",
       eyebrowAmicus: "Private KI",
       websitesShort:
         "Redaktionelle Websites, die schon beim ersten Eindruck überzeugen — schnell, markengerecht, leicht zu pflegen.",
       authorityShort:
-        "Wir verankern Ihre Kanzlei in den lokalen Suchbrennpunkten — damit Mandanten unter akutem Handlungsdruck den ersten digitalen Weg direkt zu Ihnen finden.",
+        "Wir richten einen mehrschichtigen Schutzring einmal ein — Cloudflare-Abschirmung, WAF, Bot-Abwehr und verriegelte Hintertür im Code. Danach gehört alles Ihnen. Kein Retainer.",
       amicusShort:
         "Eine private, lokal laufende KI mit vier Werkzeugen für den Kanzlei-Alltag — semantische Urteilssuche, Gegner-Simulator, kontrollierte Anonymisierung und ein regelbasierter Fristenrechner.",
       learnMore: "Lösung im Detail",
@@ -1111,25 +1494,55 @@ const de: Dict = {
       ],
     },
     authority: {
-      title: "Dort sichtbar, wo Mandanten unter Druck suchen.",
-      body: "Ihre Website ist das digitale Hauptquartier — Verdex Authority bringt es in das gesamte digitale Ökosystem. Google- und Apple-Karten, von Google hoch bewertete Fachverzeichnisse und ein aktives Indexierungs-Management greifen ineinander, damit Sie genau dann gefunden werden, wenn die Suche dringend wird.",
-      features: [
+      title: "Einmal aufgesetzt. Dauerhaft geschützt.",
+      body: "Verdex Authority ist die Sicherheits-Infrastruktur für die Website Ihrer Kanzlei — einmal eingerichtet, dann selbsttragend. Wir migrieren Ihre Domain zu Cloudflare, blenden Ihre echte Server-IP aus, richten WAF-Regeln und Bot-Abwehr ein, limitieren Formular-Anfragen und verriegeln die Hosting-Hintertür im Code. Alles wird in Ihren Accounts übergeben. Kein laufender Vertrag mit Verdex.",
+      shieldEyebrow: "Der Schutzring",
+      shieldTitle: "Kanzlei-Infrastruktur, einmal konfiguriert.",
+      shieldBody:
+        "Drei Sicherheitssäulen, die wir beim Setup einrichten — danach arbeiten Cloudflare und Ihr Code automatisch weiter.",
+      shieldFeatures: [
         {
-          title: "Geo-Infrastruktur",
+          title: "Abschirmung am Eingang",
           description:
-            "Vollständige Einrichtung und Synchronisation von Google Business Profile und Apple Business Connect — für die exakte lokale Navigation direkt zu Ihrer Kanzlei.",
+            "Domain-Migration zu Cloudflare mit aktivem Proxy und TLS Full (strict) — Ihre echte Server-IP bleibt für die Außenwelt unsichtbar.",
         },
         {
-          title: "Entitäten-Validierung",
+          title: "Intelligente Bot-Abwehr",
           description:
-            "Eintragung in die wichtigsten, von Google hoch bewerteten Fach- und Branchenverzeichnisse (NAP-Synchronisation), um den Trust-Score Ihrer Domain zu maximieren.",
+            "WAF-Regeln, Bot Fight Mode und API-Rate-Limiting — einmal konfiguriert, danach filtert Cloudflare schädlichen Traffic und Formular-Spam automatisch.",
         },
         {
-          title: "Indexierungs-Management",
+          title: "Verriegelte Hintertür",
           description:
-            "Aktive Steuerung des Google-Bots über die Search Console — neue Rechtsgebiete und Partner-Profile landen sofort im Index statt wochenlang zu warten.",
+            "Origin-Secret in Ihrer Next.js-Middleware — direkter Zugriff auf die Hosting-URL wird mit 403 abgewiesen, wenn der gültige Header fehlt.",
         },
       ],
+      layersEyebrow: "Vier Schichten",
+      layers: [
+        {
+          title: "Schicht 1 — Eingang",
+          description:
+            "DNS-Proxy und Ende-zu-Ende-Verschlüsselung. Einmal eingerichtet, dauerhaft aktiv.",
+        },
+        {
+          title: "Schicht 2 — Türsteher",
+          description:
+            "WAF, Bot-Abwehr und Rate Limits auf API-Routen. Regeln gesetzt, Cloudflare filtert von selbst.",
+        },
+        {
+          title: "Schicht 3 — Entlastung",
+          description:
+            "Edge-Caching für HTML-Seiten — schnelle Auslieferung weltweit, weniger Last auf Ihrem Server.",
+        },
+        {
+          title: "Schicht 4 — Letzte Linie",
+          description:
+            "Middleware und Origin-Secret im Code — Teil Ihres Repositories, Eigentum Ihrer Kanzlei.",
+        },
+      ],
+      noteTitle: "Wir bauen das System. Sie besitzen es. Kein Retainer.",
+      noteBody:
+        "Nach dem Setup liegen Domain und Cloudflare in Ihren Accounts. Der Schutz läuft selbstständig weiter. Buchbar zu jeder Verdex-Website oder für einen bestehenden Auftritt.",
     },
     amicus: {
       title: "Ein privater KI-Partner für Ihre Kanzlei.",
@@ -1256,7 +1669,7 @@ const de: Dict = {
     eyebrow: "Deutschlandweit",
     title: "Remote gedacht,",
     titleItalic: "deutschlandweit zu Hause.",
-    body: "Verdex arbeitet vollständig remote — vom Erstgespräch bis zum Launch und darüber hinaus. Ob Ihre Kanzlei in Flensburg sitzt oder in München: Entfernung spielt keine Rolle, Sorgfalt schon.",
+    body: "Verdex arbeitet vollständig remote — vom Erstgespräch bis zur vollständigen Übergabe. Ob Ihre Kanzlei in Flensburg sitzt oder in München: Entfernung spielt keine Rolle, Sorgfalt schon.",
     facts: [
       { value: "100 %", label: "remote — kein Anfahrtsweg, keine Umwege" },
       { value: "DSGVO", label: "konform, Hosting in Deutschland" },
@@ -1264,6 +1677,87 @@ const de: Dict = {
     ],
     mapNote:
       "Die dargestellten Städte dienen nur zur Illustration und sind keine tatsächlichen Kundenstandorte.",
+    teaser: {
+      lead: "Vollständig remote — von Flensburg bis München, mit Sorgfalt statt Anfahrtsweg.",
+      link: "So arbeiten wir deutschlandweit",
+    },
+  },
+  cities: {
+    backToRegions: "Alle Städte",
+    eyebrow: "Kanzlei-Website · {bundesland}",
+    heroTitle: "Kanzlei-Website für {city}",
+    mapAria: "Karte von Deutschland mit hervorgehobener Stadt {city}",
+    regionsEyebrow: "Regionen",
+    regionsTitle: "Kanzlei-Websites in ganz Deutschland",
+    regionsBody:
+      "Verdex baut moderne Kanzlei-Websites für mittelgroße Städte — dort, wo Mandanten unter Druck suchen und die Konkurrenz noch gewinnbar ist.",
+    regionsMapAria: "Interaktive Karte von Deutschland mit Verdex-Zielstädten",
+    searchLabel: "Städte suchen",
+    searchPlaceholder: "Stadt, Region oder Rechtsschwerpunkt suchen…",
+    searchNoResults: "Keine Städte gefunden.",
+    searchNoResultsHint:
+      "Versuchen Sie eine andere Schreibweise — oder leeren Sie die Suche und stöbern Sie in den Bundesländern.",
+    searchResults: "{count} Städte gefunden",
+    bundeslaenderTitle: "Nach Bundesland",
+    bundeslandEmpty: "Demnächst",
+    bundeslandComingSoon:
+      "Stadtseiten für dieses Bundesland sind in Vorbereitung.",
+    bundeslandCount: "{count} Städte live",
+    viewCity: "Kanzlei-Website {city}",
+    landmarksLabel: "Wahrzeichen",
+    faqTitle: "Was Kanzleien in {city} zuerst fragen",
+    cta: "Kontakt aufnehmen — {city}",
+    courtsTitle: "Gerichte für Mandate aus {city}",
+    economyTitle: "Wirtschaft & Mandanten in {city}",
+    servicesTitle: "Was Verdex in {city} liefert",
+    localExampleTitle: "Beispiel: So suchen Mandanten in {city}",
+    localExampleDisclaimer:
+      "Fiktives Suchszenario zur Veranschaulichung — kein von Verdex bearbeiteter Fall.",
+    whyVerdexTitle: "Warum Verdex für {city}",
+    nearbyTitle: "Weitere Regionen nahe {city}",
+    moreRegionsTitle: "Weitere Regionen folgen",
+    moreRegionsBody:
+      "Wir erweitern die Stadtseiten deutschlandweit. Alle live geschalteten Städte finden Sie auf unserer Deutschlandweit-Seite — oder schreiben Sie uns für Ihre Stadt.",
+    sections: {
+      courts: "Gerichte",
+      economy: "Lokale Wirtschaft",
+      services: "Leistungen",
+      localExample: "Suchszenario",
+      faq: "Häufige Fragen",
+      whyVerdex: "Warum Verdex",
+      nearby: "Nahe Regionen",
+    },
+    serp: {
+      eyebrow: "Lokale Sichtbarkeit",
+      title: "So finden Mandanten Sie in {city}",
+      body: "Wenn jemand in {city} unter Druck sucht, gewinnt das erste Ergebnis den Anruf — nicht der beste Anwalt auf dem Papier.",
+      beforeLabel: "Ohne Positionierung",
+      afterLabel: "Mit lokaler Positionierung",
+      beforeSnippet:
+        "Allgemeine Kanzlei-Startseite ohne lokalen Fokus. Mandanten in {city} scrollen vorbei.",
+      afterSnippet:
+        "{legalArea} in {city} — klare Expertise, Google Maps, schnelle Ladezeiten. Gefunden, wenn es zählt.",
+      query: "{legalArea} {city}",
+      disclaimer:
+        "Nur eine illustrative Vorschau — kein echtes Suchergebnis und kein Kundenprojekt.",
+    },
+    bundeslandPage: {
+      backToDeutschlandweit: "Alle Städte",
+      eyebrow: "Bundesland · Stadtstaat",
+      heroTitle: "Kanzlei-Websites in {bundesland}",
+      mapAria: "Karte von Deutschland mit hervorgehobenem Bundesland {bundesland}",
+      citiesTitle: "Stadtseiten in {bundesland}",
+      citiesBody:
+        "Jede Stadt hat eine eigene Landingpage mit lokalen Gerichten, Wirtschaft und Suchszenarien.",
+      viewHub: "Übersicht {bundesland}",
+      legalAreasLabel: "Typische Rechtsgebiete",
+      cta: "Kontakt aufnehmen — {bundesland}",
+      courtsTitle: "Gerichte in {bundesland}",
+      economyTitle: "Wirtschaft & Mandate in {bundesland}",
+      servicesTitle: "Was Verdex in {bundesland} liefert",
+      whyVerdexTitle: "Warum Verdex für {bundesland}",
+      faqTitle: "Was Kanzleien in {bundesland} zuerst fragen",
+    },
   },
   process: {
     eyebrow: "So läuft's ab",
@@ -1283,8 +1777,8 @@ const de: Dict = {
         body: "Design und Entwicklung aus einer Hand, mit festen Zwischenständen statt Überraschungen.",
       },
       {
-        title: "Launch & Betreuung",
-        body: "Go-live, Einrichtung der Sichtbarkeit und ein Ansprechpartner, der erreichbar bleibt.",
+        title: "Launch & Übergabe",
+        body: "Go-live und vollständige Übergabe aller gebuchten Leistungen — Website, lokale Sichtbarkeit und/oder Schutz-Infrastruktur.",
       },
     ],
   },
@@ -1302,11 +1796,15 @@ const de: Dict = {
       },
       {
         q: "Wem gehört die Website nach dem Launch?",
-        a: "Ihnen. Domain, Inhalte und Code liegen vollständig bei Ihrer Kanzlei — keine Miete, kein Lock-in. Auf Wunsch übernehmen wir die laufende Betreuung und Pflege.",
+        a: "Ihnen. Domain, Inhalte und Code liegen vollständig bei Ihrer Kanzlei — keine Miete, kein Lock-in. Wir richten ein, was Sie buchen, einmal ein und übergeben alles. Ein Pflegevertrag bei Verdex ist nicht vorgesehen.",
       },
       {
         q: "Brauchen wir technisches Vorwissen?",
         a: "Nein. Wir übernehmen Technik, Hosting und Einrichtung vollständig und erklären alles in klarer Sprache — nicht im Entwickler-Jargon. Inhalte pflegt Ihr Team später selbst über ein schlankes CMS.",
+      },
+      {
+        q: "Ist unsere Website vor Angriffen geschützt?",
+        a: "Ja — mit Verdex Authority (2.000–3.000 €). Ihre Domain läuft über eine professionelle Edge-Infrastruktur mit Verschlüsselung, Bot-Filter und im Code verankerter Zugangskontrolle. Direkte Zugriffe auf die Hosting-URL werden abgewiesen. Einmal einrichten, übergeben — kein Retainer.",
       },
       {
         q: "Ist das alles DSGVO-konform?",
@@ -1362,10 +1860,25 @@ const de: Dict = {
         ],
       },
     ],
+    authorityPlan: {
+      eyebrow: "Eigenständig · Sicherheit",
+      name: "Verdex Authority",
+      price: "2.000–3.000 €",
+      priceNote: "einmalig, zzgl. USt. — je nach Umfang",
+      tagline:
+        "Schutz-Infrastruktur auf Kanzlei-Niveau — einzeln buchbar oder ergänzend zu jedem Website-Paket.",
+      features: [
+        "Cloudflare-Proxy & TLS Full (strict)",
+        "WAF, Bot Fight Mode & API-Rate-Limiting",
+        "Origin-Verriegelung in der Middleware — Hintertür dicht",
+        "Edge-Caching & vollständige Übergabe in Ihre Accounts",
+      ],
+      detailLink: "Verdex Authority im Detail",
+    },
     recurring: {
-      label: "Laufende Betreuung",
-      price: "ab 220 € / Monat",
-      note: "Hosting, Pflege und Sichtbarkeits-Betreuung — optional, aber empfohlen.",
+      label: "Vollständige Übergabe",
+      price: "ohne Retainer",
+      note: "Kein Pflegevertrag bei Verdex. Alles, was wir einrichten, liegt in Ihren Accounts und läuft danach selbstständig weiter.",
     },
     footnote:
       "Alle Angaben sind Einstiegspreise, netto zzgl. USt. Der finale Festpreis richtet sich nach Umfang, Standorten und Inhalten Ihrer Kanzlei.",
@@ -1414,6 +1927,94 @@ const de: Dict = {
         "Aufgrund eines technischen Problems können Anfragen über dieses Formular momentan nicht verarbeitet werden. Bitte erreichen Sie mich direkt per E-Mail — ich melde mich schnellstmöglich bei Ihnen zurück.",
       unavailableEmailPrompt: "Schreiben Sie mir direkt:",
     },
+    briefing: {
+      stepLabel: "Schritt",
+      stepOf: "von",
+      back: "Zurück",
+      next: "Weiter",
+      send: "Briefing senden",
+      durationHint:
+        "Dauert ca. 2 Minuten — Ihre Antworten werden zu einer strukturierten E-Mail zusammengestellt.",
+      summaryTitle: "Ihr Briefing",
+      subjectPrefix: "Verdex · Briefing ·",
+      otherPlaceholder: "Bitte Rechtsgebiet angeben",
+      mailLabels: {
+        firm: "Kanzlei",
+        area: "Rechtsgebiet",
+        websiteStatus: "Aktuelle Website",
+        goal: "Hauptziel",
+        timeline: "Zeitrahmen",
+        name: "Name",
+        email: "E-Mail",
+        note: "Weitere Anmerkungen",
+      },
+      mail: {
+        header: "VERDEX · KANZLEI-BRIEFING",
+        intro:
+          "Guten Tag,\n\nanbei mein Briefing für ein erstes Gespräch:",
+        sectionBriefing: "BRIEFING",
+        sectionContact: "KONTAKT",
+        footer: "Gesendet über verdex.de",
+      },
+      steps: {
+        firm: {
+          title: "Wie heißt Ihre Kanzlei?",
+          sub: "Damit ich weiß, mit wem ich spreche.",
+          placeholder: "z. B. Müller & Partner",
+        },
+        area: {
+          title: "In welchen Rechtsgebieten sind Sie tätig?",
+          sub: "Mehrfachauswahl möglich — wählen Sie alle zutreffenden Bereiche.",
+          options: [
+            { id: "arbeit", label: "Arbeitsrecht" },
+            { id: "familie", label: "Familienrecht" },
+            { id: "erb", label: "Erbrecht" },
+            { id: "wirtschaft", label: "Wirtschaftsrecht" },
+            { id: "miet", label: "Miet- & Immobilienrecht" },
+            { id: "straf", label: "Strafrecht" },
+            { id: "verkehr", label: "Verkehrsrecht" },
+            { id: "gesellschaft", label: "Gesellschaftsrecht" },
+            { id: "steuer", label: "Steuerrecht" },
+            { id: "medizin", label: "Medizinrecht" },
+            { id: "other", label: "Sonstiges" },
+          ],
+        },
+        websiteStatus: {
+          title: "Wie sieht Ihre Website heute aus?",
+          sub: "Ein ehrlicher Überblick hilft mir, den Ausgangspunkt einzuschätzen.",
+          options: [
+            { id: "none", label: "Noch keine Website" },
+            { id: "outdated", label: "Veraltet oder langsam" },
+            { id: "relaunch", label: "Relaunch geplant" },
+            { id: "seo", label: "In Ordnung, aber schwach in der Suche" },
+          ],
+        },
+        goal: {
+          title: "Was ist Ihr Hauptziel?",
+          sub: "Was soll sich für Ihre Kanzlei verändern?",
+          options: [
+            { id: "leads", label: "Mehr Mandatsanfragen" },
+            { id: "image", label: "Professionellerer Auftritt" },
+            { id: "local", label: "Bessere lokale Sichtbarkeit" },
+            { id: "security", label: "Sicherheit & DSGVO-Konformität" },
+          ],
+        },
+        timeline: {
+          title: "Wann möchten Sie starten?",
+          sub: "Unverbindlich — damit ich Ihren Zeitrahmen kenne.",
+          options: [
+            { id: "now", label: "So schnell wie möglich" },
+            { id: "soon", label: "In 1–3 Monaten" },
+            { id: "info", label: "Erst einmal informieren" },
+          ],
+        },
+        contact: {
+          title: "Fast geschafft — wie erreiche ich Sie?",
+          sub: "Prüfen Sie Ihr Briefing und hinterlassen Sie Ihre Kontaktdaten.",
+          notePlaceholder: "Noch etwas Wichtiges? (optional)",
+        },
+      },
+    },
   },
   footer: {
     tagline:
@@ -1432,9 +2033,10 @@ const de: Dict = {
       careers: "Karriere",
       imprint: "Impressum",
       privacy: "Datenschutz",
-      references: "Referenzen",
+      references: "Beispiel",
       process: "Ablauf",
       faq: "FAQ",
+      nationwide: "Deutschlandweit",
     },
     copyright: "Alle Rechte vorbehalten.",
     madeWith: "Mit Sorgfalt für die juristische Berufswelt gebaut.",

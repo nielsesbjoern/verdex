@@ -10,6 +10,15 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["framer-motion", "lucide-react"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/leistungen/sichtbarkeit",
+        destination: "/leistungen/sicherheit",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

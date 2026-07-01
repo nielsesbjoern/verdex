@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { useLang } from "@/lib/LanguageProvider";
 import { FadeIn } from "./FadeIn";
 import { Magnetic } from "./Magnetic";
+import { hrefForSlug } from "@/components/solutions/solutionsMeta";
 
 /**
  * "Investment" section — three entry-level package anchors ("from …") shown on
@@ -93,6 +95,53 @@ export function Pricing() {
           );
         })}
       </div>
+
+      <FadeIn delay={0.15} className="mt-10">
+        <div className="rounded-2xl border border-neutral-200 p-8 dark:border-white/10 lg:flex lg:items-start lg:justify-between lg:gap-12">
+          <div className="max-w-xl">
+            <p className="text-xs font-medium uppercase tracking-[0.22em] text-forest-deep dark:text-forest-light">
+              {p.authorityPlan.eyebrow}
+            </p>
+            <h3 className="mt-4 font-serif text-2xl tracking-tight text-neutral-900 sm:text-[28px] dark:text-neutral-100">
+              {p.authorityPlan.name}
+            </h3>
+            <div className="mt-5 flex items-baseline gap-2">
+              <span className="font-serif text-4xl tracking-tight text-neutral-900 dark:text-neutral-100">
+                {p.authorityPlan.price}
+              </span>
+            </div>
+            <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+              {p.authorityPlan.priceNote}
+            </p>
+            <p className="mt-6 text-[15px] leading-relaxed text-neutral-500 dark:text-neutral-400">
+              {p.authorityPlan.tagline}
+            </p>
+            <Link
+              href={hrefForSlug("sicherheit")}
+              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-forest-deep transition-colors duration-300 ease-editorial hover:text-forest-deep/80 dark:text-forest-light dark:hover:text-forest-light/80"
+            >
+              {p.authorityPlan.detailLink}
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          <ul className="mt-8 flex flex-col gap-3 border-t border-neutral-200 pt-7 dark:border-white/10 lg:mt-0 lg:min-w-[20rem] lg:border-t-0 lg:pt-0">
+            {p.authorityPlan.features.map((feature) => (
+              <li
+                key={feature}
+                className="flex items-start gap-3 text-[15px] leading-relaxed text-neutral-700 dark:text-neutral-300"
+              >
+                <Check
+                  size={16}
+                  aria-hidden
+                  className="mt-1 shrink-0 text-forest-deep dark:text-forest-light"
+                />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </FadeIn>
 
       <FadeIn
         delay={0.1}

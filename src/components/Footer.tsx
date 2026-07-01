@@ -27,7 +27,7 @@ export function Footer() {
         },
         {
           label: t.solutions.tabAuthority,
-          href: "/leistungen/sichtbarkeit",
+          href: "/leistungen/sicherheit",
           internal: true,
         },
         ...(AMICUS_VISIBLE
@@ -50,6 +50,7 @@ export function Footer() {
       title: t.footer.columns.company,
       links: [
         { label: t.footer.links.about, href: "/about", internal: true },
+        { label: t.footer.links.nationwide, href: "/deutschlandweit", internal: true },
         { label: t.footer.links.process, href: "/ablauf", internal: true },
         { label: t.footer.links.faq, href: "/faq", internal: true },
         { label: t.footer.links.contact, href: "/#contact" },

@@ -23,7 +23,7 @@ const LanguageContext = createContext<Ctx | null>(null);
 function detectInitial(): Lang {
   // Must match the server-rendered markup. Reading localStorage or browser
   // language during the first client render causes hydration mismatches.
-  return "en";
+  return "de";
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -42,8 +42,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       // localStorage might be disabled — browser preference can still apply.
     }
 
-    if (!next && window.navigator.language?.toLowerCase().startsWith("de")) {
-      next = "de";
+    if (!next && !window.navigator.language?.toLowerCase().startsWith("de")) {
+      next = "en";
     }
 
     if (next && next !== lang) setLangState(next);

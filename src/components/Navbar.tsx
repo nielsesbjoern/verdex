@@ -41,6 +41,7 @@ export function Navbar() {
 
   // Flat links shown below the group.
   const flatLinks: SimpleLink[] = [
+    { label: t.nav.nationwide, href: "/deutschlandweit" },
     { label: t.nav.references, href: "/referenzen" },
     { label: t.nav.process, href: "/ablauf" },
     { label: t.nav.about, href: "/about" },

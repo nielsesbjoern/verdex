@@ -2,7 +2,7 @@ import { Hero } from "@/components/Hero";
 import { SolutionsTabs } from "@/components/SolutionsTabs";
 import { PricingTeaser } from "@/components/PricingTeaser";
 import { ReferencesTeaser } from "@/components/ReferencesTeaser";
-import { GermanyReach } from "@/components/GermanyReach";
+import { ReachTeaser } from "@/components/ReachTeaser";
 import { Contact } from "@/components/Contact";
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
       <SolutionsTabs />
       <PricingTeaser />
       <ReferencesTeaser />
-      <GermanyReach />
+      <ReachTeaser />
       <Contact />
     </>
   );

@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { BeforeAfterShowcase } from "@/components/showcase/BeforeAfterShowcase";
 
 export const metadata: Metadata = {
-  title: "Referenzen — Vorher / Nachher",
+  title: "Anschauungsbeispiel — Vorher / Nachher",
   description:
-    "Ein anonymisiertes Vorher-Nachher-Beispiel: vom alten Kanzlei-Auftritt zum Mandantenmagneten — inklusive messbarer SEO-Wirkung.",
+    "Fiktives Vorher-Nachher-Beispiel zur Veranschaulichung — kein tatsächlich umgesetztes Kanzlei-Projekt.",
   alternates: { canonical: "/referenzen" },
   openGraph: {
-    title: "Referenzen — Verdex",
+    title: "Anschauungsbeispiel — Verdex",
     description:
-      "Ein anonymisiertes Vorher-Nachher-Beispiel: vom alten Kanzlei-Auftritt zum Mandantenmagneten — inklusive messbarer SEO-Wirkung.",
+      "Fiktives Vorher-Nachher-Beispiel zur Veranschaulichung — kein tatsächlich umgesetztes Kanzlei-Projekt.",
     type: "website",
   },
 };
