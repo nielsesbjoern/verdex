@@ -6,10 +6,6 @@ import { ArrowRight, ChevronDown, Search } from "lucide-react";
 import { FadeIn } from "@/components/FadeIn";
 import { BUNDESLAENDER } from "@/lib/cities/bundeslaender";
 import { areCityPagesPubliclyAccessible, getLiveCityRecords, hrefForCity } from "@/lib/cities/citiesMeta";
-import {
-  bundeslandNameToSlug,
-  hrefForBundesland,
-} from "@/lib/cities/bundeslandMeta";
 import type { CityRecord } from "@/lib/cities/types";
 import { useLang } from "@/lib/LanguageProvider";
 
@@ -178,46 +174,29 @@ export function RegionsDirectory() {
               const liveCount = list.length;
               const panelId = `bl-panel-${bundeslandId(bundesland)}`;
 
-              const hubSlug = bundeslandNameToSlug(bundesland);
-              const hubHref = hubSlug ? hrefForBundesland(hubSlug) : null;
-
               return (
                 <div
                   key={bundesland}
                   className="border-b border-neutral-200 dark:border-white/10"
                 >
-                  <div className="flex w-full items-center justify-between gap-4 py-5">
-                    <button
-                      type="button"
-                      onClick={() => toggleState(bundesland)}
-                      aria-expanded={open}
-                      aria-controls={panelId}
-                      className="group flex min-w-0 flex-1 items-center justify-between gap-6 text-left"
-                    >
-                      <span className="text-[15px] font-medium text-neutral-900 transition-colors duration-300 ease-editorial group-hover:text-forest-deep sm:text-base dark:text-neutral-100 dark:group-hover:text-forest-light">
-                          {bundesland}
-                        </span>
-                      <ChevronDown
-                        size={18}
-                        aria-hidden
-                        className={`shrink-0 text-neutral-400 transition-transform duration-500 ease-editorial ${
-                          open ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                    {hubHref && (
-                      <Link
-                        href={hubHref}
-                        aria-label={t.cities.bundeslandPage.viewHub.replace(
-                          "{bundesland}",
-                          bundesland,
-                        )}
-                        className="shrink-0 text-forest-deep transition-colors duration-300 ease-editorial hover:text-forest-deep/80 dark:text-forest-light dark:hover:text-forest-light/80"
-                      >
-                        <ArrowRight size={18} aria-hidden />
-                      </Link>
-                    )}
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => toggleState(bundesland)}
+                    aria-expanded={open}
+                    aria-controls={panelId}
+                    className="group flex w-full items-center justify-between gap-6 py-5 text-left"
+                  >
+                    <span className="text-[15px] font-medium text-neutral-900 transition-colors duration-300 ease-editorial group-hover:text-forest-deep sm:text-base dark:text-neutral-100 dark:group-hover:text-forest-light">
+                      {bundesland}
+                    </span>
+                    <ChevronDown
+                      size={18}
+                      aria-hidden
+                      className={`shrink-0 text-neutral-400 transition-transform duration-500 ease-editorial ${
+                        open ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
 
                   {/* Always in the DOM for crawlers; collapsed visually when closed. */}
                   <div
