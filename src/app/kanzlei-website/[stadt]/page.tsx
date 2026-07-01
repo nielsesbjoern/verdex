@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CityLandingPage } from "@/components/cities/CityLandingPage";
-import { CITY_PAGES_PUBLICLY_ACCESSIBLE } from "@/lib/cities/cityPagesRollout";
+import { REGIONAL_PAGES_PUBLICLY_ACCESSIBLE } from "@/lib/cities/cityPagesRollout";
 import {
   getCityRecord,
   isLiveCitySlug,
@@ -10,10 +10,10 @@ import {
 
 type Params = { stadt: string };
 
-export const dynamicParams = CITY_PAGES_PUBLICLY_ACCESSIBLE;
+export const dynamicParams = REGIONAL_PAGES_PUBLICLY_ACCESSIBLE;
 
 export function generateStaticParams() {
-  if (!CITY_PAGES_PUBLICLY_ACCESSIBLE) return [];
+  if (!REGIONAL_PAGES_PUBLICLY_ACCESSIBLE) return [];
   return LIVE_CITIES.map((c) => ({ stadt: c.slug }));
 }
 
@@ -37,14 +37,14 @@ function metadataForCity(slug: string): Metadata | null {
 }
 
 export function generateMetadata({ params }: { params: Params }): Metadata {
-  if (!CITY_PAGES_PUBLICLY_ACCESSIBLE) {
+  if (!REGIONAL_PAGES_PUBLICLY_ACCESSIBLE) {
     return { robots: { index: false, follow: false } };
   }
   return metadataForCity(params.stadt) ?? {};
 }
 
 export default function CityPage({ params }: { params: Params }) {
-  if (!CITY_PAGES_PUBLICLY_ACCESSIBLE) notFound();
+  if (!REGIONAL_PAGES_PUBLICLY_ACCESSIBLE) notFound();
   if (!isLiveCitySlug(params.stadt)) notFound();
   const city = getCityRecord(params.stadt);
   if (!city) notFound();

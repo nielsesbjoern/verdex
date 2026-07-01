@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { BUNDESLAND_PAGE_SLUGS } from "@/lib/cities/bundeslandSlugs";
-import { areCityPagesPubliclyAccessible, LIVE_CITIES } from "@/lib/cities/citiesMeta";
+import { areBundeslandPagesPubliclyAccessible, areCityPagesPubliclyAccessible, LIVE_CITIES } from "@/lib/cities/citiesMeta";
 import { SOLUTIONS } from "@/components/solutions/solutionsMeta";
 import { siteUrl } from "@/lib/site";
 
@@ -23,14 +23,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }))
     : [];
 
-  const bundeslandRoutes: MetadataRoute.Sitemap = BUNDESLAND_PAGE_SLUGS.map(
-    (slug) => ({
-      url: `${siteUrl}/deutschlandweit/bundesland/${slug}`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    }),
-  );
+  const bundeslandRoutes: MetadataRoute.Sitemap = areBundeslandPagesPubliclyAccessible()
+    ? BUNDESLAND_PAGE_SLUGS.map((slug) => ({
+        url: `${siteUrl}/deutschlandweit/bundesland/${slug}`,
+        lastModified,
+        changeFrequency: "monthly",
+        priority: 0.7,
+      }))
+    : [];
 
   return [
     {

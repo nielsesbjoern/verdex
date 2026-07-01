@@ -2,10 +2,17 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Search } from "lucide-react";
+import { ChevronDown, Search } from "lucide-react";
 import { FadeIn } from "@/components/FadeIn";
+import { GermanyBundeslandMap } from "@/components/cities/GermanyBundeslandMap";
 import { BUNDESLAENDER } from "@/lib/cities/bundeslaender";
-import { areCityPagesPubliclyAccessible, getLiveCityRecords, hrefForCity } from "@/lib/cities/citiesMeta";
+import type { Bundesland } from "@/lib/cities/bundeslaender";
+import {
+  bundeslandNameToSlug,
+  hrefForBundesland,
+} from "@/lib/cities/bundeslandMeta";
+import { areBundeslandPagesPubliclyAccessible } from "@/lib/cities/cityPagesRollout";
+import { getLiveCityRecords } from "@/lib/cities/citiesMeta";
 import type { CityRecord } from "@/lib/cities/types";
 import { useLang } from "@/lib/LanguageProvider";
 
@@ -32,55 +39,48 @@ function cityMatchesQuery(city: CityRecord, query: string): boolean {
   return haystack.includes(query);
 }
 
-function bundeslandId(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/ä/g, "ae")
-    .replace(/ö/g, "oe")
-    .replace(/ü/g, "ue")
-    .replace(/ß/g, "ss")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
-/** City search + Bundesländer accordion — rendered below the map on `/deutschlandweit`. */
+/** City search + Bundesländer map — rendered on `/deutschlandweit#staedte`. */
 export function RegionsDirectory() {
   const { t } = useLang();
   const cities = getLiveCityRecords();
-  const cityPagesPublic = areCityPagesPubliclyAccessible();
+  const bundeslandPagesPublic = areBundeslandPagesPubliclyAccessible();
   const [query, setQuery] = useState("");
   const normalizedQuery = normalizeSearch(query);
 
   const citiesByBundesland = useMemo(() => {
     const grouped = Object.fromEntries(
       BUNDESLAENDER.map((bl) => [bl, [] as CityRecord[]]),
-    ) as Record<(typeof BUNDESLAENDER)[number], CityRecord[]>;
+    ) as Record<Bundesland, CityRecord[]>;
 
     for (const city of cities) {
-      if (grouped[city.bundesland as (typeof BUNDESLAENDER)[number]]) {
-        grouped[city.bundesland as (typeof BUNDESLAENDER)[number]].push(city);
+      if (grouped[city.bundesland as Bundesland]) {
+        grouped[city.bundesland as Bundesland].push(city);
       }
-    }
-
-    for (const bl of BUNDESLAENDER) {
-      grouped[bl].sort((a, b) => a.name.localeCompare(b.name, "de"));
     }
 
     return grouped;
   }, [cities]);
 
   const filteredBundeslaender = useMemo(() => {
-    return BUNDESLAENDER.map((bl) => {
-      const matches = citiesByBundesland[bl].filter((city) =>
+    return BUNDESLAENDER.filter((bl) => {
+      if (!normalizedQuery) return true;
+      if (normalizeSearch(bl).includes(normalizedQuery)) return true;
+      return citiesByBundesland[bl].some((city) =>
         cityMatchesQuery(city, normalizedQuery),
       );
-      return { bundesland: bl, cities: matches };
-    }).filter(({ cities: list }) => !normalizedQuery || list.length > 0);
+    });
   }, [citiesByBundesland, normalizedQuery]);
 
-  const [openStates, setOpenStates] = useState<Set<string>>(() => new Set());
+  const [openStates, setOpenStates] = useState<Set<Bundesland>>(
+    () => new Set(),
+  );
 
-  const toggleState = (bl: string) => {
+  const highlightedBundeslaender = useMemo(
+    () => Array.from(openStates),
+    [openStates],
+  );
+
+  const toggleState = (bl: Bundesland) => {
     setOpenStates((prev) => {
       const next = new Set(prev);
       if (next.has(bl)) next.delete(bl);
@@ -98,17 +98,23 @@ export function RegionsDirectory() {
     }
     setOpenStates(
       new Set(
-        BUNDESLAENDER.filter((bl) =>
-          citiesByBundesland[bl].some((city) => cityMatchesQuery(city, q)),
+        BUNDESLAENDER.filter(
+          (bl) =>
+            normalizeSearch(bl).includes(q) ||
+            citiesByBundesland[bl].some((city) => cityMatchesQuery(city, q)),
         ),
       ),
     );
   };
 
-  const totalMatches = filteredBundeslaender.reduce(
-    (sum, { cities: list }) => sum + list.length,
-    0,
-  );
+  const totalCityMatches = useMemo(() => {
+    if (!normalizedQuery) return 0;
+    return cities.filter((city) => cityMatchesQuery(city, normalizedQuery))
+      .length;
+  }, [cities, normalizedQuery]);
+
+  const nameClassName =
+    "text-[15px] font-medium text-neutral-900 transition-colors duration-300 ease-editorial hover:text-forest-deep sm:text-base dark:text-neutral-100 dark:hover:text-forest-light";
 
   return (
     <section
@@ -148,133 +154,77 @@ export function RegionsDirectory() {
         </div>
         {normalizedQuery && (
           <p className="mt-3 text-sm text-neutral-500 dark:text-neutral-400">
-            {totalMatches === 0
+            {totalCityMatches === 0
               ? t.cities.searchNoResults
               : t.cities.searchResults.replace(
                   "{count}",
-                  String(totalMatches),
+                  String(totalCityMatches),
                 )}
           </p>
         )}
       </FadeIn>
 
       <FadeIn delay={0.1} className="mt-12 lg:mt-16">
-        <h3 className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
-          {t.cities.bundeslaenderTitle}
-        </h3>
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
+          <GermanyBundeslandMap
+            highlightedBundeslaender={highlightedBundeslaender}
+            ariaLabel={t.cities.bundeslaenderTitle}
+            className="mx-auto w-full max-w-[320px] lg:sticky lg:top-32 lg:max-w-none"
+          />
 
-        {normalizedQuery && totalMatches === 0 ? (
-          <p className="mt-8 text-[15px] leading-relaxed text-neutral-500 dark:text-neutral-400">
-            {t.cities.searchNoResultsHint}
-          </p>
-        ) : (
-          <div className="mt-6 border-t border-neutral-200 dark:border-white/10">
-            {filteredBundeslaender.map(({ bundesland, cities: list }) => {
-              const open = openStates.has(bundesland);
-              const liveCount = list.length;
-              const panelId = `bl-panel-${bundeslandId(bundesland)}`;
+          <div>
+            <h3 className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
+              {t.cities.bundeslaenderTitle}
+            </h3>
 
-              return (
-                <div
-                  key={bundesland}
-                  className="border-b border-neutral-200 dark:border-white/10"
-                >
-                  <button
-                    type="button"
-                    onClick={() => toggleState(bundesland)}
-                    aria-expanded={open}
-                    aria-controls={panelId}
-                    className="group flex w-full items-center justify-between gap-6 py-5 text-left"
-                  >
-                    <span className="text-[15px] font-medium text-neutral-900 transition-colors duration-300 ease-editorial group-hover:text-forest-deep sm:text-base dark:text-neutral-100 dark:group-hover:text-forest-light">
-                      {bundesland}
-                    </span>
-                    <ChevronDown
-                      size={18}
-                      aria-hidden
-                      className={`shrink-0 text-neutral-400 transition-transform duration-500 ease-editorial ${
-                        open ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
+            {normalizedQuery && totalCityMatches === 0 ? (
+              <p className="mt-8 text-[15px] leading-relaxed text-neutral-500 dark:text-neutral-400">
+                {t.cities.searchNoResultsHint}
+              </p>
+            ) : (
+              <div className="mt-6 border-t border-neutral-200 dark:border-white/10">
+                {filteredBundeslaender.map((bundesland) => {
+                  const open = openStates.has(bundesland);
+                  const hubHref = bundeslandPagesPublic
+                    ? hrefForBundesland(bundeslandNameToSlug(bundesland))
+                    : null;
 
-                  {/* Always in the DOM for crawlers; collapsed visually when closed. */}
-                  <div
-                    id={panelId}
-                    className={`grid transition-[grid-template-rows] duration-500 ease-editorial ${
-                      open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                    }`}
-                    aria-hidden={!open}
-                  >
-                    <div className="overflow-hidden">
-                      <div className="pb-6">
-                        {liveCount === 0 ? (
-                          <p className="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
-                            {t.cities.bundeslandComingSoon}
-                          </p>
-                        ) : (
-                          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                            {list.map((city) => {
-                              const cardClassName =
-                                "flex flex-col rounded-xl border border-neutral-200 p-4 dark:border-white/10" +
-                                (cityPagesPublic
-                                  ? " group transition-all duration-500 ease-editorial hover:border-forest-deep/30 dark:hover:border-forest-light/30"
-                                  : "");
-
-                              const cardContent = (
-                                <>
-                                  <span className="font-serif text-lg text-neutral-900 dark:text-neutral-100">
-                                    {city.name}
-                                  </span>
-                                  <span className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
-                                    {city.primaryLegalArea}
-                                  </span>
-                                  {cityPagesPublic && (
-                                    <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-forest-deep dark:text-forest-light">
-                                      {t.cities.viewCity.replace(
-                                        "{city}",
-                                        city.name,
-                                      )}
-                                      <ArrowRight
-                                        size={14}
-                                        className="transition-transform duration-300 ease-editorial group-hover:translate-x-1"
-                                      />
-                                    </span>
-                                  )}
-                                </>
-                              );
-
-                              return (
-                                <li key={city.slug}>
-                                  {cityPagesPublic ? (
-                                    <Link
-                                      href={hrefForCity(city.slug)}
-                                      tabIndex={open ? undefined : -1}
-                                      className={cardClassName}
-                                    >
-                                      {cardContent}
-                                    </Link>
-                                  ) : (
-                                    <div
-                                      className={cardClassName}
-                                      tabIndex={open ? undefined : -1}
-                                    >
-                                      {cardContent}
-                                    </div>
-                                  )}
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        )}
-                      </div>
+                  return (
+                    <div
+                      key={bundesland}
+                      className="flex items-center justify-between gap-4 border-b border-neutral-200 py-5 dark:border-white/10"
+                    >
+                      {hubHref ? (
+                        <Link href={hubHref} className={nameClassName}>
+                          {bundesland}
+                        </Link>
+                      ) : (
+                        <span className="text-[15px] font-medium text-neutral-900 sm:text-base dark:text-neutral-100">
+                          {bundesland}
+                        </span>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => toggleState(bundesland)}
+                        aria-expanded={open}
+                        aria-label={`${bundesland} ${open ? "einklappen" : "hervorheben"}`}
+                        className="shrink-0 rounded-full p-1 text-neutral-400 transition-colors duration-300 ease-editorial hover:text-forest-deep dark:hover:text-forest-light"
+                      >
+                        <ChevronDown
+                          size={18}
+                          aria-hidden
+                          className={`transition-transform duration-500 ease-editorial ${
+                            open ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
+                  );
+                })}
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </FadeIn>
     </section>
   );

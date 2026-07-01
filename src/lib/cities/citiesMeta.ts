@@ -37,7 +37,10 @@ import { phase4Content, phase4Facts } from "./regions/phase-4";
 import { thueringenContent, thueringenFacts } from "./regions/thueringen";
 import { stralsundContent } from "./content/stralsund";
 import { wismarContent } from "./content/wismar";
-import { areCityPagesPubliclyAccessible } from "./cityPagesRollout";
+import {
+  areBundeslandPagesPubliclyAccessible,
+  areCityPagesPubliclyAccessible,
+} from "./cityPagesRollout";
 import type { CityContent, CityFacts, CityRecord } from "./types";
 
 export const wismarFacts: CityFacts = {
@@ -166,7 +169,7 @@ export function isPublicCitySlug(slug: string): boolean {
   return areCityPagesPubliclyAccessible() && isLiveCitySlug(slug);
 }
 
-export { areCityPagesPubliclyAccessible };
+export { areBundeslandPagesPubliclyAccessible, areCityPagesPubliclyAccessible };
 
 export function getCityFacts(slug: string): CityFacts | null {
   return ALL_CITIES.find((c) => c.slug === slug) ?? null;
